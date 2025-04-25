@@ -1,0 +1,48 @@
+def print_header():
+    print("╔════════════╦════════════╦════════════╦════════════╦════════╗")
+    print(f"║    CHI     ║    NCL     ║    CGV     ║    NFR     ║  NFI   ║")
+    print("╠════════════╬════════════╬════════════╬════════════╬════════╬════╗")
+
+
+
+
+
+def main():
+    rows = []
+    max_rows = 10
+
+    try:
+        while True:
+            clear_screen()
+            print_header()
+
+            row_data = [
+                generate_random_number(0, 100),
+                generate_random_number(10, 25),
+                generate_random_number(0, 1),
+                generate_random_number(0, 100),
+                generate_random_number(0, 100)
+            ]
+
+            row_str = "║║║"
+            for i, value in enumerate(row_data):
+                color = generate_random_color()
+                if i == 4:  # NFI column
+                    row_str += f" {color} {value:^6.3f}{RESET}  ║║  "
+                else:
+                    row_str += f" {color} {value:^7.3f}{RESET} ║║ "
+
+            row_str += f" {GREEN}OK{RESET} "
+
+            rows.append(row_str)
+            if len(rows) > max_rows:
+                rows.pop(0)
+
+            for row in rows:
+                print_row(row)
+
+            print("╚════════════╩════════════╩════════════╩════════════╩════════╩════╝")
+
+            time.sleep(0.5)
+    except KeyboardInterrupt:
+        print("\nProgram terminated")

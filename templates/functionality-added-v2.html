@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Command Center</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #0ff;
+            height: 100%;
+        }
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+        #visualizer {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+        }
+        #map {
+            flex: 1;
+            height: 100%;
+        }
+        #mode-display {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 20, 40, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        #controls {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(0, 20, 40, 0.8);
+            overflow-y: auto;
+        }
+        .button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #004499;
+        }
+        #messages {
+            height: 200px;
+            overflow-y: scroll;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .parameter {
+            margin-bottom: 10px;
+        }
+        .parameter input {
+            background-color: #001f3f;
+            color: #0ff;
+            border: 1px solid #0066cc;
+            padding: 5px;
+        }
+        #mission-planner {
+            margin-top: 20px;
+        }
+        #hud {
+            background-color: rgba(0, 20, 40, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .hud-data {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
+        }
+        .hud-data div {
+            padding: 5px;
+        }
+        .label {
+            font-weight: bold;
+            color: #0ff;
+        }
+        .value {
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="visualizer">
+            <div id="mode-display">Current Mode: <span id="current-mode">-</span></div>
+            <div id="map"></div>
+        </div>
+        <div id="controls">
+            <h2>Drone Command Center</h2>
+            <button class="button" onclick="armDrone()">Arm Drone</button>
+            <button class="button" onclick="disarmDrone()">Disarm Drone</button>
+            <button class="button" onclick="takeoff()">Takeoff</button>
+            <button class="button" onclick="land()">Land</button>
+            <button class="button" onclick="returnToLaunch()">Return to Launch</button>
+            <button class="button" onclick="openVideoFeed()">Open Video Feed</button>
+
+            <div id="flight-modes">
+                <h3>Flight Modes</h3>
+                <button class="button" onclick="setFlightMode('STABILIZE')">Stabilize</button>
+                <button class="button" onclick="setFlightMode('ALT_HOLD')">Altitude Hold</button>
+                <button class="button" onclick="setFlightMode('LOITER')">Loiter</button>
+                <button class="button" onclick="setFlightMode('AUTO')">Auto</button>
+                <button class="button" onclick="toggleRepositionMode()">Toggle Reposition Mode</button>
+            </div>
+
+            <div id="altitude-control">
+                <h3>Altitude Control</h3>
+                <input type="number" id="new-altitude" placeholder="New Altitude (m)">
+                <button class="button" onclick="changeAltitude()">Change Altitude</button>
+            </div>
+
+            <div id="speed-control">
+                <h3>Speed Control</h3>
+                <input type="number" id="new-speed" placeholder="New Speed (m/s)" step="0.1" min="0">
+                <button class="button" onclick="changeSpeed()">Set Speed (m/s)</button>
+                <button class="button" onclick="increaseSpeed()">+1 m/s</button>
+                <button class="button" onclick="decreaseSpeed()">-1 m/s</button>
+            </div>
+
+            <div id="mission-planner">
+                <h3>Mission Planner</h3>
+                <button class="button" onclick="toggleMissionPlanningMode()">Toggle Mission Planning Mode</button>
+                <button class="button" onclick="clearMission()">Clear Mission</button>
+                <button class="button" onclick="uploadMission()">Upload Mission</button>
+                <div id="waypoint-list"></div>
+            </div>
+
+            <div id="parameters">
+                <h3>Parameters</h3>
+                <div class="parameter">
+                    <label for="param-fence-radius">Geofence Radius (m):</label>
+                    <input type="number" id="param-fence-radius" value="100">
+                    <button class="button" onclick="setGeofence()">Set Geofence</button>
+                </div>
+            </div>
+
+            <div id="hud">
+                <h3>Heads-Up Display</h3>
+                <div class="hud-data">
+                    <div class="label">Roll:</div><div id="roll" class="value">-</div>
+                    <div class="label">Pitch:</div><div id="pitch" class="value">-</div>
+                    <div class="label">Yaw:</div><div id="yaw" class="value">-</div>
+                    <div class="label">Roll Speed:</div><div id="rollspeed" class="value">-</div>
+                    <div class="label">Pitch Speed:</div><div id="pitchspeed" class="value">-</div>
+                    <div class="label">Yaw Speed:</div><div id="yawspeed" class="value">-</div>
+                    <div class="label">Latitude:</div><div id="latitude" class="value">-</div>
+                    <div class="label">Longitude:</div><div id="longitude" class="value">-</div>
+                    <div class="label">Altitude:</div><div id="altitude" class="value">-</div>
+                    <div class="label">Ground Speed:</div><div id="groundspeed" class="value">-</div>
+                    <div class="label">Airspeed:</div><div id="airspeed" class="value">-</div>
+                    <div class="label">Climb Rate:</div><div id="climbrate" class="value">-</div>
+                    <div class="label">Battery:</div><div id="battery" class="value">-</div>
+                </div>
+            </div>
+
+            <div id="messages"></div>
+        </div>
+    </div>
+    <script>
+        const socket = io();
+        let map, droneMarker;
+        let missionPlanningMode = false;
+        let repositionMode = false;
+        let waypoints = [];
+        let repositionMarker = null;
+
+        function initMap() {
+            console.log("Initializing map...");
+            map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            droneMarker = L.marker([0, 0]).addTo(map);
+
+            map.on('click', onMapClick);
+        }
+
+        function onMapClick(e) {
+            if (missionPlanningMode) {
+                const { lat, lng } = e.latlng;
+                addWaypoint(lat, lng);
+            } else if (repositionMode) {
+                const { lat, lng } = e.latlng;
+                repositionDrone(lat, lng);
+            }
+        }
+
+        function addWaypoint(lat, lon) {
+            console.log(`Adding waypoint: ${lat}, ${lon}`);
+            waypoints.push([lat, lon]);
+            L.marker([lat, lon]).addTo(map);
+            updateWaypointList();
+        }
+
+        function updateWaypointList() {
+            const waypointList = document.getElementById('waypoint-list');
+            waypointList.innerHTML = '';
+            waypoints.forEach((waypoint, index) => {
+                const waypointItem = document.createElement('div');
+                waypointItem.textContent = `Waypoint ${index + 1}: ${waypoint[0]}, ${waypoint[1]}`;
+                waypointList.appendChild(waypointItem);
+            });
+        }
+
+        function repositionDrone(lat, lon) {
+            console.log(`Repositioning drone to: ${lat}, ${lon}`);
+            if (repositionMarker) {
+                map.removeLayer(repositionMarker);
+            }
+            repositionMarker = L.marker([lat, lon], { icon: L.icon({ iconUrl: 'drone-icon.png' }) }).addTo(map);
+            // Send reposition command to the drone via socket
+            socket.emit('repositionDrone', { lat: lat, lon: lon });
+        }
+
+        socket.on('connect', () => {
+            console.log("Connected to server");
+        });
+
+        socket.on('droneState', (data) => {
+            console.log("Received drone state:", data);
+            updateDroneState(data);
+        });
+
+        function updateDroneState(data) {
+            droneMarker.setLatLng([data.latitude, data.longitude]);
+            map.panTo([data.latitude, data.longitude]);
+
+            // Update HUD values
+            document.getElementById('roll').textContent = data.roll;
+            document.getElementById('pitch').textContent = data.pitch;
+            document.getElementById('yaw').textContent = data.yaw;
+            document.getElementById('rollspeed').textContent = data.rollspeed;
+            document.getElementById('pitchspeed').textContent = data.pitchspeed;
+            document.getElementById('yawspeed').textContent = data.yawspeed;
+            document.getElementById('latitude').textContent = data.latitude;
+            document.getElementById('longitude').textContent = data.longitude;
+            document.getElementById('altitude').textContent = data.altitude;
+            document.getElementById('groundspeed').textContent = data.groundspeed;
+            document.getElementById('airspeed').textContent = data.airspeed;
+            document.getElementById('climbrate').textContent = data.climbrate;
+            document.getElementById('battery').textContent = data.battery;
+        }
+
+        function armDrone() {
+            socket.emit('arm');
+        }
+
+        function disarmDrone() {
+            socket.emit('disarm');
+        }
+
+        function takeoff() {
+            const altitude = document.getElementById('new-altitude').value;
+            socket.emit('takeoff', { altitude });
+        }
+
+        function land() {
+            socket.emit('land');
+        }
+
+        function returnToLaunch() {
+            socket.emit('rtl');
+        }
+
+        function openVideoFeed() {
+            window.open('/video_feed');
+        }
+
+        function setFlightMode(mode) {
+            socket.emit('setFlightMode', mode);
+        }
+
+        function toggleRepositionMode() {
+            repositionMode = !repositionMode;
+            alert(`Reposition Mode ${repositionMode ? 'Enabled' : 'Disabled'}`);
+        }
+
+        function changeAltitude() {
+            const newAltitude = document.getElementById('new-altitude').value;
+            socket.emit('setAltitude', { altitude: newAltitude });
+        }
+
+        function changeSpeed() {
+            const newSpeed = document.getElementById('new-speed').value;
+            socket.emit('setSpeed', { speed: newSpeed });
+        }
+
+        function increaseSpeed() {
+            socket.emit('changeSpeed', { delta: 1 });
+        }
+
+        function decreaseSpeed() {
+            socket.emit('changeSpeed', { delta: -1 });
+        }
+
+        function toggleMissionPlanningMode() {
+            missionPlanningMode = !missionPlanningMode;
+            alert(`Mission Planning Mode ${missionPlanningMode ? 'Enabled' : 'Disabled'}`);
+        }
+
+        function clearMission() {
+            waypoints = [];
+            updateWaypointList();
+        }
+
+        function uploadMission() {
+            socket.emit('uploadMission', { waypoints });
+        }
+
+        function setGeofence() {
+            const radius = document.getElementById('param-fence-radius').value;
+            socket.emit('setGeofence', { radius });
+        }
+
+        window.onload = () => {
+            initMap();
+        };
+    </script>
+</body>
+</html>

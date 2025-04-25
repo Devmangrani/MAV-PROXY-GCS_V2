@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAVLink Data Display</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        #message-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            height: 400px;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        #data-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .data-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: calc(33.33% - 20px);
+            box-sizing: border-box;
+        }
+        .data-box h2 {
+            margin-top: 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>MAVLink Data Display</h1>
+    <div id="message-container"></div>
+    <div id="data-container">
+        <div class="data-box">
+            <h2>ATTITUDE</h2>
+            <pre id="attitude-data"></pre>
+        </div>
+        <div class="data-box">
+            <h2>GLOBAL_POSITION_INT</h2>
+            <pre id="global-position-data"></pre>
+        </div>
+        <div class="data-box">
+            <h2>VFR_HUD</h2>
+            <pre id="vfr-hud-data"></pre>
+        </div>
+        <div class="data-box">
+            <h2>SYS_STATUS</h2>
+            <pre id="sys-status-data"></pre>
+        </div>
+        <div class="data-box">
+            <h2>GPS_RAW_INT</h2>
+            <pre id="gps-raw-data"></pre>
+        </div>
+        <div class="data-box">
+            <h2>STATUSTEXT</h2>
+            <pre id="statustext-data"></pre>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        const messageContainer = document.getElementById('message-container');
+
+        socket.on('message', function(msg) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.style.color = msg.color;
+
+            if (msg.type && msg.data) {
+                const dataObj = JSON.parse(msg.data);
+                const dataElement = document.getElementById(`${msg.type.toLowerCase().replace('_', '-')}-data`);
+                if (dataElement) {
+                    dataElement.textContent = Object.entries(dataObj)
+                        .map(([key, value]) => `${key}: ${value}`)
+                        .join('\n');
+                }
+            } else if (msg.text) {
+                messageElement.textContent = msg.text;
+                messageContainer.appendChild(messageElement);
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

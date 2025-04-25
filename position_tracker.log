@@ -1,0 +1,136 @@
+2025-03-06 00:17:06,027 - ERROR - Failed to connect to car GPS: [Errno 2] could not open port /tmp/vgps2: [Errno 2] No such file or directory: '/tmp/vgps2'
+2025-03-06 00:17:06,027 - ERROR - Failed to start car GPS
+2025-03-06 00:17:06,027 - ERROR - Failed to start tracker
+2025-03-06 00:17:43,693 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:17:43,693 - INFO - Car GPS receiver started
+2025-03-06 00:17:43,694 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:17:43,917 - INFO - Connected to vehicle
+2025-03-06 00:17:43,917 - INFO - Drone position tracker started
+2025-03-06 00:17:43,935 - INFO - HTTP server started on port 8080
+2025-03-06 00:17:44,955 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:45,090 - INFO - Real-time position tracker started
+2025-03-06 00:17:45,091 - INFO - Tracker running. Press Ctrl+C to stop.
+2025-03-06 00:17:45,960 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:46,964 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:47,967 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:48,971 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:49,974 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:50,978 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:51,982 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:52,985 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:53,989 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:54,993 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:55,997 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:57,001 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:58,004 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:17:59,008 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:18:00,011 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:18:01,015 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:18:02,019 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:18:03,022 - ERROR - Error updating map: 'GeoPoint' object has no attribute 'alt'
+2025-03-06 00:18:03,341 - INFO - Stopping tracker...
+2025-03-06 00:18:04,435 - INFO - Car GPS receiver stopped
+2025-03-06 00:18:04,575 - INFO - Drone position tracker stopped
+2025-03-06 00:18:04,575 - INFO - Real-time position tracker stopped
+2025-03-06 00:18:04,575 - INFO - Car GPS receiver stopped
+2025-03-06 00:18:04,575 - INFO - Drone position tracker stopped
+2025-03-06 00:18:04,575 - INFO - Real-time position tracker stopped
+2025-03-06 00:18:54,136 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:18:54,137 - INFO - Car GPS receiver started
+2025-03-06 00:18:54,137 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:18:54,410 - INFO - Connected to vehicle
+2025-03-06 00:18:54,410 - INFO - Drone position tracker started
+2025-03-06 00:18:54,428 - INFO - HTTP server started on port 8080
+2025-03-06 00:18:54,876 - INFO - Real-time position tracker started
+2025-03-06 00:18:54,876 - INFO - Tracker running. Press Ctrl+C to stop.
+2025-03-06 00:18:58,047 - ERROR - Error reading car GPS data: device reports readiness to read but returned no data (device disconnected or multiple access on port?)
+2025-03-06 00:19:00,047 - ERROR - Error reading car GPS data: device reports readiness to read but returned no data (device disconnected or multiple access on port?)
+2025-03-06 00:19:09,997 - INFO - Stopping tracker...
+2025-03-06 00:19:10,926 - INFO - Car GPS receiver stopped
+2025-03-06 00:19:11,060 - INFO - Drone position tracker stopped
+2025-03-06 00:19:11,060 - INFO - Real-time position tracker stopped
+2025-03-06 00:19:11,060 - INFO - Car GPS receiver stopped
+2025-03-06 00:19:11,060 - INFO - Drone position tracker stopped
+2025-03-06 00:19:11,060 - INFO - Real-time position tracker stopped
+2025-03-06 00:19:16,071 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:19:16,071 - INFO - Car GPS receiver started
+2025-03-06 00:19:16,071 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:19:16,127 - INFO - Connected to vehicle
+2025-03-06 00:19:16,128 - INFO - Drone position tracker started
+2025-03-06 00:19:24,981 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:19:24,981 - INFO - Car GPS receiver started
+2025-03-06 00:19:24,981 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:19:25,146 - INFO - Connected to vehicle
+2025-03-06 00:19:25,146 - INFO - Drone position tracker started
+2025-03-06 00:19:34,483 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:19:34,484 - INFO - Car GPS receiver started
+2025-03-06 00:19:34,484 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:19:34,518 - INFO - Connected to vehicle
+2025-03-06 00:19:34,519 - INFO - Drone position tracker started
+2025-03-06 00:19:57,510 - ERROR - Failed to connect to car GPS: [Errno 2] could not open port /tmp/vgps2: [Errno 2] No such file or directory: '/tmp/vgps2'
+2025-03-06 00:19:57,510 - ERROR - Failed to start car GPS
+2025-03-06 00:19:57,510 - ERROR - Failed to start tracker
+2025-03-06 00:20:06,099 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:20:06,099 - INFO - Car GPS receiver started
+2025-03-06 00:20:06,099 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:20:06,244 - INFO - Connected to vehicle
+2025-03-06 00:20:06,245 - INFO - Drone position tracker started
+2025-03-06 00:20:06,262 - INFO - HTTP server started on port 8080
+2025-03-06 00:20:06,652 - INFO - Real-time position tracker started
+2025-03-06 00:20:06,652 - INFO - Tracker running. Press Ctrl+C to stop.
+2025-03-06 00:20:41,333 - INFO - Stopping tracker...
+2025-03-06 00:20:42,216 - INFO - Car GPS receiver stopped
+2025-03-06 00:20:42,268 - INFO - Drone position tracker stopped
+2025-03-06 00:20:42,268 - INFO - Real-time position tracker stopped
+2025-03-06 00:20:42,268 - INFO - Car GPS receiver stopped
+2025-03-06 00:20:42,269 - INFO - Drone position tracker stopped
+2025-03-06 00:20:42,269 - INFO - Real-time position tracker stopped
+2025-03-06 00:21:29,466 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:21:29,466 - INFO - Car GPS receiver started
+2025-03-06 00:21:29,467 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:21:29,769 - INFO - Connected to vehicle
+2025-03-06 00:21:29,769 - INFO - Drone position tracker started
+2025-03-06 00:21:29,788 - INFO - HTTP server started on port 8080
+2025-03-06 00:21:30,180 - INFO - Real-time position tracker started
+2025-03-06 00:21:30,180 - INFO - Tracker running. Press Ctrl+C to stop.
+2025-03-06 00:22:11,141 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,241 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,341 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,441 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,542 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,642 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,742 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,842 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:11,942 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,043 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,143 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,243 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,343 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,444 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,544 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,557 - INFO - Stopping tracker...
+2025-03-06 00:22:12,644 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,744 - ERROR - Error reading car GPS data: [Errno 5] Input/output error
+2025-03-06 00:22:12,845 - INFO - Car GPS receiver stopped
+2025-03-06 00:22:12,977 - INFO - Drone position tracker stopped
+2025-03-06 00:22:12,977 - INFO - Real-time position tracker stopped
+2025-03-06 00:22:12,977 - INFO - Car GPS receiver stopped
+2025-03-06 00:22:12,977 - INFO - Drone position tracker stopped
+2025-03-06 00:22:12,977 - INFO - Real-time position tracker stopped
+2025-03-06 00:25:04,496 - INFO - Connected to car GPS on /tmp/vgps2 at 9600 baud
+2025-03-06 00:25:04,497 - INFO - Car GPS receiver started
+2025-03-06 00:25:04,497 - INFO - Connecting to vehicle on udp:127.0.0.1:14551
+2025-03-06 00:25:04,570 - INFO - Connected to vehicle
+2025-03-06 00:25:04,571 - INFO - Drone position tracker started
+2025-03-06 00:25:04,588 - INFO - HTTP server started on port 8080
+2025-03-06 00:25:04,592 - INFO - Starting car tracking mission with 5 midpoints
+2025-03-06 00:25:04,592 - INFO - First target: Midpoint Point A-Point B (23.191418, 77.365396, 10.0m)
+2025-03-06 00:25:05,494 - INFO - Real-time position tracker started
+2025-03-06 00:25:05,495 - INFO - Tracker running. Press Ctrl+C to stop.
+2025-03-06 00:25:12,708 - INFO - Stopping tracker...
+2025-03-06 00:25:13,126 - INFO - Car GPS receiver stopped
+2025-03-06 00:25:13,200 - INFO - Drone position tracker stopped
+2025-03-06 00:25:13,200 - INFO - Real-time position tracker stopped
+2025-03-06 00:25:13,200 - INFO - Car GPS receiver stopped
+2025-03-06 00:25:13,200 - INFO - Drone position tracker stopped
+2025-03-06 00:25:13,201 - INFO - Real-time position tracker stopped

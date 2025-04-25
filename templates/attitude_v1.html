@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Attitude Data</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #messages {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .message {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vehicle Attitude Data</h1>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Roll</td>
+                <td id="roll">-</td>
+            </tr>
+            <tr>
+                <td>Pitch</td>
+                <td id="pitch">-</td>
+            </tr>
+            <tr>
+                <td>Yaw</td>
+                <td id="yaw">-</td>
+            </tr>
+            <tr>
+                <td>Roll Speed</td>
+                <td id="rollspeed">-</td>
+            </tr>
+            <tr>
+                <td>Pitch Speed</td>
+                <td id="pitchspeed">-</td>
+            </tr>
+            <tr>
+                <td>Yaw Speed</td>
+                <td id="yawspeed">-</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Status Messages</h2>
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        var socket = io();
+
+        socket.on('attitude', function(data) {
+            document.getElementById('roll').textContent = data['Roll'];
+            document.getElementById('pitch').textContent = data['Pitch'];
+            document.getElementById('yaw').textContent = data['Yaw'];
+            document.getElementById('rollspeed').textContent = data['Roll Speed'];
+            document.getElementById('pitchspeed').textContent = data['Pitch Speed'];
+            document.getElementById('yawspeed').textContent = data['Yaw Speed'];
+        });
+
+        socket.on('message', function(data) {
+            var messagesDiv = document.getElementById('messages');
+            var messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.style.backgroundColor = data.color;
+            messageElement.textContent = data.text;
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+    </script>
+</body>
+</html>

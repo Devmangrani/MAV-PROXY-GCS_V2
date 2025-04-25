@@ -1,0 +1,76 @@
+{
+  "waypoints": [
+    {
+      "name": "WP1",
+      "lat": 23.18992,
+      "lon": 77.36748,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.191215,
+      "lon": 77.36921000000001,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.19251,
+      "lon": 77.37094,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP4",
+      "lat": 23.194709779565418,
+      "lon": 77.37102404199749,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP5",
+      "lat": 23.19705,
+      "lon": 77.36917,
+      "elevation": 70.0,
+      "speed": 0.0
+    }
+  ],
+  "optimized_path": [
+    {
+      "name": "WP1",
+      "lat": 23.18992,
+      "lon": 77.36748,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.191215,
+      "lon": 77.36921000000001,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.19251,
+      "lon": 77.37094,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP4",
+      "lat": 23.194709779565418,
+      "lon": 77.37102404199749,
+      "elevation": 70.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP5",
+      "lat": 23.19705,
+      "lon": 77.36917,
+      "elevation": 70.0,
+      "speed": 0.0
+    }
+  ]
+}

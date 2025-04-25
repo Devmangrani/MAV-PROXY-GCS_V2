@@ -1,0 +1,2917 @@
+<!DOCTYPE html>
+<!--suppress NonAsciiCharacters -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drone Command Center</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #map {
+      height: calc(100vh - 0px);
+      width: calc(100vw - 0px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    #right-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 220px;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      overflow-y: auto;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .button {
+      background-color: rgba(76, 175, 80, 0.8);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      text-align: left;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin: 5px 0;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: rgba(69, 160, 73, 0.9);
+    }
+
+    .button i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    #messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      background-color: rgba(34, 34, 34, 0.6);
+      padding: 8px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    #hud-panel {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: calc(100% - 260px);
+      height: 80px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .hud-item {
+      text-align: center;
+    }
+
+    .hud-label {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .hud-value {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #top-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% - 260px);
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 0 10px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #flight-mode {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #important-messages {
+      font-size: 14px;
+      color: #ff9800;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+
+    .popup input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #555;
+      color: white;
+    }
+
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      font-size: 24px;
+    }
+
+    #parameter-list {
+      height: 300px;
+      overflow-y: scroll;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+    }
+
+    .parameter-item {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #0066cc;
+      padding-bottom: 5px;
+    }
+
+    .parameter-item input {
+      background-color: rgba(76, 175, 80, 0.8);
+      color: white;
+      border: 1px solid #555555;
+      padding: 5px;
+      width: 90%;
+    }
+
+    #parameter-search {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      background-color: rgba(76, 175, 80, 0.8);
+      color: white;
+      border: 1px solid #555555;
+    }
+
+    .parameter-group {
+      margin-bottom: 15px;
+    }
+
+    .group-title {
+      font-weight: bold;
+      color: #3A7734;
+      cursor: pointer;
+    }
+
+    .group-content {
+      display: none;
+      margin-left: 10px;
+    }
+
+    .custom-number-icon {
+      background: none;
+      border: none;
+    }
+
+    .leaflet-div-icon {
+      background: transparent;
+      border: none;
+    }
+
+    .marker-pin {
+      width: 30px;
+      height: 30px;
+      border-radius: 50% 50% 50% 0;
+      background: #c30b82;
+      position: absolute;
+      transform: rotate(-45deg);
+      left: 50%;
+      top: 50%;
+      margin: -15px 0 0 -15px;
+    }
+
+    .custom-div-icon i {
+      position: absolute;
+      width: 22px;
+      font-size: 22px;
+      left: 0;
+      right: 0;
+      margin: 10px auto;
+      text-align: center;
+    }
+
+    .leaflet-control-zoom {
+      position: fixed !important;
+      bottom: 100px !important;
+      left: 5px !important;
+      top: auto !important;
+    }
+
+    #artificial-horizon-container {
+      position: absolute;
+      top: 55px; /* Moved up to align with compass */
+      right: 250px;
+      width: 150px; /* Reduced from 200px */
+      height: 170px; /* Reduced from 220px */
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    #artificial-horizon {
+      width: 130px; /* Reduced from 180px */
+      height: 130px; /* Reduced from 180px */
+      border-radius: 50%;
+    }
+
+    #attitude-values {
+      color: white;
+      font-size: 12px; /* Reduced from 14px */
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    .drone-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .drone-icon svg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #mission-popup {
+      position: absolute;
+      top: 160px;
+      /* Positioned right below the top panel */
+      left: 15.5%;
+      /* Shifted to the right to avoid overlapping with the left panel */
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      z-index: 1000;
+      display: none;
+      /* This will hide it by default */
+      border-radius: 5px;
+      max-width: 2000px;
+      /* Ensure it doesn't overflow on smaller screens */
+    }
+
+    #mission-popup button {
+      margin: 5px;
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #mission-popup button:hover {
+      background-color: #45a049;
+    }
+
+    #extended-hud-panel {
+      position: absolute;
+      top: 445px;
+      right: 250px;
+      width: 150px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+
+    #extended-hud-panel .hud-item {
+      margin-bottom: 5px;
+    }
+
+    #extended-hud-panel .hud-label {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    #extended-hud-panel .hud-value {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #000000, #003300, #006600);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .splash-content {
+      text-align: center;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .splash-title {
+      font-size: 3.5em;
+      margin-bottom: 0.2em;
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: fadeInDown 0.8s ease-out 0.5s forwards;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .splash-subtitle {
+      font-size: 1.8em;
+      margin-bottom: 1em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease-out 1s forwards;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      color: #00ff00;
+      /* Bright green for contrast */
+    }
+
+    .loading-bar {
+      width: 200px;
+      height: 4px;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 20px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .loading-progress {
+      width: 0;
+      height: 100%;
+      background-color: #00ff00;
+      /* Bright green for the loading bar */
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: loading 3s ease-in-out forwards;
+    }
+
+    .splash-author {
+      font-size: 1.2em;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 2s forwards;
+      color: #cccccc;
+      /* Light grey for the author text */
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes fadeInDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes loading {
+      0% {
+        width: 0;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
+
+    #compass-container {
+      position: fixed;
+      /* Change from absolute to fixed */
+      right: 250px;
+      top: 250px;
+      /* Position from bottom instead of top */
+      width: 150px;
+      height: 170px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      /* Ensure it's above other elements */
+    }
+
+    #compass {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #00ff00;
+      position: relative;
+      transition: transform 0.5s ease;
+    }
+
+    .compass-center {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #00ff00;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .compass-direction {
+      position: absolute;
+      font-size: 16px;
+      font-weight: bold;
+      color: #00ff00;
+    }
+
+    #compass-n {
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #compass-e {
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+
+    #compass-s {
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #compass-w {
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+    }
+
+    .compass-needle {
+      position: absolute;
+      width: 4px;
+      height: 50px;
+      background-color: red;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transform-origin: bottom center;
+    }
+
+    #compass-heading {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #00ff00;
+    }
+
+    #gps-follow-button {
+        background-color: rgba(69, 160, 73, 0.9);
+        transition: background-color 0.3s ease;
+    }
+
+    #gps-follow-button.active {
+        background-color: #ff4444;
+    }
+
+    #gps-follow-button:hover {
+        background-color: #45a049;
+    }
+
+    #gps-follow-button.active:hover {
+        background-color: #ff0000;
+    }
+
+    /* GPS Follow Popup Styles */
+    #gps-follow-popup {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 8px;
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        min-width: 300px;
+    }
+
+    #gps-follow-popup h3 {
+        color: #fff;
+        margin: 0 0 20px 0;
+        text-align: center;
+        font-size: 1.2em;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    .input-group label {
+        display: block;
+        color: #ddd;
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #666;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-radius: 4px;
+        font-size: 1em;
+    }
+
+    .input-group input:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .button-group button {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background-color 0.3s ease;
+    }
+
+    .confirm-btn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .confirm-btn:hover {
+        background-color: #45a049;
+    }
+
+    .cancel-btn {
+        background-color: #666;
+        color: white;
+    }
+
+    .cancel-btn:hover {
+        background-color: #555;
+    }
+
+    /* GPS Follow Marker Styles */
+    .gps-follow-marker {
+        width: 30px;
+        height: 30px;
+        background-color: #ff4444;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gps-follow-marker i {
+        color: white;
+        font-size: 16px;
+    }
+
+    /* GPS Follow Status Box */
+    .gps-follow-status {
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .gps-follow-status.hidden {
+        opacity: 0;
+    }
+
+    /* Error Message Style */
+    .error-message {
+        color: #ff4444;
+        font-size: 0.9em;
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    /* Input Validation Styles */
+    .input-group input:invalid {
+        border-color: #ff4444;
+    }
+
+    .input-group input:invalid + .error-message {
+        display: block;
+    }
+
+    .input-group .error-message {
+        display: none;
+        color: #ff4444;
+        font-size: 0.8em;
+        margin-top: 5px;
+    }
+
+    /* Loading Indicator */
+    .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #4CAF50;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        display: none;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Status Messages */
+    .status-message {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        color: white;
+        font-size: 0.9em;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    }
+
+    .status-message.success {
+        background-color: #4CAF50;
+    }
+
+    .status-message.error {
+        background-color: #ff4444;
+    }
+
+    .status-message.show {
+        opacity: 1;
+    }
+
+    /* Tooltip Styles */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        text-align: center;
+        border-radius: 4px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loading" style="display: none;">Loading...</div>
+  <div id="map"></div>
+
+  <div id="top-panel">
+    <div id="flight-mode">Flight Mode: N/A</div>
+    <div id="important-messages"></div>
+  </div>
+
+  <div id="hud-panel">
+    <div class="hud-item">
+      <div class="hud-label">Altitude</div>
+      <div id="altitude" class="hud-value">0 m</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Ground Speed</div>
+      <div id="groundspeed" class="hud-value">0 m/s</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Vertical Speed</div>
+      <div id="climbrate" class="hud-value">0 m/s</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Heading</div>
+      <div id="heading" class="hud-value">0°</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Battery</div>
+      <div id="battery" class="hud-value">0%</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">GPS</div>
+      <div id="gps" class="hud-value">No Fix</div>
+    </div>
+  </div>
+
+  <div id="mission-popup" class="popup">
+    <h3>Mission Planning</h3>
+
+    <div class="button-group">
+      <button onclick="addTakeoff()">Add Takeoff</button>
+      <button id="addWaypointBtn" onclick="enableAddWaypointMode()" disabled>Add Waypoints</button>
+      <button onclick="showManualWaypointPopup()">Add Waypoint Manually</button>
+      <button id="addLandBtn" onclick="addLand()" disabled>Add Land</button>
+      <button id="addRTLBtn" onclick="addRTL()" disabled>Add RTL</button>
+    </div>
+
+    <div class="button-group">
+      <button id="addLoiterTimeBtn" onclick="setLoiterTime()" disabled>Add Loiter Time</button>
+      <button id="addLoiterTurnsBtn" onclick="showLoiterTurnsPopup()" disabled>Add Loiter Turns</button>
+    </div>
+
+    <div class="button-group">
+      <button onclick="uploadMission()">Upload Mission</button>
+      <button onclick="fetchCurrentMission()">Fetch Current Mission</button>
+      <button onclick="executeMission()">Execute Mission</button>
+      <button onclick="clearMission()">Clear Mission</button>
+    </div>
+    <button onclick="closeMissionPopup()">Close</button>
+  </div>
+
+    <!-- Loiter Turns Popup -->
+    <div id="loiter-turns-popup" class="popup">
+        <h2>Set Loiter Turns</h2>
+        <label for="loiter-turns">Number of Turns:</label>
+        <input type="number" id="loiter-turns" min="1" step="1" required>
+        <label for="loiter-radius">Radius (m):</label>
+        <input type="number" id="loiter-radius" min="0" step="0.1" required>
+        <button onclick="setLoiterTurns()">Add Loiter Turns</button>
+        <button onclick="closePopup('loiter-turns-popup')">Cancel</button>
+    </div>
+
+    <div id="manual-waypoint-popup" class="popup">
+        <h3>Add Waypoint Manually</h3>
+        <input type="number" id="manual-waypoint-lat" placeholder="Latitude" step="any">
+        <input type="number" id="manual-waypoint-lon" placeholder="Longitude" step="any">
+        <input type="number" id="manual-waypoint-alt" placeholder="Altitude (m)" step="any">
+        <button onclick="addManualWaypoint()">Add Waypoint</button>
+        <button onclick="closePopup('manual-waypoint-popup')">Cancel</button>
+      </div>
+
+  <div id="right-panel">
+    <h2>Drone Controls</h2>
+    <button class="button" onclick="confirmAction('Are you sure you want to initiate takeoff?', takeoff)">
+      <i class="fas fa-arrow-up"></i> Takeoff
+    </button>
+    <button class="button" onclick="showAltitudePopup()">
+      <i class="fas fa-arrows-alt-v"></i> Change Altitude
+    </button>
+    <button class="button" onclick="showSpeedPopup()">
+      <i class="fas fa-tachometer-alt"></i> Change Speed
+    </button>
+    <button class="button" onclick="confirmAction('Are you sure you want to land the drone?', land)">
+      <i class="fas fa-arrow-down"></i> Land
+    </button>
+    <button class="button" onclick="confirmAction('Are you sure you want to return to launch?', returnToLaunch)">
+      <i class="fas fa-home"></i> Return to Launch
+    </button>
+    <button class="button" onclick="setFlightMode('LOITER')">
+      <i class="fas fa-crosshairs"></i> Loiter
+    </button>
+    <button class="button" onclick="showCircleModePopup()">
+      <i class="fas fa-circle-notch"></i> Set Circle Mode
+    </button>
+    <button class="button" onclick="openVideoFeed()">
+      <i class="fas fa-video"></i> Video Feed
+    </button>
+    <button class="button" onclick="centerOnDrone()">
+      <i class="fas fa-bullseye"></i> Center on Drone
+    </button>
+    <button class="button" onclick="toggleRepositionMode()">
+      <i class="fas fa-map-marker-alt"></i> Reposition
+    </button>
+    <button class="button" onclick="toggleMissionPlanningMode()">
+      <i class="fas fa-route"></i> Plan Mission
+    </button>
+    <button class="button" onclick="fetchParameters()">
+      <i class="fas fa-cogs"></i> Fetch Params
+    </button>
+
+    <div id="parameter-management">
+      <h3>Parameter Management</h3>
+      <input type="text" id="parameter-search" placeholder="Search parameters...">
+      <div id="parameter-list"></div>
+    </div>
+
+    <div id="messages"></div>
+  </div>
+
+  <div id="altitude-popup" class="popup">
+    <input type="number" id="new-altitude" placeholder="New Altitude (m)">
+    <button class="button" onclick="changeAltitude()"><i class="fas fa-check"></i> Set Altitude</button>
+    <button class="button" onclick="closePopup('altitude-popup')"><i class="fas fa-times"></i> Cancel</button>
+  </div>
+
+  <div id="speed-popup" class="popup">
+    <input type="number" id="new-speed" placeholder="New Speed (m/s)" step="0.1" min="0">
+    <button class="button" onclick="changeSpeed()"><i class="fas fa-check"></i> Set Speed</button>
+    <button class="button" onclick="closePopup('speed-popup')"><i class="fas fa-times"></i> Cancel</button>
+  </div>
+
+  <div id="circle-mode-popup" class="popup">
+    <h3>Set Circle Mode Parameters</h3>
+    <input type="number" id="circle-radius" placeholder="Radius (meters)" required min="1" step="1">
+<!--    <input type="number" id="circle-altitude" placeholder="Altitude (meters)" required min="0" step="1">-->
+    <input type="number" id="circle-speed" placeholder="Speed (m/s)" required min="0" step="0.1">
+    <input type="number" id="circle-turns" placeholder="Number of turns" required min="1" step="1">
+    <button class="button" onclick="setCircleMode()"><i class="fas fa-check"></i> Start Circle Mode</button>
+    <button class="button" onclick="closePopup('circle-mode-popup')"><i class="fas fa-times"></i> Cancel</button>
+  </div>
+
+  <div id="artificial-horizon-container">
+    <canvas id="artificial-horizon" width="180" height="180"></canvas>
+    <div id="attitude-values">
+      Roll: 0° | Pitch: 0°
+    </div>
+  </div>
+
+  <div id="extended-hud-panel">
+    <div class="hud-item">
+      <div class="hud-label">Airspeed</div>
+      <div id="airspeed" class="hud-value">0 </div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Altitude (Rel)</div>
+      <div id="altitude-relative" class="hud-value">0 </div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Altitude (AMSL)</div>
+      <div id="altitude-amsl" class="hud-value">0 </div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Flight Distance</div>
+      <div id="flight-distance" class="hud-value">0 </div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Flight Time</div>
+      <div id="flight-time" class="hud-value">00:00:00</div>
+    </div>
+    <div class="hud-item">
+      <div class="hud-label">Distance to Home</div>
+      <div id="distance-to-home" class="hud-value">0 </div>
+    </div>
+  </div>
+
+  <div id="splash-screen">
+    <div class="splash-content">
+      <h1 class="splash-title">Rodella Aerospace Labs</h1>
+      <div class="splash-subtitle">Ground Control Station</div>
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <p class="splash-author">Made by Skand Varma</p>
+    </div>
+  </div>
+
+  <div id="compass-container">
+    <div id="compass">
+      <div class="compass-center"></div>
+      <div class="compass-direction" id="compass-n">N</div>
+      <div class="compass-direction" id="compass-e">E</div>
+      <div class="compass-direction" id="compass-s">S</div>
+      <div class="compass-direction" id="compass-w">W</div>
+      <div class="compass-needle"></div>
+    </div>
+    <div id="compass-heading">Heading: 0°</div>
+  </div>
+
+  <div id="edit-waypoint-popup" class="popup">
+      <h3>Edit Waypoint</h3>
+      <div class="waypoint-param">
+        <label for="edit-waypoint-type">Waypoint Type:</label>
+        <select id="edit-waypoint-type" onchange="updateWaypointTypeFields()">
+          <option value="waypoint">Regular Waypoint</option>
+          <option value="loiter_time">Loiter Time</option>
+          <option value="loiter_turns">Loiter Turns</option>
+          <option value="rtl">Return to Launch</option>
+          <option value="land">Land</option>
+        </select>
+      </div>
+      <div class="waypoint-param">
+        <label for="edit-waypoint-lat">Latitude:</label>
+        <input type="number" id="edit-waypoint-lat" step="any">
+      </div>
+      <div class="waypoint-param">
+        <label for="edit-waypoint-lon">Longitude:</label>
+        <input type="number" id="edit-waypoint-lon" step="any">
+      </div>
+      <div class="waypoint-param">
+        <label for="edit-waypoint-alt">Altitude (m):</label>
+        <input type="number" id="edit-waypoint-alt" step="any">
+      </div>
+      <div id="loiter-time-param" class="waypoint-param" style="display: none;">
+        <label for="edit-loiter-time">Loiter Time (s):</label>
+        <input type="number" id="edit-loiter-time" step="any">
+      </div>
+      <div id="loiter-turns-param" class="waypoint-param" style="display: none;">
+        <label for="edit-loiter-turns">Loiter Turns:</label>
+        <input type="number" id="edit-loiter-turns" step="1">
+      </div>
+      <div id="loiter-radius-param" class="waypoint-param" style="display: none;">
+        <label for="edit-loiter-radius">Loiter Radius (m):</label>
+        <input type="number" id="edit-loiter-radius" step="any">
+      </div>
+      <button onclick="updateWaypoint()">Update Waypoint</button>
+      <button onclick="deleteWaypoint()">Delete Waypoint</button>
+      <button onclick="closePopup('edit-waypoint-popup')">Cancel</button>
+    </div>
+
+  <script>
+    const socket = io({
+      reconnection: true,
+      reconnectionAttempts: Infinity,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
+      timeout: 20000,
+    });
+    let map, droneMarker, geofenceCircle;
+    // let lastMapUpdate = 0;
+    let missionPlanningMode = false;
+    let repositionMode = false;
+    let waypoints = [];
+    let repositionMarker = null;
+    let allParameters = {};
+    let missionPolyline;
+    // let waypointLayerGroup;
+    // let messageCount = 0;
+    let roll = 0;
+    let pitch = 0;
+    let homePosition = null;
+    document.addEventListener('DOMContentLoaded', (event) => {
+      console.log("DOM fully loaded and parsed");
+      const splashScreen = document.getElementById('splash-screen');
+      // Hide splash screen after 3 seconds
+      setTimeout(() => {
+        console.log("Fading out splash screen");
+        if (splashScreen) {
+          splashScreen.style.opacity = '0';
+          splashScreen.style.transition = 'opacity 0.5s ease-out';
+          // Remove splash screen from DOM after fade out
+          setTimeout(() => {
+            console.log("Removing splash screen and initializing application");
+            splashScreen.remove();
+            initializeApplication();
+          }, 500);
+        } else {
+          console.error("Splash screen element not found");
+          initializeApplication();
+        }
+      }, 3500);
+    });
+
+    function initializeApplication() {
+      console.log("Initializing application...");
+      try {
+        initMap();
+        resizeMap();
+        applyPerformanceOptimizations();
+        toggleRepositionMode();
+        addGPSFollowButton();
+        initializeCompass();
+        console.log("Application initialized.");
+      } catch (error) {
+        console.error("Error during application initialization:", error);
+      }
+    }
+
+    function initMap() {
+      console.log("Initializing map...");
+      map = L.map('map').setView([0, 0], 4);
+
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: ''
+      }).addTo(map);
+
+      const droneIconSvg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3388ff">
+            <path d="M12 2L8 6H3V9H5L7 11H17L19 9H21V6H16L12 2M7.5 12L6.3 13.2C6.1 13.4 6 13.7 6 14V18C6 18.5 6.2 19 6.6 19.4C7 19.8 7.5 20 8 20H9C9.5 20 10 19.8 10.4 19.4C10.8 19 11 18.5 11 18V17.5L12 18.5L13 17.5V18C13 18.5 13.2 19 13.6 19.4C14 19.8 14.5 20 15 20H16C16.5 20 17 19.8 17.4 19.4C17.8 19 18 18.5 18 18V14C18 13.7 17.9 13.4 17.7 13.2L16.5 12H7.5Z"/>
+        </svg>
+      `;
+
+      const droneIcon = L.divIcon({
+        className: 'drone-icon',
+        iconSize: [40, 40],
+        iconAnchor: [20, 20],
+        html: droneIconSvg
+      });
+
+      droneMarker = L.marker([0, 0], {
+        icon: droneIcon
+      }).addTo(map);
+      droneMarker.bindPopup("Drone Position");
+
+      map.on('click', onMapClick);
+      console.log("Map initialized with drone marker and ESRI World Imagery satellite tiles.");
+    }
+
+    function updateDronePosition(lat, lon, alt) {
+      console.log(`Updating drone position: ${lat}, ${lon}, ${alt}`);
+      if (droneMarker) {
+        droneMarker.setLatLng([lat, lon]);
+        droneMarker.getPopup().setContent(`Drone Position<br>Lat: ${lat}<br>Lon: ${lon}<br>Alt: ${alt}m<br>Heading: ${currentHeading}°`);
+        // Rotate the drone icon
+        const droneIcon = droneMarker.getElement().querySelector('.drone-icon svg');
+        if (droneIcon) {
+          droneIcon.style.transform = `rotate(${currentHeading}deg)`;
+        }
+        // Update flight stats
+        updateFlightStats();
+      } else {
+        console.error("Drone marker not initialized");
+      }
+    }
+
+    function onMapClick(e) {
+      console.log(`Map clicked at ${e.latlng.lat}, ${e.latlng.lng}`);
+      if (missionPlanningMode) {
+        const lat = e.latlng.lat.toFixed(6);
+        const lon = e.latlng.lng.toFixed(6);
+        const alt = prompt("Enter altitude for this waypoint (meters):", "10");
+        if (alt !== null) {
+          addWaypoint(parseFloat(lat), parseFloat(lon), parseFloat(alt));
+        }
+      } else if (repositionMode) {
+        const lat = e.latlng.lat.toFixed(6);
+        const lon = e.latlng.lng.toFixed(6);
+        const alt = prompt("Enter altitude for repositioning (meters):", "10");
+        if (alt !== null) {
+          if (repositionMarker) {
+            map.removeLayer(repositionMarker);
+          }
+          repositionMarker = L.marker([lat, lon], {
+            icon: L.icon({
+              iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+              shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            })
+          }).addTo(map);
+          repositionMarker.bindPopup(`Reposition Target<br>Lat: ${lat}<br>Lon: ${lon}<br>Alt: ${alt}m`).openPopup();
+          repositionDrone(lat, lon, alt);
+        }
+      }
+    }
+    // Replace your existing socket.on('message') handler with this:
+    socket.on('message', function(msg) {
+      console.log('Raw message received:', msg);
+      let parsedMsg;
+      if (typeof msg === 'string') {
+        try {
+          parsedMsg = JSON.parse(msg);
+        } catch (e) {
+          console.error('Failed to parse message as JSON:', e);
+          parsedMsg = msg; // Keep the original message if parsing fails
+        }
+      } else {
+        parsedMsg = msg;
+      }
+      console.log('Parsed message:', parsedMsg);
+      // Try to handle the message regardless of its format
+      handleDroneMessage(parsedMsg);
+    });
+
+    function handleDroneMessage(msg) {
+      if (msg.type && msg.data) {
+        console.log(`Processing ${msg.type} message`);
+        let data = msg.data;
+        if (typeof data === 'string') {
+          try {
+            data = JSON.parse(data);
+          } catch (e) {
+            console.error('Failed to parse msg.data as JSON:', e);
+          }
+        }
+        console.log(`Processed data:`, data);
+        updateHUD(msg.type, data);
+      } else if (msg.Roll !== undefined && msg.Pitch !== undefined) {
+        // Direct attitude data
+        console.log('Direct attitude data received:', msg);
+        updateHUD('ATTITUDE', msg);
+      } else {
+        console.warn('Received message in unexpected format:', msg);
+      }
+    }
+    // Modify your updateHUD function:
+    function updateHUD(type, data) {
+      console.log(`updateHUD called with type: ${type}`);
+      console.log('updateHUD data:', data);
+      switch (type) {
+        case 'ATTITUDE':
+          console.log('ATTITUDE data:', data);
+          let roll = parseFloat(data['Roll'] || data['roll']);
+          let pitch = parseFloat(data['Pitch'] || data['pitch']);
+          if (!isNaN(roll) && !isNaN(pitch)) {
+            updateHUDValue('roll', roll.toFixed(2));
+            updateHUDValue('pitch', pitch.toFixed(2));
+            if (data['Yaw'] || data['yaw']) {
+              updateHUDValue('yaw', parseFloat(data['Yaw'] || data['yaw']).toFixed(2));
+            }
+            console.log('Updating ArtificialHorizon with:', roll, pitch);
+            ArtificialHorizon.setAttitude(roll, pitch);
+          } else {
+            console.error('Invalid ATTITUDE data format:', data);
+          }
+          break;
+        case 'GLOBAL_POSITION_INT':
+          updateHUDValue('altitude', data['Relative Altitude']);
+          updateHUDValue('altitude-amsl', `${data['Alt'] / 1000}`);
+          updateDronePosition(
+            parseFloat(data['Latitude']),
+            parseFloat(data['Longitude']),
+            parseFloat(data['Relative Altitude'])
+          );
+          break;
+        case 'VFR_HUD':
+          updateHUDValue('airspeed', `${data['Airspeed']}`);
+          updateHUDValue('groundspeed', data['Ground Speed']);
+          updateHUDValue('heading', data['Heading']);
+          updateHUDValue('climbrate', data['Climb Rate']);
+          updateHUDValue('altitude-relative', `${data['Altitude']}`);
+          updateCompass(parseFloat(data['Heading'])); // Add this line
+          break;
+        case 'SYS_STATUS':
+          updateHUDValue('battery', data['Battery Remaining']);
+          break;
+        case 'GPS_RAW_INT':
+          updateHUDValue('gps', getGPSFixType(data['fix_type']));
+          break;
+        case 'HEARTBEAT':
+          updateFlightMode(data['Flight Mode']);
+          break;
+        default:
+          console.warn(`Unhandled message type: ${type}`);
+      }
+      updateFlightStats();
+    }
+    let currentHeading = 0; // Global variable to store current heading
+    function initializeCompass() {
+      const compass = document.getElementById('compass-container');
+      if (!compass) {
+        console.error('Compass container not found');
+        return;
+      }
+      updateCompass(0); // Initialize with 0 degrees
+    }
+    socket.on('arm', () => {
+      // Start the flight timer when an 'arm' event is received
+      startFlightTimer();
+    });
+    let flightStartTime = null;
+
+    function startFlightTimer() {
+      if (!isTimerRunning) {
+        flightStartTime = new Date();
+        isTimerRunning = true;
+        updateFlightTimeDisplay();
+        console.log("Flight timer started.");
+      }
+    }
+
+    function updateFlightTimeDisplay() {
+      if (isTimerRunning) {
+        const currentTime = new Date();
+        const elapsedSeconds = Math.floor((currentTime - flightStartTime) / 1000);
+        const hours = Math.floor(elapsedSeconds / 3600);
+        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+        const seconds = elapsedSeconds % 60;
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        updateHUDValue('flight-time', formattedTime);
+        setTimeout(updateFlightTimeDisplay, 1000); // Update every second
+      }
+    }
+
+    function centerOnDrone() {
+      if (droneMarker) {
+        const position = droneMarker.getLatLng();
+        map.setView(position, 18); // Center on the drone's position at zoom level 16
+      } else {
+        console.warn("Drone marker not found. Unable to center on drone.");
+      }
+    }
+
+    function updateCompass(heading) {
+      const compass = document.getElementById('compass');
+      const compassHeading = document.getElementById('compass-heading');
+      if (!compass || !compassHeading) {
+        console.error('Compass elements not found');
+        return;
+      }
+      compass.style.transform = `rotate(${-heading}deg)`;
+      compassHeading.textContent = `Heading: ${heading.toFixed(1)}°`;
+    }
+    let totalFlightDistance = 0;
+    let lastPosition = null;
+    let isFlying = false;
+    let isTimerRunning = false; // Add this flag
+    function updateFlightStats() {
+      const currentAltitude = parseFloat(document.getElementById('altitude-relative').textContent);
+      if (currentAltitude > 0 && !isFlying) {
+        isFlying = true;
+        // Don't reset flightStartTime here, as it's set by startFlightTimer
+        totalFlightDistance = 0;
+        lastPosition = null;
+      }
+      if (currentAltitude <= 0 && isFlying) {
+        isFlying = false;
+        flightStartTime = null;
+        isTimerRunning = false; // Stop the timer when landing
+      }
+      // Update flight time only if the timer is running
+      if (isTimerRunning) {
+        updateFlightTimeDisplay();
+        if (lastPosition && droneMarker) {
+          const currentPosition = droneMarker.getLatLng();
+          totalFlightDistance += calculateDistance(lastPosition.lat, lastPosition.lng, currentPosition.lat, currentPosition.lng);
+          lastPosition = currentPosition;
+        } else if (droneMarker) {
+          lastPosition = droneMarker.getLatLng();
+        }
+        updateHUDValue('flight-distance', `${totalFlightDistance.toFixed(2)} m`);
+      } else {
+        updateHUDValue('flight-time', '00:00:00');
+        updateHUDValue('flight-distance', '0.00 m');
+      }
+    }
+    // Modify your updateHUDValue function:
+    function updateHUDValue(id, value) {
+      console.log(`updateHUDValue called for ${id} with value:`, value);
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = value;
+        console.log(`Updated ${id} to ${value}`);
+        if (id === 'heading') {
+          currentHeading = parseFloat(value);
+          // Update drone icon rotation
+          const droneIcon = droneMarker.getElement().querySelector('.drone-icon svg');
+          if (droneIcon) {
+            droneIcon.style.transform = `rotate(${currentHeading}deg)`;
+          }
+        }
+      } else {
+        console.warn(`Element with id '${id}' not found`);
+      }
+    }
+
+    function updateFlightMode(mode) {
+      document.getElementById('flight-mode').textContent = 'Flight Mode: ' + mode;
+    }
+    const ArtificialHorizon = (() => {
+      let canvas, ctx;
+      let targetRoll = 0,
+        targetPitch = 0;
+      let currentRoll = 0,
+        currentPitch = 0;
+      let lastUpdate = 0;
+      const transitionSpeed = 0.1; // Adjust this value to change the smoothness of transitions
+      let isAnimating = false;
+
+      function init() {
+        canvas = document.getElementById('artificial-horizon');
+        ctx = canvas.getContext('2d');
+        console.log('ArtificialHorizon initialized');
+        startAnimation();
+      }
+
+      function startAnimation() {
+        if (!isAnimating) {
+          isAnimating = true;
+          requestAnimationFrame(update);
+          console.log('ArtificialHorizon animation started');
+        }
+      }
+
+      function lerp(start, end, t) {
+        return start * (1 - t) + end * t;
+      }
+
+      function update(timestamp) {
+        if (!lastUpdate) lastUpdate = timestamp;
+        const deltaTime = (timestamp - lastUpdate) / 1000;
+        lastUpdate = timestamp;
+        currentRoll = lerp(currentRoll, targetRoll, transitionSpeed);
+        currentPitch = lerp(currentPitch, targetPitch, transitionSpeed);
+        console.log('ArtificialHorizon updated:', currentRoll.toFixed(2), currentPitch.toFixed(2));
+        draw();
+        requestAnimationFrame(update);
+      }
+
+      function draw() {
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        // Clear the canvas
+        ctx.clearRect(0, 0, width, height);
+        // Save the canvas state
+        ctx.save();
+        // Create a circular clipping region
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 89, 0, 2 * Math.PI);
+        ctx.clip();
+        // Move the origin to the center of the canvas
+        ctx.translate(centerX, centerY);
+        // Rotate for roll
+        ctx.rotate(currentRoll * Math.PI / 180);
+        // Draw the sky
+        ctx.fillStyle = 'skyblue';
+        ctx.fillRect(-width, -height + currentPitch * 2, width * 2, height); // Reversed pitch
+        // Draw the ground
+        ctx.fillStyle = 'saddlebrown';
+        ctx.fillRect(-width, currentPitch * 2, width * 2, height); // Reversed pitch
+        // Draw the horizon line
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(-width, 0);
+        ctx.lineTo(width, 0);
+        ctx.stroke();
+        // Draw pitch lines
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 1;
+        for (let i = -90; i <= 90; i += 10) {
+          if (i === 0) continue; // Skip horizon line
+          ctx.beginPath();
+          ctx.moveTo(-30, -i * 2); // Reversed pitch
+          ctx.lineTo(30, -i * 2); // Reversed pitch
+          ctx.stroke();
+        }
+        // Restore the canvas state
+        ctx.restore();
+        // Draw the fixed aircraft reference
+        ctx.strokeStyle = 'yellow';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(centerX - 30, centerY);
+        ctx.lineTo(centerX + 30, centerY);
+        ctx.moveTo(centerX, centerY - 30);
+        ctx.lineTo(centerX, centerY + 30);
+        ctx.stroke();
+        // Draw the circular frame
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 89, 0, 2 * Math.PI);
+        ctx.stroke();
+        // Update numeric values
+        document.getElementById('attitude-values').textContent =
+          `Roll: ${currentRoll.toFixed(1)}° | Pitch: ${currentPitch.toFixed(1)}°`;
+      }
+
+      function radiansToDegrees(radians) {
+        return radians * (180 / Math.PI);
+      }
+
+      function setAttitude(roll, pitch) {
+        // Convert from radians to degrees and scale for better visibility
+        let rollDegrees = radiansToDegrees(roll);
+        let pitchDegrees = radiansToDegrees(pitch);
+        // Optionally, scale the values for more pronounced effect
+        rollDegrees *= 2; // Adjust this multiplier as needed
+        pitchDegrees *= 2; // Adjust this multiplier as needed
+        console.log('ArtificialHorizon.setAttitude called with:', roll, pitch);
+        console.log('Converted to degrees:', rollDegrees, pitchDegrees);
+        targetRoll = rollDegrees;
+        targetPitch = pitchDegrees;
+        if (!isAnimating) {
+          startAnimation();
+        }
+      }
+      return {
+        init,
+        setAttitude
+      };
+    })();
+
+    function getGPSFixType(fixType) {
+      const fixTypes = ['No GPS', 'No Fix', '2D Fix', '3D Fix', 'DGPS', 'RTK Float', 'RTK Fixed'];
+      return fixTypes[fixType] || 'Unknown';
+    }
+
+    function addImportantMessage(message) {
+      const messagesDiv = document.getElementById('important-messages');
+      messagesDiv.textContent = message;
+      setTimeout(() => {
+        messagesDiv.textContent = '';
+      }, 5000);
+    }
+
+    function showLoiterTimePopup() {
+      document.getElementById('loiter-time-popup').style.display = 'block';
+    }
+
+    function showLoiterTurnsPopup() {
+      document.getElementById('loiter-turns-popup').style.display = 'block';
+    }
+
+    function getLastWaypoint() {
+      if (waypoints.length > 0) {
+        return waypoints[waypoints.length - 1];
+      }
+      return null;
+    }
+
+    function setLoiterTime() {
+        const lastWaypoint = getLastWaypoint();
+        if (lastWaypoint) {
+            const time = prompt("Enter loiter time in seconds:", "30");
+            if (time !== null) {
+                const loiterTime = parseFloat(time);
+                if (isNaN(loiterTime) || loiterTime <= 0) {
+                    alert('Please enter a valid loiter time.');
+                    return;
+                }
+                waypoints.push({
+                    lat: lastWaypoint.lat,
+                    lon: lastWaypoint.lon,
+                    alt: lastWaypoint.alt,
+                    type: 'loiter_time',
+                    time: loiterTime
+                });
+                updateWaypointMarkers();
+                updateWaypointDisplay();
+                updateTotalDistance();
+            }
+        } else {
+            alert("No existing waypoints. Please add a waypoint before adding loiter time.");
+        }
+    }
+
+      // Function to set Loiter Turns
+        function setLoiterTurns() {
+          const turns = parseInt(document.getElementById('loiter-turns').value);
+          const radius = parseFloat(document.getElementById('loiter-radius').value);
+
+          console.log("Parsed values:", { turns, radius });
+
+          if (isNaN(turns) || turns <= 0 || isNaN(radius) || radius <= 0) {
+            alert('Please enter valid values for turns and radius.');
+            return;
+          }
+
+          const lastWaypoint = getLastWaypoint();
+          if (lastWaypoint) {
+            const data = {
+              radius: radius, // Pass radius directly
+              lat: lastWaypoint.lat,
+              lon: lastWaypoint.lon,
+              alt: lastWaypoint.alt,
+              turns: turns,
+            };
+
+            console.log("Sending data to backend:", data);
+
+            fetch('/add_loiter_turns', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log("Received response from backend:", data);
+              if (data.error) {
+                alert(data.error);
+              } else {
+                waypoints.push(data.waypoint);
+                updateWaypointMarkers();
+                updateWaypointDisplay();
+                closePopup('loiter-turns-popup');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert('Failed to add loiter turns');
+            });
+          } else {
+            alert("No existing waypoints. Please add a waypoint before adding loiter turns.");
+          }
+        }
+
+    function closePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        if (popup) {
+            popup.remove();
+        }
+    }
+
+
+    function armDrone() {
+      socket.emit('arm');
+    }
+
+    function disarmDrone() {
+      socket.emit('disarm');
+    }
+
+    function takeoff() {
+      const altitude = prompt("Enter takeoff altitude (meters):", "10");
+      if (altitude !== null) {
+        socket.emit('takeoff', parseFloat(altitude));
+      }
+    }
+
+    function land() {
+      socket.emit('land');
+    }
+
+    function returnToLaunch() {
+      fetchWithLoading('/rtl')
+        .then(data => console.log(data))
+        .catch(error => handleError(error, 'Error during RTL command'));
+    }
+
+    function setFlightMode(mode) {
+      fetchWithLoading('/set_flight_mode', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            mode: mode
+          }),
+        })
+        .then(data => console.log(data))
+        .catch(error => handleError(error, 'Error setting flight mode'));
+    }
+
+    function toggleRepositionMode() {
+      repositionMode = !repositionMode;
+      missionPlanningMode = false;
+      if (repositionMode) {
+        if (droneMarker) {
+          const currentPosition = droneMarker.getLatLng();
+          if (repositionMarker) {
+            map.removeLayer(repositionMarker);
+          }
+          repositionMarker = L.marker(currentPosition, {
+            icon: L.icon({
+              iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+              shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41],
+              popupAnchor: [1, -34],
+              shadowSize: [41, 41]
+            })
+          }).addTo(map);
+          repositionMarker.bindPopup("Reposition Target").openPopup();
+        }
+        addImportantMessage("Reposition Mode: Enabled. Click on the map to set new position.");
+      } else {
+        if (repositionMarker) {
+          map.removeLayer(repositionMarker);
+          repositionMarker = null;
+        }
+        addImportantMessage("Reposition Mode: Disabled");
+      }
+    }
+
+    function repositionDrone(lat, lon, alt) {
+      fetchWithLoading('/reposition', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            lat: parseFloat(lat),
+            lon: parseFloat(lon),
+            alt: parseFloat(alt)
+          }),
+        })
+        .then(data => {
+          if (data.error) {
+            handleError(data.error, 'Error repositioning drone');
+          } else {
+            console.log('Reposition data:', data);
+            alert(data.message);
+          }
+        });
+    }
+
+    function changeAltitude() {
+      const newAltitude = document.getElementById('new-altitude').value;
+      if (newAltitude !== null && newAltitude !== "") {
+        fetchWithLoading('/change_altitude', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              altitude: parseFloat(newAltitude)
+            }),
+          })
+          .then(data => console.log(data))
+          .catch(error => handleError(error, 'Error changing altitude'));
+      }
+      closePopup('altitude-popup');
+    }
+
+    function changeSpeed() {
+      const newSpeed = document.getElementById('new-speed').value;
+      if (newSpeed !== null && newSpeed !== "") {
+        setDroneSpeed(parseFloat(newSpeed));
+      }
+      closePopup('speed-popup');
+    }
+
+    function setDroneSpeed(speed) {
+      fetchWithLoading('/set_speed', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            speed: speed
+          }),
+        })
+        .then(data => {
+          console.log(data);
+          addImportantMessage(data.message || data.error);
+          document.getElementById('new-speed').value = speed;
+        });
+    }
+    // function calculateDistance(lat1, lon1, lat2, lon2) {
+    //     const R = 6371e3; // Earth's radius in meters
+    //     const φ1 = lat1 * Math.PI/180;
+    //     const φ2 = lat2 * Math.PI/180;
+    //     const Δφ = (lat2-lat1) * Math.PI/180;s
+    //     const Δλ = (lon2-lon1) * Math.PI/180;
+    //
+    //     const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+    //               Math.cos(φ1) * Math.cos(φ2) *
+    //               Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    //     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    //
+    //     return R * c; // Distance in meters
+    // }
+
+    function showManualWaypointPopup() {
+      document.getElementById('manual-waypoint-popup').style.display = 'block';
+    }
+
+    function addManualWaypoint() {
+      const lat = parseFloat(document.getElementById('manual-waypoint-lat').value);
+      const lon = parseFloat(document.getElementById('manual-waypoint-lon').value);
+      const alt = parseFloat(document.getElementById('manual-waypoint-alt').value);
+
+      if (isNaN(lat) || isNaN(lon) || isNaN(alt)) {
+        alert('Please enter valid numbers for latitude, longitude, and altitude.');
+        return;
+      }
+
+      addWaypoint(lat, lon, alt);
+      closePopup('manual-waypoint-popup');
+
+      // Clear input fields
+      document.getElementById('manual-waypoint-lat').value = '';
+      document.getElementById('manual-waypoint-lon').value = '';
+      document.getElementById('manual-waypoint-alt').value = '';
+    }
+
+    function toggleMissionPlanningMode() {
+      const missionPopup = document.getElementById('mission-popup');
+      if (missionPopup.style.display === 'none' || missionPopup.style.display === '') {
+        missionPopup.style.display = 'block';
+        addImportantMessage("Mission Planning Mode: Opened. Use the popup to plan your mission.");
+        document.getElementById('addWaypointBtn').disabled = false; // Enable the "Add Waypoint" button
+      } else {
+        closeMissionPopup();
+      }
+      missionPlanningMode = false; // Ensure waypoint adding is initially disabled
+    }
+
+    let editingWaypointIndex = -1;
+
+    function showEditWaypointPopup(index) {
+        editingWaypointIndex = index;
+        const waypoint = waypoints[index];
+
+        document.getElementById('edit-waypoint-type').value = waypoint.type;
+        document.getElementById('edit-waypoint-lat').value = waypoint.lat.toFixed(6);
+        document.getElementById('edit-waypoint-lon').value = waypoint.lon.toFixed(6);
+        document.getElementById('edit-waypoint-alt').value = waypoint.alt.toFixed(2);
+
+        updateWaypointTypeFields(waypoint);
+
+        document.getElementById('edit-waypoint-popup').style.display = 'block';
+    }
+
+    function updateWaypointTypeFields(waypoint = null) {
+        const waypointType = document.getElementById('edit-waypoint-type').value;
+        const altitudeField = document.getElementById('edit-waypoint-alt');
+        const loiterTimeParam = document.getElementById('loiter-time-param');
+        const loiterTurnsParam = document.getElementById('loiter-turns-param');
+        const loiterRadiusParam = document.getElementById('loiter-radius-param');
+
+        // Hide all special params by default
+        loiterTimeParam.style.display = 'none';
+        loiterTurnsParam.style.display = 'none';
+        loiterRadiusParam.style.display = 'none';
+        altitudeField.disabled = false;
+
+        switch (waypointType) {
+            case 'loiter_time':
+                loiterTimeParam.style.display = 'block';
+                if (waypoint && waypoint.time) {
+                    document.getElementById('edit-loiter-time').value = waypoint.time.toFixed(1);
+                }
+                break;
+            case 'loiter_turns':
+                loiterTurnsParam.style.display = 'block';
+                loiterRadiusParam.style.display = 'block';
+                if (waypoint && waypoint.turns && waypoint.radius) {
+                    document.getElementById('edit-loiter-turns').value = waypoint.turns;
+                    document.getElementById('edit-loiter-radius').value = waypoint.radius.toFixed(2);
+                }
+                break;
+            case 'rtl':
+                altitudeField.disabled = true;
+                break;
+            case 'land':
+                altitudeField.disabled = true;
+                altitudeField.value = '0';
+                break;
+        }
+    }
+
+    function updateWaypoint() {
+        if (editingWaypointIndex === -1) return;
+
+        const waypointType = document.getElementById('edit-waypoint-type').value;
+        const lat = parseFloat(document.getElementById('edit-waypoint-lat').value);
+        const lon = parseFloat(document.getElementById('edit-waypoint-lon').value);
+        const alt = parseFloat(document.getElementById('edit-waypoint-alt').value);
+
+        if (isNaN(lat) || isNaN(lon) || isNaN(alt)) {
+            alert('Please enter valid numbers for latitude, longitude, and altitude.');
+            return;
+        }
+
+        const waypoint = {
+            type: waypointType,
+            lat: lat,
+            lon: lon,
+            alt: alt
+        };
+
+        switch (waypointType) {
+            case 'loiter_time':
+                const loiterTime = parseFloat(document.getElementById('edit-loiter-time').value);
+                if (!isNaN(loiterTime) && loiterTime > 0) {
+                    waypoint.time = loiterTime;
+                } else {
+                    alert('Please enter a valid loiter time.');
+                    return;
+                }
+                break;
+            case 'loiter_turns':
+                const loiterTurns = parseInt(document.getElementById('edit-loiter-turns').value);
+                const loiterRadius = parseFloat(document.getElementById('edit-loiter-radius').value);
+                if (!isNaN(loiterTurns) && loiterTurns > 0 && !isNaN(loiterRadius) && loiterRadius > 0) {
+                    waypoint.turns = loiterTurns;
+                    waypoint.radius = loiterRadius;
+                } else {
+                    alert('Please enter valid values for loiter turns and radius.');
+                    return;
+                }
+                break;
+            case 'rtl':
+                // Use the current altitude for RTL
+                waypoint.alt = waypoints[editingWaypointIndex].alt;
+                break;
+            case 'land':
+                waypoint.alt = 0;
+                break;
+        }
+
+        waypoints[editingWaypointIndex] = waypoint;
+        updateWaypointMarkers();
+        updateWaypointDisplay();
+        closePopup('edit-waypoint-popup');
+    }
+
+    function deleteWaypoint() {
+        if (editingWaypointIndex === -1) return;
+
+        waypoints.splice(editingWaypointIndex, 1);
+        updateWaypointMarkers();
+        updateWaypointDisplay();
+        closePopup('edit-waypoint-popup');
+    }
+
+    function addCommand(command) {
+        if (editingWaypointIndex === -1) return;
+
+        const waypoint = waypoints[editingWaypointIndex];
+
+        switch (command) {
+            case 'land':
+                waypoints.splice(editingWaypointIndex + 1, 0, {
+                    lat: waypoint.lat,
+                    lon: waypoint.lon,
+                    alt: 0,
+                    type: 'land'
+                });
+                break;
+            case 'rtl':
+                waypoints.splice(editingWaypointIndex + 1, 0, {
+                    lat: waypoint.lat,
+                    lon: waypoint.lon,
+                    alt: waypoint.alt,
+                    type: 'rtl'
+                });
+                break;
+            case 'loiter_time':
+                const loiterTime = prompt("Enter loiter time in seconds:", "30");
+                if (loiterTime !== null) {
+                    waypoints.splice(editingWaypointIndex + 1, 0, {
+                        lat: waypoint.lat,
+                        lon: waypoint.lon,
+                        alt: waypoint.alt,
+                        type: 'loiter_time',
+                        time: parseFloat(loiterTime)
+                    });
+                }
+                break;
+            case 'loiter_turns':
+                const turns = prompt("Enter number of turns:", "3");
+                const radius = prompt("Enter loiter radius in meters:", "50");
+                if (turns !== null && radius !== null) {
+                    waypoints.splice(editingWaypointIndex + 1, 0, {
+                        lat: waypoint.lat,
+                        lon: waypoint.lon,
+                        alt: waypoint.alt,
+                        type: 'loiter_turns',
+                        turns: parseInt(turns),
+                        radius: parseFloat(radius)
+                    });
+                }
+                break;
+        }
+
+        updateWaypointMarkers();
+        updateWaypointDisplay();
+        closePopup('edit-waypoint-popup');
+    }
+
+    function closeMissionPopup() {
+      const missionPopup = document.getElementById('mission-popup');
+      missionPopup.style.display = 'none';
+      missionPlanningMode = false;
+      hasTakeoff = false;
+      enableMissionButtons();
+      addImportantMessage("Mission Planning Mode: Closed.");
+    }
+
+    function enableAddWaypointMode() {
+      missionPlanningMode = true;
+      repositionMode = false;
+      addImportantMessage("Add Waypoint Mode: Enabled. Click on the map to add waypoints.");
+    }
+
+    function getWaypointColor(index, total) {
+      const hue = (index / total) * 360;
+      return `hsl(${hue}, 100%, 50%)`;
+    }
+
+    function createNumberedIcon(number, total) {
+      console.log(`Creating numbered icon: ${number} of ${total}`);
+      const color = getWaypointColor(number - 1, total);
+      return L.divIcon({
+        className: 'custom-number-icon',
+        html: `<div style="background-color: ${color}; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 16px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">${number}</div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15]
+      });
+    }
+
+    function addWaypoint(lat, lon, alt) {
+      console.log(`Adding waypoint: ${lat}, ${lon}, ${alt}`);
+      const newWaypoint = {
+        lat,
+        lon,
+        alt,
+        type: 'waypoint'
+      };
+      if (waypoints.length > 0) {
+        const prevWaypoint = waypoints[waypoints.length - 1];
+        const distance = calculateDistance(prevWaypoint.lat, prevWaypoint.lon, lat, lon);
+        newWaypoint.distanceFromPrev = distance.toFixed(2);
+      } else {
+        newWaypoint.distanceFromPrev = '0.00';
+      }
+      waypoints.push(newWaypoint);
+      updateWaypointMarkers();
+      updateWaypointDisplay();
+      updateTotalDistance();
+    }
+    let hasTakeoff = false;
+    // function addTakeoff() {
+    //     if (droneMarker) {
+    //         const position = droneMarker.getLatLng();
+    //         const altitude = prompt("Enter takeoff altitude (meters):", "10");
+    //         if (altitude !== null && !isNaN(parseFloat(altitude))) {
+    //             fetch('/add_takeoff', {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //                 body: JSON.stringify({
+    //                     lat: position.lat,
+    //                     lon: position.lng,
+    //                     alt: parseFloat(altitude)
+    //                 }),
+    //             })
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 console.log(data.message);
+    //                 addWaypointToList({
+    //                     lat: position.lat,
+    //                     lon: position.lng,
+    //                     alt: parseFloat(altitude),
+    //                     type: 'takeoff'
+    //                 });
+    //                 updateWaypointMarkers();
+    //                 hasTakeoff = true;
+    //                 enableMissionButtons();
+    //             })
+    //             .catch(error => console.error('Error:', error));
+    //         } else {
+    //             alert("Invalid altitude. Takeoff not added.");
+    //         }
+    //     } else {
+    //         alert("Drone position is not available. Unable to add takeoff point.");
+    //     }
+    // }
+    function addTakeoff() {
+      if (droneMarker) {
+        const position = droneMarker.getLatLng();
+        const altitude = prompt("Enter takeoff altitude (meters):", "10");
+        if (altitude !== null && !isNaN(parseFloat(altitude))) {
+          const takeoffWaypoint = {
+            lat: position.lat,
+            lon: position.lng,
+            alt: parseFloat(altitude),
+            type: 'takeoff'
+          };
+          // Ensure the takeoff waypoint is the first one in the array
+          waypoints = [takeoffWaypoint, ...waypoints.filter(wp => wp.type !== 'takeoff')]; // Prepend takeoffWaypoint
+          updateWaypointMarkers();
+          updateWaypointDisplay();
+          hasTakeoff = true;
+          enableMissionButtons();
+          homePosition = position;
+        }
+      } else {
+        alert("Drone position is not available. Unable to add takeoff point.");
+      }
+    }
+
+
+    function enableMissionButtons() {
+      document.getElementById('addWaypointBtn').disabled = !hasTakeoff;
+      document.getElementById('addLandBtn').disabled = !hasTakeoff;
+      document.getElementById('addRTLBtn').disabled = !hasTakeoff;
+      document.getElementById('addLoiterTimeBtn').disabled = !hasTakeoff;
+      document.getElementById('addLoiterTurnsBtn').disabled = !hasTakeoff;
+    }
+
+
+    function addLand() {
+      if (waypoints.length > 0) {
+        const lastWaypoint = waypoints[waypoints.length - 1];
+        // Create the land waypoint object
+        const landWaypoint = {
+          lat: lastWaypoint.lat,
+          lon: lastWaypoint.lon,
+          alt: 0,
+          type: 'land'
+        };
+        // Add the land waypoint to the waypoints array
+        waypoints.push(landWaypoint);
+        // Update the map markers and display immediately
+        updateWaypointMarkers();
+        updateWaypointDisplay();
+        // (Optional) Send the land command to the backend
+        fetch('/add_land', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              lat: lastWaypoint.lat,
+              lon: lastWaypoint.lon
+            }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data.message);
+          })
+          .catch(error => console.error('Error:', error));
+      } else {
+        alert("No waypoints available. Please add at least one waypoint before adding a land command.");
+      }
+    }
+
+    function addRTL() {
+        if (homePosition) {
+            fetch('/add_rtl', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    lat: homePosition.lat,
+                    lon: homePosition.lng
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+
+                // Update the waypoints array in the frontend
+                waypoints.push(data.waypoint);
+
+                // Update the waypoint markers and display
+                updateWaypointMarkers();
+                updateWaypointDisplay();
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            alert("Home position is not yet defined. Please perform a takeoff first.");
+        }
+    }
+
+    function updateTotalDistance() {
+      let totalDistance = 0;
+      for (let i = 1; i < waypoints.length; i++) {
+        totalDistance += parseFloat(waypoints[i].distanceFromPrev);
+      }
+      document.getElementById('total-distance').textContent = totalDistance.toFixed(2) + ' m';
+    }
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371e3; // Earth's radius in meters
+      const φ1 = lat1 * Math.PI / 180;
+      const φ2 = lat2 * Math.PI / 180;
+      const Δφ = (lat2 - lat1) * Math.PI / 180;
+      const Δλ = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c; // Distance in meters
+    }
+
+    function isDroneOnGround() {
+      const altitude = parseFloat(document.getElementById('altitude').textContent);
+      return altitude < 1;
+    }
+
+
+    function fetchCurrentMission() {
+        fetchWithLoading('/get_mission')
+            .then(data => {
+                if (data.error) {
+                    handleError(data.error, 'Error fetching current mission');
+                } else {
+                    // Preserve existing waypoints that have special types
+                    let specialWaypoints = waypoints.filter(wp =>
+                        ['takeoff', 'rtl', 'land', 'loiter_time', 'loiter_turns'].includes(wp.type)
+                    );
+
+                    // Update waypoints with data from server
+                    waypoints = data.map(wp => ({
+                        lat: wp.lat,
+                        lon: wp.lon,
+                        alt: wp.alt,
+                        type: wp.type,
+                        command: wp.command,
+                        ...(wp.type === 'loiter_time' ? { time: wp.time } : {}),
+                        ...(wp.type === 'loiter_turns' ? { turns: wp.turns, radius: wp.radius } : {})
+                    }));
+
+                    // Reinsert special waypoints
+                    specialWaypoints.forEach(specialWp => {
+                        // Find the closest regular waypoint
+                        let closestIndex = waypoints.findIndex(wp =>
+                            wp.lat === specialWp.lat && wp.lon === specialWp.lon
+                        );
+                        if (closestIndex !== -1) {
+                            // Insert the special waypoint after the closest regular waypoint
+                            waypoints.splice(closestIndex + 1, 0, specialWp);
+                        }
+                    });
+
+                    if (isDroneOnGround() && waypoints.length > 0 && waypoints[0].type !== 'takeoff') {
+                        const takeoffAltitude = 10;
+                        const takeoffCommand = {
+                            type: 'takeoff',
+                            lat: waypoints[0].lat,
+                            lon: waypoints[0].lon,
+                            alt: takeoffAltitude
+                        };
+                        waypoints.unshift(takeoffCommand);
+                    }
+
+                    updateWaypointMarkers();
+                    updateWaypointDisplay();
+                }
+            });
+    }
+    // function validateMission(waypoints) {
+    //     let validatedWaypoints = [];
+    //     let hasTakeoff = false;
+    //
+    //     for (let wp of waypoints) {
+    //         if (wp.type === 'takeoff') {
+    //             if (!hasTakeoff) {
+    //                 validatedWaypoints.push(wp);
+    //                 hasTakeoff = true;
+    //             }
+    //         } else {
+    //             validatedWaypoints.push(wp);
+    //         }
+    //     }
+    //
+    //     return validatedWaypoints;
+    // }
+    function uploadMission() {
+        if (waypoints.length === 0) {
+            alert('No waypoints to upload. Please add waypoints to the mission.');
+            return;
+        }
+
+        let missionToUpload = [...waypoints]; // Use all waypoints, including special types
+
+        if (isDroneOnGround() && missionToUpload[0].type !== 'takeoff') {
+            const takeoffAltitude = 10;
+            const takeoffCommand = {
+                type: 'takeoff',
+                lat: missionToUpload[0].lat,
+                lon: missionToUpload[0].lon,
+                alt: takeoffAltitude
+            };
+            missionToUpload.unshift(takeoffCommand);
+        }
+
+        fetchWithLoading('/upload_mission', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                waypoints: missionToUpload
+            })
+        })
+        .then(data => {
+            if (data.error) {
+                handleError(data.error, 'Mission upload error');
+            } else {
+                console.log('Mission upload:', data.message);
+                alert(data.message + ` (${data.item_count} waypoints)`);
+                fetchCurrentMission();
+            }
+        })
+        .catch(error => {
+            handleError(error, 'Failed to upload mission');
+        });
+    }
+
+    function validateMission(waypoints) {
+          let validatedWaypoints = [];
+          let hasTakeoff = false;
+          for (let wp of waypoints) {
+            wp.type = wp.type || 'waypoint'; // Ensure each waypoint has a type
+            if (wp.type === 'takeoff') {
+              if (!hasTakeoff) {
+                validatedWaypoints.push(wp);
+                hasTakeoff = true;
+              }
+            } else if (wp.type === 'rtl' || wp.type === 'land') {
+              // Add RTL or Land only if it's the last waypoint
+              if (validatedWaypoints.length === waypoints.length - 1) {
+                validatedWaypoints.push(wp);
+              }
+            } else {
+              validatedWaypoints.push(wp);
+            }
+          }
+          return validatedWaypoints;
+        }
+
+        function updateWaypointMarkers() {
+        // Clear existing markers, polylines, and distance labels
+        map.eachLayer((layer) => {
+            if (layer instanceof L.Marker && layer !== droneMarker) {
+                map.removeLayer(layer);
+            }
+            if (layer instanceof L.Polyline) {
+                map.removeLayer(layer);
+            }
+            if (layer.options && layer.options.icon && layer.options.icon.options.className === 'distance-label') {
+                map.removeLayer(layer);
+            }
+        });
+
+        const polylinePoints = [];
+        let distanceLabels = [];
+        let waypointCounter = 0;
+
+        waypoints.forEach((waypoint, index) => {
+            let icon;
+            let popupText;
+
+            switch (waypoint.type) {
+                case 'takeoff':
+                    icon = createCustomIcon('fas fa-plane-departure', '#4CAF50');
+                    popupText = `Takeoff: ${waypoint.lat.toFixed(6)}, ${waypoint.lon.toFixed(6)}, ${waypoint.alt.toFixed(1)}m`;
+                    break;
+                case 'rtl':
+                    icon = createCustomIcon('fas fa-home', '#FFC107');
+                    popupText = `Return to Launch: ${waypoint.lat.toFixed(6)}, ${waypoint.lon.toFixed(6)}`;
+                    break;
+                case 'land':
+                    icon = createCustomIcon('fas fa-plane-arrival', '#FF5722');
+                    popupText = `Land: ${waypoint.lat.toFixed(6)}, ${waypoint.lon.toFixed(6)}`;
+                    break;
+                case 'loiter_time':
+                    icon = createCustomIcon('fas fa-clock', '#FFA500');
+                    popupText = `Loiter Time: ${waypoint.time.toFixed(1)}s at ${waypoint.lat.toFixed(6)}, ${waypoint.lon.toFixed(6)}, ${waypoint.alt}m`;
+                    break;
+                case 'loiter_turns':
+                    icon = createCustomIcon('fas fa-sync-alt', '#00FFFF');
+                    popupText = `Loiter Turns: ${waypoint.turns.toFixed(1)} turns at ${waypoint.lat.toFixed(6)}, ${waypoint.lon.toFixed(6)}, ${waypoint.alt}m`;
+                    break;
+                default: // Regular waypoint
+                    waypointCounter++;
+                    icon = createNumberedIcon(waypointCounter, waypoints.filter(wp => !['takeoff', 'rtl', 'land', 'loiter_time', 'loiter_turns'].includes(wp.type)).length);
+                    popupText = `Waypoint ${waypointCounter}: ${waypoint.lat.toFixed(6)}, ${waypoint.lon.toFixed(6)}, ${waypoint.alt}m`;
+            }
+
+            const marker = L.marker([waypoint.lat, waypoint.lon], { icon: icon });
+            marker.addTo(map);
+            marker.bindPopup(popupText);
+            marker.on('click', () => showEditWaypointPopup(index));
+
+            // Always add the point to the polyline, including takeoff
+            polylinePoints.push([waypoint.lat, waypoint.lon]);
+
+            // Add distance labels between waypoints, including from takeoff to first waypoint
+            if (index > 0) {
+                const prevWaypoint = waypoints[index - 1];
+                const midpoint = L.latLng(
+                    (prevWaypoint.lat + waypoint.lat) / 2,
+                    (prevWaypoint.lon + waypoint.lon) / 2
+                );
+                const distance = calculateDistance(
+                    prevWaypoint.lat, prevWaypoint.lon,
+                    waypoint.lat, waypoint.lon
+                );
+                distanceLabels.push({
+                    position: midpoint,
+                    distance: distance.toFixed(2)
+                });
+            }
+        });
+
+        // Create the mission polyline
+        if (polylinePoints.length > 1) {
+            L.polyline(polylinePoints, {
+                color: 'blue',
+                weight: 3,
+                opacity: 0.7,
+                dashArray: '5, 5'  // This creates a dashed line
+            }).addTo(map);
+        }
+
+        // Add distance labels to the map
+        distanceLabels.forEach(label => {
+            L.marker(label.position, {
+                icon: L.divIcon({
+                    className: 'distance-label',
+                    html: `<div style="background-color: rgba(255, 255, 255, 0.7); padding: 2px 5px; border-radius: 3px;">${label.distance}m</div>`,
+                    iconSize: [50, 20],
+                    iconAnchor: [25, 10]
+                })
+            }).addTo(map);
+        });
+
+        if (waypoints.length > 0) {
+            map.fitBounds(L.latLngBounds(polylinePoints));
+        }
+
+        console.log(`Updated ${waypoints.length} waypoint markers (${waypointCounter} numbered waypoints)`);
+        map.invalidateSize();
+    }
+
+    function updateWaypointDisplay() {
+        console.log("Updating waypoint display...");
+        const waypointList = document.getElementById('waypoint-list') || document.createElement('div');
+        waypointList.id = 'waypoint-list';
+        waypointList.innerHTML = '<h4>Mission:</h4>';
+        let waypointCounter = 0;
+        waypoints.forEach((wp, index) => {
+            const color = getWaypointColor(index, waypoints.length);
+            let waypointText = '';
+            switch (wp.type) {
+                case 'takeoff':
+                    waypointText = `Takeoff: ${wp.lat.toFixed(6)}, ${wp.lon.toFixed(6)}, ${wp.alt.toFixed(1)}m`; // toFixed(1) here
+                    break;
+                case 'rtl':
+                    waypointText = `Return to Launch: ${wp.lat.toFixed(6)}, ${wp.lon.toFixed(6)}`;
+                    break;
+                case 'land':
+                    waypointText = `Land: ${wp.lat.toFixed(6)}, ${wp.lon.toFixed(6)}`;
+                    break;
+                case 'loiter_time':
+                    waypointText = `Loiter Time: ${wp.time.toFixed(1)}s at ${wp.lat.toFixed(6)}, ${wp.lon.toFixed(6)}, ${wp.alt}m`;
+                    break;
+                case 'loiter_turns':
+                    waypointText = `Loiter Turns: ${wp.turns.toFixed(1)} turns at ${wp.lat.toFixed(6)}, ${wp.lon.toFixed(6)}, ${wp.alt}m`;
+                    break;
+                default:
+                    waypointCounter++;
+                    waypointText = `Waypoint ${waypointCounter}: ${wp.lat.toFixed(6)}, ${wp.lon.toFixed(6)}, ${wp.alt}m`;
+            }
+            const distanceText = wp.distanceFromPrev ? ` Distance: ${wp.distanceFromPrev} m` : '';
+            waypointList.innerHTML += `<p style="color: ${color}; font-weight: bold;">${waypointText}${distanceText}</p>`;
+        });
+        document.getElementById('right-panel').appendChild(waypointList);
+        console.log(`Displayed ${waypoints.length} mission items (${waypointCounter} numbered waypoints)`);
+    }
+
+    function createCustomIcon(iconClass, bgColor) {
+      return L.divIcon({
+        className: 'custom-div-icon',
+        html: `<div style='background-color:${bgColor};' class='marker-pin'></div><i class='${iconClass}' style='font-size: 15px; margin-top: 8px; margin-left: 8px; color: white;'></i>`,
+        iconSize: [30, 42],
+        iconAnchor: [15, 42]
+      });
+    }
+
+    function clearCircleVisualization() {
+        if (geofenceCircle) {
+            map.removeLayer(geofenceCircle);
+            geofenceCircle = null;
+        }
+    }
+
+    function clearMission() {
+        console.log("Clearing mission...");
+        waypoints = []; // Clear the waypoints array
+        hasTakeoff = false;
+        updateWaypointMarkers(); // This will clear markers and polyline
+        updateWaypointDisplay();
+        enableMissionButtons();
+        clearCircleVisualization();
+        console.log("Mission cleared");
+    }
+
+
+    function executeMission() {
+      fetchWithLoading('/execute_mission', {
+          method: 'POST',
+        })
+        .then(data => {
+          if (data.error) {
+            handleError(data.error, 'Mission execution error');
+          } else {
+            console.log('Mission execution:', data.message);
+            alert(data.message);
+          }
+        });
+    }
+
+    function fetchParameters() {
+      fetchWithLoading('/fetch_all_parameters')
+        .then(data => {
+          allParameters = data;
+          displayParameters();
+        })
+        .catch(error => handleError(error, 'Error fetching parameters'));
+    }
+
+    function displayParameters() {
+      const parameterList = document.getElementById('parameter-list');
+      parameterList.innerHTML = '';
+      const groups = groupParameters(allParameters);
+      for (const [groupName, params] of Object.entries(groups)) {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'parameter-group';
+        const groupTitle = document.createElement('div');
+        groupTitle.className = 'group-title';
+        groupTitle.textContent = groupName;
+        groupTitle.onclick = () => toggleGroup(groupDiv);
+        groupDiv.appendChild(groupTitle);
+        const groupContent = document.createElement('div');
+        groupContent.className = 'group-content';
+        for (const [key, value] of Object.entries(params)) {
+          const paramDiv = createParameterItem(key, value);
+          groupContent.appendChild(paramDiv);
+        }
+        groupDiv.appendChild(groupContent);
+        parameterList.appendChild(groupDiv);
+      }
+    }
+
+    function createParameterItem(key, value) {
+      const paramDiv = document.createElement('div');
+      paramDiv.className = 'parameter-item';
+      const label = document.createElement('label');
+      label.textContent = key;
+      paramDiv.appendChild(label);
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = value;
+      input.dataset.key = key;
+      input.onchange = () => updateParameter(key, input.value);
+      paramDiv.appendChild(input);
+      return paramDiv;
+    }
+
+    function updateParameter(key, value) {
+      fetchWithLoading('/update_parameter', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            param_id: key,
+            param_value: parseFloat(value)
+          }),
+        })
+        .then(data => {
+          console.log(data);
+          addImportantMessage(data.message);
+        })
+        .catch(error => handleError(error, 'Error updating parameter'));
+    }
+
+    function groupParameters(params) {
+      const groups = {};
+      for (const [key, value] of Object.entries(params)) {
+        const groupName = key.split('_')[0];
+        if (!groups[groupName]) {
+          groups[groupName] = {};
+        }
+        groups[groupName][key] = value;
+      }
+      return groups;
+    }
+
+    function toggleGroup(groupDiv) {
+      const content = groupDiv.querySelector('.group-content');
+      content.style.display = content.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function openVideoFeed() {
+      const videoWindow = window.open('', 'Drone Video Feed', 'width=640,height=480');
+      videoWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Drone Video Feed</title>
+                        <style>
+                            body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #000; }
+                            img { max-width: 100%; max-height: 100%; object-fit: contain; }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${window.location.origin}/video_feed" alt="Live Drone Feed">
+                    </body>
+                </html>
+            `);
+    }
+
+    function resizeMap() {
+      if (map) {
+        map.invalidateSize();
+      }
+    }
+
+    function handleError(error, message) {
+      console.error(error);
+      addImportantMessage(message || 'An error occurred. Please try again.');
+    }
+
+    function showLoading() {
+      document.getElementById('loading').style.display = 'flex';
+    }
+
+    function hideLoading() {
+      document.getElementById('loading').style.display = 'none';
+    }
+
+    function fetchWithLoading(url, options = {}) {
+      showLoading();
+      return fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+          hideLoading();
+          return data;
+        })
+        .catch(error => {
+          hideLoading();
+          handleError(error, 'Failed to fetch data from server');
+        });
+    }
+
+    function confirmAction(message, action) {
+      if (confirm(message)) {
+        action();
+      }
+    }
+
+    // function debounce(func, wait) {
+    //   let timeout;
+    //   return function executedFunction(...args) {
+    //     const later = () => {
+    //       clearTimeout(timeout);
+    //       func(...args);
+    //     };
+    //     clearTimeout(timeout);
+    //     timeout = setTimeout(later, wait);
+    //   };
+    // }
+    // const debouncedResizeMap = debounce(resizeMap, 250);
+
+    function showCircleModePopup() {
+      document.getElementById('circle-mode-popup').style.display = 'block';
+    }
+
+    function setCircleMode() {
+      const radius = parseFloat(document.getElementById('circle-radius').value);
+      // const altitude = parseFloat(document.getElementById('circle-altitude').value);
+      const speed = parseFloat(document.getElementById('circle-speed').value);
+      const turns = parseInt(document.getElementById('circle-turns').value);
+      if (isNaN(radius) || isNaN(altitude) || isNaN(speed) || isNaN(turns)) {
+        alert('Please fill in all fields with valid numbers.');
+        return;
+      }
+      fetchWithLoading('/set_circle_mode', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            radius,
+            // altitude,
+            speed,
+            turns
+          }),
+        })
+        .then(data => {
+          console.log('Circle mode set:', data);
+          addImportantMessage(data.message);
+          closePopup('circle-mode-popup');
+          visualizeCircleMode(radius);
+        })
+        .catch(error => handleError(error, 'Error setting circle mode'));
+    }
+
+    function visualizeCircleMode(radius) {
+        if (droneMarker) {
+            const center = droneMarker.getLatLng();
+            clearCircleVisualization(); // Clear existing circle before drawing a new one
+            geofenceCircle = L.circle(center, {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.2,
+                radius: radius
+            }).addTo(map);
+            map.fitBounds(geofenceCircle.getBounds());
+        } else {
+            console.error('Drone marker not available for circle visualization');
+        }
+    }
+
+    function showAltitudePopup() {
+      document.getElementById('altitude-popup').style.display = 'block';
+    }
+
+    function showSpeedPopup() {
+      document.getElementById('speed-popup').style.display = 'block';
+    }
+
+    function handleParameterSearch(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const groups = document.querySelectorAll('.parameter-group');
+      groups.forEach(group => {
+        const groupTitle = group.querySelector('.group-title').textContent.toLowerCase();
+        const params = group.querySelectorAll('.parameter-item');
+        let groupVisible = false;
+        params.forEach(param => {
+          const paramText = param.textContent.toLowerCase();
+          const isVisible = paramText.includes(searchTerm) || groupTitle.includes(searchTerm);
+          param.style.display = isVisible ? 'block' : 'none';
+          groupVisible = groupVisible || isVisible;
+        });
+        group.style.display = groupVisible ? 'block' : 'none';
+      });
+    }
+
+    function throttle(func, limit) {
+      let lastFunc;
+      let lastRan;
+      return function() {
+        const context = this;
+        const args = arguments;
+        if (!lastRan) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        } else {
+          clearTimeout(lastFunc);
+          lastFunc = setTimeout(function() {
+            if ((Date.now() - lastRan) >= limit) {
+              func.apply(context, args);
+              lastRan = Date.now();
+            }
+          }, limit - (Date.now() - lastRan));
+        }
+      }
+    }
+
+    // Use a more efficient debounce function
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func.apply(this, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    let gpsFollowEnabled = false;
+    let gpsFollowMarker = null;
+
+    // Add button to the right panel
+    function addGPSFollowButton() {
+        const rightPanel = document.getElementById('right-panel');
+        const button = document.createElement('button');
+        button.className = 'button';
+        button.id = 'gps-follow-button';
+        button.innerHTML = '<i class="fas fa-crosshairs"></i> Follow Host GPS';
+        button.onclick = toggleGPSFollow;
+        rightPanel.insertBefore(button, rightPanel.firstChild);
+    }
+
+    // Toggle GPS following
+    function showGPSFollowPopup() {
+        // Create and show a popup for altitude input
+        const popup = document.createElement('div');
+        popup.className = 'popup';
+        popup.id = 'gps-follow-popup';
+        popup.innerHTML = `
+            <h3>GPS Follow Settings</h3>
+            <div class="input-group">
+                <label for="gps-follow-altitude">Follow Altitude (meters):</label>
+                <input type="number" id="gps-follow-altitude" value="10" min="1" step="0.5">
+            </div>
+            <button onclick="startGPSFollow()">Start Following</button>
+            <button onclick="closePopup('gps-follow-popup')">Cancel</button>
+        `;
+        document.body.appendChild(popup);
+        popup.style.display = 'block';
+    }
+
+    function startGPSFollow() {
+        const altitudeInput = document.getElementById('gps-follow-altitude');
+        const altitude = parseFloat(altitudeInput.value);
+
+        if (isNaN(altitude) || altitude <= 0) {
+            alert('Please enter a valid altitude greater than 0 meters');
+            return;
+        }
+
+        const button = document.getElementById('gps-follow-button');
+
+        // Start following with specified altitude
+        fetchWithLoading('/start_gps_follow', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ altitude: altitude })
+        })
+        .then(data => {
+            if (data.error) {
+                handleError(data.error, 'Failed to start GPS following');
+                return;
+            }
+            gpsFollowEnabled = true;
+            button.style.backgroundColor = '#ff4444';
+            button.innerHTML = '<i class="fas fa-stop"></i> Stop Following';
+            addImportantMessage('GPS following started');
+            closePopup('gps-follow-popup');
+        });
+    }
+
+    function toggleGPSFollow() {
+        if (gpsFollowEnabled) {
+            // Stop following
+            fetchWithLoading('/stop_gps_follow')
+                .then(data => {
+                    if (data.error) {
+                        handleError(data.error, 'Failed to stop GPS following');
+                        return;
+                    }
+                    gpsFollowEnabled = false;
+                    const button = document.getElementById('gps-follow-button');
+                    button.style.backgroundColor = '';
+                    button.innerHTML = '<i class="fas fa-crosshairs"></i> Follow Host GPS';
+                    addImportantMessage('GPS following stopped');
+
+                    // Remove GPS marker if it exists
+                    if (gpsFollowMarker) {
+                        map.removeLayer(gpsFollowMarker);
+                        gpsFollowMarker = null;
+                    }
+                });
+        } else {
+            // Show popup for starting GPS follow
+            showGPSFollowPopup();
+        }
+    }
+
+    function updateGPSFollowMarker(data) {
+        const position = [data.lat, data.lon];
+
+        // Create or update marker
+        if (!gpsFollowMarker) {
+            const icon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style='background-color:#ff4444;' class='marker-pin'></div><i class='fas fa-mobile-alt' style='color: white;'></i>`,
+                iconSize: [30, 42],
+                iconAnchor: [15, 42]
+            });
+
+            gpsFollowMarker = L.marker(position, {icon: icon}).addTo(map);
+        } else {
+            gpsFollowMarker.setLatLng(position);
+        }
+
+        // Update popup content
+        gpsFollowMarker.bindPopup(`Host GPS Position<br>Lat: ${data.lat}<br>Lon: ${data.lon}`).openPopup();
+    }
+
+    // Optimize the applyPerformanceOptimizations function
+    function applyPerformanceOptimizations() {
+      const throttledUpdateDronePosition = throttle(updateDronePosition, 200);
+      socket.on('drone_position', ({ lat, lon, alt }) => {
+        throttledUpdateDronePosition(lat, lon, alt);
+      });
+
+      const debouncedHandleParameterSearch = debounce(handleParameterSearch, 300);
+      const parameterSearchInput = document.getElementById('parameter-search');
+      parameterSearchInput.addEventListener('input', debouncedHandleParameterSearch);
+
+      const messagesDiv = document.getElementById('messages');
+      const cleanupMessages = () => {
+        const childNodes = messagesDiv.childNodes;
+        const nodesToRemove = childNodes.length - 100;
+        if (nodesToRemove > 0) {
+          messagesDiv.replaceChildren(...Array.from(childNodes).slice(nodesToRemove));
+        }
+      };
+      setInterval(cleanupMessages, 300000); // Clean up messages every 5 minutes
+    }
+
+    // Optimize the resizeMap function (assuming it exists)
+    const debouncedResizeMap = debounce(() => {
+      if (map) {
+        map.invalidateSize();
+      }
+    }, 250);
+    // Event Listeners
+    window.addEventListener('resize', debouncedResizeMap);
+    // Initialize
+    window.onload = function() {
+      ArtificialHorizon.init();
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+[2024-08-20 00:47:56 +0530] [13601] [INFO] Starting gunicorn 22.0.0
+[2024-08-20 00:47:56 +0530] [13601] [INFO] Listening at: http://0.0.0.0:5000 (13601)
+[2024-08-20 00:47:56 +0530] [13601] [INFO] Using worker: eventlet
+[2024-08-20 00:47:56 +0530] [13621] [INFO] Booting worker with pid: 13621
+[2024-08-20 00:47:56 +0530] [13622] [INFO] Booting worker with pid: 13622
+[2024-08-20 00:47:56 +0530] [13623] [INFO] Booting worker with pid: 13623
+[2024-08-20 00:47:56 +0530] [13624] [INFO] Booting worker with pid: 13624
+[2024-08-20 00:47:56 +0530] [13625] [INFO] Booting worker with pid: 13625
+[2024-08-20 00:47:56 +0530] [13626] [INFO] Booting worker with pid: 13626
+[2024-08-20 00:47:56 +0530] [13627] [INFO] Booting worker with pid: 13627
+[2024-08-20 00:47:56 +0530] [13628] [INFO] Booting worker with pid: 13628
+[2024-08-20 00:47:56 +0530] [13629] [INFO] Booting worker with pid: 13629
+[2024-08-20 00:47:56 +0530] [13630] [INFO] Booting worker with pid: 13630
+[2024-08-20 00:47:57 +0530] [13631] [INFO] Booting worker with pid: 13631
+[2024-08-20 00:47:57 +0530] [13632] [INFO] Booting worker with pid: 13632
+[2024-08-20 00:47:57 +0530] [13633] [INFO] Booting worker with pid: 13633
+[2024-08-20 00:47:57 +0530] [13634] [INFO] Booting worker with pid: 13634
+[2024-08-20 00:47:57 +0530] [13635] [INFO] Booting worker with pid: 13635
+[2024-08-20 00:47:57 +0530] [13636] [INFO] Booting worker with pid: 13636
+[2024-08-20 00:47:57 +0530] [13637] [INFO] Booting worker with pid: 13637
+[2024-08-20 00:47:57 +0530] [13638] [INFO] Booting worker with pid: 13638
+[2024-08-20 00:47:57 +0530] [13639] [INFO] Booting worker with pid: 13639
+[2024-08-20 00:47:57 +0530] [13640] [INFO] Booting worker with pid: 13640
+[2024-08-20 00:47:57 +0530] [13641] [INFO] Booting worker with pid: 13641
+[2024-08-20 00:47:57 +0530] [13642] [INFO] Booting worker with pid: 13642
+[2024-08-20 00:47:57 +0530] [13643] [INFO] Booting worker with pid: 13643
+[2024-08-20 00:47:57 +0530] [13644] [INFO] Booting worker with pid: 13644
+[2024-08-20 00:47:57 +0530] [13645] [INFO] Booting worker with pid: 13645
+[2024-08-20 00:47:57 +0530] [13647] [INFO] Booting worker with pid: 13647
+[2024-08-20 00:47:57 +0530] [13648] [INFO] Booting worker with pid: 13648
+[2024-08-20 00:47:57 +0530] [13649] [INFO] Booting worker with pid: 13649
+[2024-08-20 00:47:57 +0530] [13650] [INFO] Booting worker with pid: 13650
+[2024-08-20 00:47:57 +0530] [13651] [INFO] Booting worker with pid: 13651
+[2024-08-20 00:47:58 +0530] [13652] [INFO] Booting worker with pid: 13652
+[2024-08-20 00:47:58 +0530] [13653] [INFO] Booting worker with pid: 13653
+[2024-08-20 00:47:58 +0530] [13654] [INFO] Booting worker with pid: 13654
+[2024-08-20 00:48:47 +0530] [13601] [INFO] Handling signal: int
+[2024-08-20 00:48:47 +0530] [13632] [INFO] Worker exiting (pid: 13632)
+[2024-08-20 00:48:47 +0530] [13653] [INFO] Worker exiting (pid: 13653)
+[2024-08-20 00:48:47 +0530] [13633] [INFO] Worker exiting (pid: 13633)
+[2024-08-20 00:48:47 +0530] [13654] [INFO] Worker exiting (pid: 13654)
+[2024-08-20 00:48:47 +0530] [13634] [INFO] Worker exiting (pid: 13634)
+[2024-08-20 00:48:47 +0530] [13635] [INFO] Worker exiting (pid: 13635)
+[2024-08-20 00:48:47 +0530] [13636] [INFO] Worker exiting (pid: 13636)
+[2024-08-20 00:48:47 +0530] [13637] [INFO] Worker exiting (pid: 13637)
+[2024-08-20 00:48:47 +0530] [13638] [INFO] Worker exiting (pid: 13638)
+[2024-08-20 00:48:47 +0530] [13639] [INFO] Worker exiting (pid: 13639)
+[2024-08-20 00:48:47 +0530] [13640] [INFO] Worker exiting (pid: 13640)
+[2024-08-20 00:48:47 +0530] [13641] [INFO] Worker exiting (pid: 13641)
+[2024-08-20 00:48:47 +0530] [13621] [INFO] Worker exiting (pid: 13621)
+[2024-08-20 00:48:47 +0530] [13642] [INFO] Worker exiting (pid: 13642)
+[2024-08-20 00:48:47 +0530] [13622] [INFO] Worker exiting (pid: 13622)
+[2024-08-20 00:48:47 +0530] [13643] [INFO] Worker exiting (pid: 13643)
+[2024-08-20 00:48:47 +0530] [13623] [INFO] Worker exiting (pid: 13623)
+[2024-08-20 00:48:47 +0530] [13624] [INFO] Worker exiting (pid: 13624)
+[2024-08-20 00:48:47 +0530] [13644] [INFO] Worker exiting (pid: 13644)
+[2024-08-20 00:48:47 +0530] [13625] [INFO] Worker exiting (pid: 13625)
+[2024-08-20 00:48:48 +0530] [13645] [INFO] Worker exiting (pid: 13645)
+[2024-08-20 00:48:48 +0530] [13648] [INFO] Worker exiting (pid: 13648)
+[2024-08-20 00:48:48 +0530] [13626] [INFO] Worker exiting (pid: 13626)
+[2024-08-20 00:48:48 +0530] [13647] [INFO] Worker exiting (pid: 13647)
+[2024-08-20 00:48:48 +0530] [13627] [INFO] Worker exiting (pid: 13627)
+[2024-08-20 00:48:48 +0530] [13649] [INFO] Worker exiting (pid: 13649)
+[2024-08-20 00:48:48 +0530] [13650] [INFO] Worker exiting (pid: 13650)
+[2024-08-20 00:48:48 +0530] [13628] [INFO] Worker exiting (pid: 13628)
+[2024-08-20 00:48:48 +0530] [13651] [INFO] Worker exiting (pid: 13651)
+[2024-08-20 00:48:48 +0530] [13629] [INFO] Worker exiting (pid: 13629)
+[2024-08-20 00:48:48 +0530] [13630] [INFO] Worker exiting (pid: 13630)
+[2024-08-20 00:48:48 +0530] [13652] [INFO] Worker exiting (pid: 13652)
+[2024-08-20 00:48:48 +0530] [13631] [INFO] Worker exiting (pid: 13631)
+[2024-08-20 00:48:48 +0530] [13601] [INFO] Shutting down: Master
+[2024-08-20 00:49:58 +0530] [13831] [INFO] Starting gunicorn 22.0.0
+[2024-08-20 00:49:58 +0530] [13831] [INFO] Listening at: http://0.0.0.0:5000 (13831)
+[2024-08-20 00:49:58 +0530] [13831] [INFO] Using worker: eventlet
+[2024-08-20 00:49:58 +0530] [13847] [INFO] Booting worker with pid: 13847
+[2024-08-20 00:50:18 +0530] [13831] [INFO] Handling signal: int
+[2024-08-20 00:50:19 +0530] [13847] [INFO] Worker exiting (pid: 13847)
+[2024-08-20 00:50:19 +0530] [13831] [INFO] Shutting down: Master

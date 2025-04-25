@@ -1,0 +1,132 @@
+{
+  "waypoints": [
+    {
+      "name": "WP1",
+      "lat": 23.19102,
+      "lon": 77.38055,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.18935,
+      "lon": 77.382135,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.18768,
+      "lon": 77.38372,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP4",
+      "lat": 23.188205,
+      "lon": 77.38582666666666,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP5",
+      "lat": 23.18873,
+      "lon": 77.38793333333334,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP6",
+      "lat": 23.189255,
+      "lon": 77.39004,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP7",
+      "lat": 23.18978,
+      "lon": 77.39214666666666,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP8",
+      "lat": 23.190305,
+      "lon": 77.39425333333334,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP9",
+      "lat": 23.19083,
+      "lon": 77.39636,
+      "elevation": 10.0,
+      "speed": 0.0
+    }
+  ],
+  "optimized_path": [
+    {
+      "name": "WP1",
+      "lat": 23.19102,
+      "lon": 77.38055,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.18935,
+      "lon": 77.382135,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.18768,
+      "lon": 77.38372,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP4",
+      "lat": 23.188205,
+      "lon": 77.38582666666666,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP5",
+      "lat": 23.18873,
+      "lon": 77.38793333333334,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP6",
+      "lat": 23.189255,
+      "lon": 77.39004,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP7",
+      "lat": 23.18978,
+      "lon": 77.39214666666666,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP8",
+      "lat": 23.190305,
+      "lon": 77.39425333333334,
+      "elevation": 10.0,
+      "speed": 0.0
+    },
+    {
+      "name": "WP9",
+      "lat": 23.19083,
+      "lon": 77.39636,
+      "elevation": 10.0,
+      "speed": 0.0
+    }
+  ]
+}

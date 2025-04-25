@@ -1,0 +1,1070 @@
+2024-11-09 00:05:43,873 - INFO - Attempting to sync with publisher at tcp://localhost:5556
+2024-11-09 00:05:44,873 - ERROR - Failed to initialize ZMQ: Sync timeout
+2024-11-09 00:06:45,373 - INFO - Attempting to sync with publisher at tcp://localhost:5556
+2024-11-09 00:06:46,373 - ERROR - Failed to initialize ZMQ: Sync timeout
+2024-11-09 00:06:56,658 - INFO - Attempting to sync with publisher at tcp://localhost:5556
+2024-11-09 00:06:57,659 - ERROR - Failed to initialize ZMQ: Sync timeout
+2024-11-09 00:07:37,212 - INFO - Attempting to sync with publisher at tcp://localhost:5556
+2024-11-09 00:09:27,401 - INFO - Connected to tracking publisher at tcp://localhost:5555
+2024-11-09 00:09:29,914 - INFO - Gimbal controller initialized
+2024-11-09 00:09:29,914 - INFO - Starting gimbal control loop
+2024-11-09 00:09:34,923 - INFO - Processing tracking data: ID=0, Sequence=1, Position=(424.50, 251.50)
+2024-11-09 00:09:34,964 - INFO - Processing tracking data: ID=0, Sequence=2, Position=(424.50, 251.50)
+2024-11-09 00:09:35,006 - INFO - Processing tracking data: ID=0, Sequence=3, Position=(424.50, 251.50)
+2024-11-09 00:09:35,014 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,014 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,014 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,041 - INFO - Processing tracking data: ID=0, Sequence=4, Position=(424.50, 251.50)
+2024-11-09 00:09:35,041 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,042 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,042 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,091 - INFO - Processing tracking data: ID=0, Sequence=5, Position=(424.50, 251.50)
+2024-11-09 00:09:35,092 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,092 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,092 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,169 - INFO - Processing tracking data: ID=0, Sequence=6, Position=(424.50, 251.50)
+2024-11-09 00:09:35,170 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,170 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,170 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,205 - INFO - Processing tracking data: ID=0, Sequence=7, Position=(424.50, 251.50)
+2024-11-09 00:09:35,205 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,206 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,206 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,246 - INFO - Processing tracking data: ID=0, Sequence=8, Position=(424.50, 251.50)
+2024-11-09 00:09:35,247 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,247 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,247 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,284 - INFO - Processing tracking data: ID=0, Sequence=9, Position=(424.50, 251.50)
+2024-11-09 00:09:35,284 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,284 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,285 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,322 - INFO - Processing tracking data: ID=0, Sequence=10, Position=(424.50, 251.50)
+2024-11-09 00:09:35,323 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,323 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,323 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,364 - INFO - Processing tracking data: ID=0, Sequence=11, Position=(424.50, 251.50)
+2024-11-09 00:09:35,364 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,364 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,364 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,406 - INFO - Processing tracking data: ID=0, Sequence=12, Position=(424.50, 251.50)
+2024-11-09 00:09:35,406 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,406 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,406 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,446 - INFO - Processing tracking data: ID=0, Sequence=13, Position=(424.50, 251.50)
+2024-11-09 00:09:35,447 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,447 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,447 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,482 - INFO - Processing tracking data: ID=0, Sequence=14, Position=(424.50, 251.50)
+2024-11-09 00:09:35,482 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,483 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,483 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,528 - INFO - Processing tracking data: ID=0, Sequence=15, Position=(424.50, 251.50)
+2024-11-09 00:09:35,528 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,528 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,528 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,605 - INFO - Processing tracking data: ID=0, Sequence=16, Position=(424.50, 251.50)
+2024-11-09 00:09:35,606 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,606 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,606 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,646 - INFO - Processing tracking data: ID=0, Sequence=17, Position=(424.50, 251.50)
+2024-11-09 00:09:35,646 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,646 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,646 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,687 - INFO - Processing tracking data: ID=0, Sequence=18, Position=(424.50, 251.50)
+2024-11-09 00:09:35,688 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,688 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,688 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,726 - INFO - Processing tracking data: ID=0, Sequence=19, Position=(424.50, 251.50)
+2024-11-09 00:09:35,726 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,726 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,726 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,767 - INFO - Processing tracking data: ID=0, Sequence=20, Position=(424.50, 251.50)
+2024-11-09 00:09:35,767 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,767 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,767 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,804 - INFO - Processing tracking data: ID=0, Sequence=21, Position=(424.50, 251.50)
+2024-11-09 00:09:35,804 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,804 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,804 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,844 - INFO - Processing tracking data: ID=0, Sequence=22, Position=(424.50, 251.50)
+2024-11-09 00:09:35,845 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,845 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,845 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,885 - INFO - Processing tracking data: ID=0, Sequence=23, Position=(424.50, 251.50)
+2024-11-09 00:09:35,885 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,885 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,885 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,919 - INFO - Processing tracking data: ID=0, Sequence=24, Position=(424.50, 251.50)
+2024-11-09 00:09:35,920 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,920 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,920 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:35,966 - INFO - Processing tracking data: ID=0, Sequence=25, Position=(424.50, 251.50)
+2024-11-09 00:09:35,967 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:35,967 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:35,967 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,004 - INFO - Processing tracking data: ID=0, Sequence=26, Position=(424.50, 251.50)
+2024-11-09 00:09:36,005 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,005 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,005 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,041 - INFO - Processing tracking data: ID=0, Sequence=27, Position=(424.50, 251.50)
+2024-11-09 00:09:36,042 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,042 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,042 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,187 - INFO - Processing tracking data: ID=0, Sequence=28, Position=(424.50, 251.50)
+2024-11-09 00:09:36,188 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,188 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,188 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,231 - INFO - Processing tracking data: ID=0, Sequence=29, Position=(424.50, 251.50)
+2024-11-09 00:09:36,231 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,231 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,231 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,282 - INFO - Processing tracking data: ID=0, Sequence=30, Position=(424.50, 251.50)
+2024-11-09 00:09:36,283 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,283 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,283 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,322 - INFO - Processing tracking data: ID=0, Sequence=31, Position=(424.50, 251.50)
+2024-11-09 00:09:36,322 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,322 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,322 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,364 - INFO - Processing tracking data: ID=0, Sequence=32, Position=(424.50, 251.50)
+2024-11-09 00:09:36,365 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,365 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,365 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,402 - INFO - Processing tracking data: ID=0, Sequence=33, Position=(424.50, 251.50)
+2024-11-09 00:09:36,402 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,402 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,403 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,444 - INFO - Processing tracking data: ID=0, Sequence=34, Position=(423.50, 251.50)
+2024-11-09 00:09:36,445 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,445 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,445 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,485 - INFO - Processing tracking data: ID=0, Sequence=35, Position=(424.50, 251.50)
+2024-11-09 00:09:36,485 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,485 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,485 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,522 - INFO - Processing tracking data: ID=0, Sequence=36, Position=(424.50, 251.50)
+2024-11-09 00:09:36,522 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,522 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,522 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,561 - INFO - Processing tracking data: ID=0, Sequence=37, Position=(424.50, 251.50)
+2024-11-09 00:09:36,562 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,562 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,562 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,603 - INFO - Processing tracking data: ID=0, Sequence=38, Position=(424.50, 251.50)
+2024-11-09 00:09:36,603 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,603 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,603 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,643 - INFO - Processing tracking data: ID=0, Sequence=39, Position=(424.00, 251.00)
+2024-11-09 00:09:36,643 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,643 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,643 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,687 - INFO - Processing tracking data: ID=0, Sequence=40, Position=(424.50, 251.50)
+2024-11-09 00:09:36,688 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,688 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,688 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,728 - INFO - Processing tracking data: ID=0, Sequence=41, Position=(423.50, 251.50)
+2024-11-09 00:09:36,729 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,729 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,729 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,764 - INFO - Processing tracking data: ID=0, Sequence=42, Position=(424.50, 250.50)
+2024-11-09 00:09:36,764 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:36,765 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:36,765 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,804 - INFO - Processing tracking data: ID=0, Sequence=43, Position=(423.50, 250.50)
+2024-11-09 00:09:36,804 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:36,804 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:36,804 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,843 - INFO - Processing tracking data: ID=0, Sequence=44, Position=(424.50, 250.50)
+2024-11-09 00:09:36,843 - INFO - Raw Offset: (535.50, 289.50)
+2024-11-09 00:09:36,843 - INFO - Adjusted Offset: (24.10, 13.03)
+2024-11-09 00:09:36,843 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,886 - INFO - Processing tracking data: ID=0, Sequence=45, Position=(424.00, 251.00)
+2024-11-09 00:09:36,887 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:36,887 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:36,887 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,950 - INFO - Processing tracking data: ID=0, Sequence=46, Position=(424.50, 251.50)
+2024-11-09 00:09:36,951 - INFO - Raw Offset: (535.50, 289.50)
+2024-11-09 00:09:36,952 - INFO - Adjusted Offset: (24.10, 13.03)
+2024-11-09 00:09:36,952 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:36,993 - INFO - Processing tracking data: ID=0, Sequence=47, Position=(423.50, 251.50)
+2024-11-09 00:09:36,994 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:36,994 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:36,994 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,047 - INFO - Processing tracking data: ID=0, Sequence=48, Position=(423.50, 250.50)
+2024-11-09 00:09:37,048 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:37,048 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:37,048 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,084 - INFO - Processing tracking data: ID=0, Sequence=49, Position=(423.50, 250.50)
+2024-11-09 00:09:37,085 - INFO - Raw Offset: (536.50, 289.00)
+2024-11-09 00:09:37,085 - INFO - Adjusted Offset: (24.14, 13.00)
+2024-11-09 00:09:37,085 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,120 - INFO - Processing tracking data: ID=0, Sequence=50, Position=(424.50, 251.50)
+2024-11-09 00:09:37,120 - INFO - Raw Offset: (536.50, 288.50)
+2024-11-09 00:09:37,120 - INFO - Adjusted Offset: (24.14, 12.98)
+2024-11-09 00:09:37,120 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,162 - INFO - Processing tracking data: ID=0, Sequence=51, Position=(423.50, 250.50)
+2024-11-09 00:09:37,162 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,163 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,163 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,205 - INFO - Processing tracking data: ID=0, Sequence=52, Position=(424.50, 250.50)
+2024-11-09 00:09:37,206 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,206 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,206 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,252 - INFO - Processing tracking data: ID=0, Sequence=53, Position=(423.50, 251.50)
+2024-11-09 00:09:37,253 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,253 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,253 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,337 - INFO - Processing tracking data: ID=0, Sequence=54, Position=(424.50, 251.50)
+2024-11-09 00:09:37,338 - INFO - Raw Offset: (535.50, 288.50)
+2024-11-09 00:09:37,338 - INFO - Adjusted Offset: (24.10, 12.98)
+2024-11-09 00:09:37,338 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,405 - INFO - Processing tracking data: ID=0, Sequence=55, Position=(423.50, 251.50)
+2024-11-09 00:09:37,405 - INFO - Raw Offset: (536.50, 288.50)
+2024-11-09 00:09:37,405 - INFO - Adjusted Offset: (24.14, 12.98)
+2024-11-09 00:09:37,405 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,446 - INFO - Processing tracking data: ID=0, Sequence=56, Position=(423.50, 250.50)
+2024-11-09 00:09:37,446 - INFO - Raw Offset: (536.50, 288.50)
+2024-11-09 00:09:37,446 - INFO - Adjusted Offset: (24.14, 12.98)
+2024-11-09 00:09:37,446 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,480 - INFO - Processing tracking data: ID=0, Sequence=57, Position=(423.50, 250.50)
+2024-11-09 00:09:37,480 - INFO - Raw Offset: (536.50, 288.50)
+2024-11-09 00:09:37,480 - INFO - Adjusted Offset: (24.14, 12.98)
+2024-11-09 00:09:37,480 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,525 - INFO - Processing tracking data: ID=0, Sequence=58, Position=(424.50, 250.50)
+2024-11-09 00:09:37,525 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,525 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,525 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,564 - INFO - Processing tracking data: ID=0, Sequence=59, Position=(423.50, 251.50)
+2024-11-09 00:09:37,564 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,564 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,564 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,601 - INFO - Processing tracking data: ID=0, Sequence=60, Position=(423.50, 250.50)
+2024-11-09 00:09:37,601 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,601 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,601 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,641 - INFO - Processing tracking data: ID=0, Sequence=61, Position=(424.50, 250.50)
+2024-11-09 00:09:37,641 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,641 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,641 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,687 - INFO - Processing tracking data: ID=0, Sequence=62, Position=(423.50, 251.50)
+2024-11-09 00:09:37,687 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,687 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,687 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,727 - INFO - Processing tracking data: ID=0, Sequence=63, Position=(423.50, 250.50)
+2024-11-09 00:09:37,727 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,727 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,727 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,764 - INFO - Processing tracking data: ID=0, Sequence=64, Position=(423.50, 250.50)
+2024-11-09 00:09:37,764 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,764 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,764 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,803 - INFO - Processing tracking data: ID=0, Sequence=65, Position=(424.50, 250.50)
+2024-11-09 00:09:37,804 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,804 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,804 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,843 - INFO - Processing tracking data: ID=0, Sequence=66, Position=(423.50, 250.50)
+2024-11-09 00:09:37,844 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,844 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,844 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,890 - INFO - Processing tracking data: ID=0, Sequence=67, Position=(423.50, 250.50)
+2024-11-09 00:09:37,890 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,890 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,890 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:37,966 - INFO - Processing tracking data: ID=0, Sequence=68, Position=(424.50, 250.50)
+2024-11-09 00:09:37,967 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:37,967 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:37,967 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,002 - INFO - Processing tracking data: ID=0, Sequence=69, Position=(423.50, 250.50)
+2024-11-09 00:09:38,002 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,002 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,003 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,044 - INFO - Processing tracking data: ID=0, Sequence=70, Position=(423.50, 250.50)
+2024-11-09 00:09:38,045 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,045 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,045 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,081 - INFO - Processing tracking data: ID=0, Sequence=71, Position=(424.50, 250.50)
+2024-11-09 00:09:38,082 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,082 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,082 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,126 - INFO - Processing tracking data: ID=0, Sequence=72, Position=(424.00, 251.00)
+2024-11-09 00:09:38,126 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,126 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,126 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,164 - INFO - Processing tracking data: ID=0, Sequence=73, Position=(424.50, 250.50)
+2024-11-09 00:09:38,165 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,165 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,165 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,206 - INFO - Processing tracking data: ID=0, Sequence=74, Position=(424.00, 251.00)
+2024-11-09 00:09:38,207 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,207 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,207 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,244 - INFO - Processing tracking data: ID=0, Sequence=75, Position=(424.50, 250.50)
+2024-11-09 00:09:38,244 - INFO - Raw Offset: (535.50, 289.50)
+2024-11-09 00:09:38,244 - INFO - Adjusted Offset: (24.10, 13.03)
+2024-11-09 00:09:38,244 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,282 - INFO - Processing tracking data: ID=0, Sequence=76, Position=(423.00, 251.00)
+2024-11-09 00:09:38,282 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:38,282 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:38,282 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,320 - INFO - Processing tracking data: ID=0, Sequence=77, Position=(423.50, 250.50)
+2024-11-09 00:09:38,320 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,320 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,320 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,364 - INFO - Processing tracking data: ID=0, Sequence=78, Position=(424.50, 250.50)
+2024-11-09 00:09:38,365 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,365 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,365 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,404 - INFO - Processing tracking data: ID=0, Sequence=79, Position=(423.50, 250.50)
+2024-11-09 00:09:38,404 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,404 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,404 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,445 - INFO - Processing tracking data: ID=0, Sequence=80, Position=(423.50, 250.50)
+2024-11-09 00:09:38,445 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,445 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,445 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,551 - INFO - Processing tracking data: ID=0, Sequence=81, Position=(424.50, 250.50)
+2024-11-09 00:09:38,551 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,551 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,551 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,603 - INFO - Processing tracking data: ID=0, Sequence=82, Position=(423.50, 250.50)
+2024-11-09 00:09:38,603 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,604 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,604 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,642 - INFO - Processing tracking data: ID=0, Sequence=83, Position=(424.50, 250.50)
+2024-11-09 00:09:38,643 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,643 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,643 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,691 - INFO - Processing tracking data: ID=0, Sequence=84, Position=(424.00, 251.00)
+2024-11-09 00:09:38,692 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,692 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,692 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,726 - INFO - Processing tracking data: ID=0, Sequence=85, Position=(423.50, 250.50)
+2024-11-09 00:09:38,727 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,727 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,727 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,764 - INFO - Processing tracking data: ID=0, Sequence=86, Position=(424.50, 250.50)
+2024-11-09 00:09:38,764 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,764 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,764 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,802 - INFO - Processing tracking data: ID=0, Sequence=87, Position=(423.00, 251.00)
+2024-11-09 00:09:38,802 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:38,803 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:38,803 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,842 - INFO - Processing tracking data: ID=0, Sequence=88, Position=(423.50, 250.50)
+2024-11-09 00:09:38,842 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,842 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,843 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,887 - INFO - Processing tracking data: ID=0, Sequence=89, Position=(424.50, 250.50)
+2024-11-09 00:09:38,887 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,887 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,887 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,924 - INFO - Processing tracking data: ID=0, Sequence=90, Position=(423.00, 251.00)
+2024-11-09 00:09:38,925 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,925 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,925 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:38,963 - INFO - Processing tracking data: ID=0, Sequence=91, Position=(423.50, 250.50)
+2024-11-09 00:09:38,963 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:38,963 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:38,963 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,002 - INFO - Processing tracking data: ID=0, Sequence=92, Position=(423.50, 250.50)
+2024-11-09 00:09:39,002 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,003 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,003 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,044 - INFO - Processing tracking data: ID=0, Sequence=93, Position=(424.50, 250.50)
+2024-11-09 00:09:39,044 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,044 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,044 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,084 - INFO - Processing tracking data: ID=0, Sequence=94, Position=(424.00, 251.00)
+2024-11-09 00:09:39,085 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,085 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,085 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,124 - INFO - Processing tracking data: ID=0, Sequence=95, Position=(423.50, 250.50)
+2024-11-09 00:09:39,125 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,125 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,125 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,164 - INFO - Processing tracking data: ID=0, Sequence=96, Position=(424.50, 250.50)
+2024-11-09 00:09:39,164 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:39,164 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:39,165 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,207 - INFO - Processing tracking data: ID=0, Sequence=97, Position=(423.00, 251.00)
+2024-11-09 00:09:39,207 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:39,207 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:39,207 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,246 - INFO - Processing tracking data: ID=0, Sequence=98, Position=(423.50, 250.50)
+2024-11-09 00:09:39,246 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,246 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,246 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,280 - INFO - Processing tracking data: ID=0, Sequence=99, Position=(424.50, 250.50)
+2024-11-09 00:09:39,280 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,280 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,281 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,322 - INFO - Processing tracking data: ID=0, Sequence=100, Position=(423.00, 251.00)
+2024-11-09 00:09:39,322 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,322 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,322 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,366 - INFO - Processing tracking data: ID=0, Sequence=101, Position=(423.50, 250.50)
+2024-11-09 00:09:39,366 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,366 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,366 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,403 - INFO - Processing tracking data: ID=0, Sequence=102, Position=(424.50, 250.50)
+2024-11-09 00:09:39,403 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,403 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,403 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,444 - INFO - Processing tracking data: ID=0, Sequence=103, Position=(423.00, 251.00)
+2024-11-09 00:09:39,445 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,445 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,445 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,483 - INFO - Processing tracking data: ID=0, Sequence=104, Position=(423.50, 250.50)
+2024-11-09 00:09:39,484 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,484 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,484 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,522 - INFO - Processing tracking data: ID=0, Sequence=105, Position=(423.50, 250.50)
+2024-11-09 00:09:39,522 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,523 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,523 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,562 - INFO - Processing tracking data: ID=0, Sequence=106, Position=(424.50, 250.50)
+2024-11-09 00:09:39,563 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,563 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,563 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,604 - INFO - Processing tracking data: ID=0, Sequence=107, Position=(424.00, 251.00)
+2024-11-09 00:09:39,605 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,605 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,605 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,640 - INFO - Processing tracking data: ID=0, Sequence=108, Position=(423.50, 250.50)
+2024-11-09 00:09:39,641 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,641 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,641 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,780 - INFO - Processing tracking data: ID=0, Sequence=109, Position=(424.00, 251.00)
+2024-11-09 00:09:39,780 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:39,781 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:39,781 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,827 - INFO - Processing tracking data: ID=0, Sequence=110, Position=(424.50, 250.50)
+2024-11-09 00:09:39,827 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:39,827 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:39,827 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,885 - INFO - Processing tracking data: ID=0, Sequence=111, Position=(423.50, 250.50)
+2024-11-09 00:09:39,886 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:39,886 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:39,886 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,920 - INFO - Processing tracking data: ID=0, Sequence=112, Position=(423.50, 250.50)
+2024-11-09 00:09:39,921 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:39,921 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:39,921 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:39,967 - INFO - Processing tracking data: ID=0, Sequence=113, Position=(424.50, 251.50)
+2024-11-09 00:09:39,968 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:39,968 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:39,968 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,003 - INFO - Processing tracking data: ID=0, Sequence=114, Position=(423.50, 250.50)
+2024-11-09 00:09:40,004 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,004 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,004 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,042 - INFO - Processing tracking data: ID=0, Sequence=115, Position=(423.50, 250.50)
+2024-11-09 00:09:40,043 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,043 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,043 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,084 - INFO - Processing tracking data: ID=0, Sequence=116, Position=(424.50, 250.50)
+2024-11-09 00:09:40,085 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,085 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,085 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,123 - INFO - Processing tracking data: ID=0, Sequence=117, Position=(423.00, 251.00)
+2024-11-09 00:09:40,123 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,123 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,123 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,164 - INFO - Processing tracking data: ID=0, Sequence=118, Position=(423.50, 250.50)
+2024-11-09 00:09:40,164 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,164 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,164 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,210 - INFO - Processing tracking data: ID=0, Sequence=119, Position=(423.50, 250.50)
+2024-11-09 00:09:40,211 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,211 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,211 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,245 - INFO - Processing tracking data: ID=0, Sequence=120, Position=(424.50, 250.50)
+2024-11-09 00:09:40,245 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,245 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,245 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,280 - INFO - Processing tracking data: ID=0, Sequence=121, Position=(424.00, 251.00)
+2024-11-09 00:09:40,281 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,281 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,281 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,323 - INFO - Processing tracking data: ID=0, Sequence=122, Position=(423.50, 250.50)
+2024-11-09 00:09:40,323 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,323 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,323 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,369 - INFO - Processing tracking data: ID=0, Sequence=123, Position=(424.50, 250.50)
+2024-11-09 00:09:40,369 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:40,370 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:40,370 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,404 - INFO - Processing tracking data: ID=0, Sequence=124, Position=(423.00, 251.00)
+2024-11-09 00:09:40,404 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:40,404 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:40,404 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,445 - INFO - Processing tracking data: ID=0, Sequence=125, Position=(423.50, 250.50)
+2024-11-09 00:09:40,446 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,446 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,446 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,480 - INFO - Processing tracking data: ID=0, Sequence=126, Position=(423.50, 250.50)
+2024-11-09 00:09:40,481 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,481 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,481 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,524 - INFO - Processing tracking data: ID=0, Sequence=127, Position=(424.50, 250.50)
+2024-11-09 00:09:40,524 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,524 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,524 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,563 - INFO - Processing tracking data: ID=0, Sequence=128, Position=(423.00, 251.00)
+2024-11-09 00:09:40,563 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,563 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,563 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,601 - INFO - Processing tracking data: ID=0, Sequence=129, Position=(423.50, 250.50)
+2024-11-09 00:09:40,601 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,601 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,601 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,647 - INFO - Processing tracking data: ID=0, Sequence=130, Position=(424.50, 250.50)
+2024-11-09 00:09:40,648 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,648 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,648 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,684 - INFO - Processing tracking data: ID=0, Sequence=131, Position=(423.00, 251.00)
+2024-11-09 00:09:40,685 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,685 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,685 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,725 - INFO - Processing tracking data: ID=0, Sequence=132, Position=(423.50, 250.50)
+2024-11-09 00:09:40,725 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,725 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,725 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,761 - INFO - Processing tracking data: ID=0, Sequence=133, Position=(423.50, 250.50)
+2024-11-09 00:09:40,761 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,761 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,761 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,799 - INFO - Processing tracking data: ID=0, Sequence=134, Position=(424.50, 251.50)
+2024-11-09 00:09:40,799 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,799 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,799 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,841 - INFO - Processing tracking data: ID=0, Sequence=135, Position=(423.50, 250.50)
+2024-11-09 00:09:40,841 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,841 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,842 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,926 - INFO - Processing tracking data: ID=0, Sequence=136, Position=(424.50, 250.50)
+2024-11-09 00:09:40,927 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,927 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,927 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:40,967 - INFO - Processing tracking data: ID=0, Sequence=137, Position=(423.00, 251.00)
+2024-11-09 00:09:40,967 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:40,967 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:40,967 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,006 - INFO - Processing tracking data: ID=0, Sequence=138, Position=(423.50, 250.50)
+2024-11-09 00:09:41,007 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,007 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,007 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,044 - INFO - Processing tracking data: ID=0, Sequence=139, Position=(423.50, 250.50)
+2024-11-09 00:09:41,044 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,044 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,044 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,085 - INFO - Processing tracking data: ID=0, Sequence=140, Position=(424.50, 250.50)
+2024-11-09 00:09:41,085 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,085 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,085 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,126 - INFO - Processing tracking data: ID=0, Sequence=141, Position=(424.00, 251.00)
+2024-11-09 00:09:41,127 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,127 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,127 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,164 - INFO - Processing tracking data: ID=0, Sequence=142, Position=(423.50, 250.50)
+2024-11-09 00:09:41,164 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,164 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,165 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,203 - INFO - Processing tracking data: ID=0, Sequence=143, Position=(424.50, 250.50)
+2024-11-09 00:09:41,203 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:41,204 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:41,204 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,245 - INFO - Processing tracking data: ID=0, Sequence=144, Position=(423.00, 251.00)
+2024-11-09 00:09:41,246 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:41,246 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:41,246 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,281 - INFO - Processing tracking data: ID=0, Sequence=145, Position=(423.50, 250.50)
+2024-11-09 00:09:41,282 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,282 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,282 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,322 - INFO - Processing tracking data: ID=0, Sequence=146, Position=(423.50, 250.50)
+2024-11-09 00:09:41,322 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,322 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,322 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,367 - INFO - Processing tracking data: ID=0, Sequence=147, Position=(424.50, 251.50)
+2024-11-09 00:09:41,368 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,368 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,368 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,406 - INFO - Processing tracking data: ID=0, Sequence=148, Position=(424.00, 251.00)
+2024-11-09 00:09:41,406 - INFO - Raw Offset: (536.50, 289.00)
+2024-11-09 00:09:41,406 - INFO - Adjusted Offset: (24.14, 13.00)
+2024-11-09 00:09:41,407 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,439 - INFO - Processing tracking data: ID=0, Sequence=149, Position=(423.50, 250.50)
+2024-11-09 00:09:41,440 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,440 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,440 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,486 - INFO - Processing tracking data: ID=0, Sequence=150, Position=(424.50, 250.50)
+2024-11-09 00:09:41,487 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:41,487 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:41,487 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,522 - INFO - Processing tracking data: ID=0, Sequence=151, Position=(423.00, 251.00)
+2024-11-09 00:09:41,522 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:41,522 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:41,522 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,562 - INFO - Processing tracking data: ID=0, Sequence=152, Position=(423.50, 250.50)
+2024-11-09 00:09:41,563 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,563 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,563 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,605 - INFO - Processing tracking data: ID=0, Sequence=153, Position=(423.50, 250.50)
+2024-11-09 00:09:41,606 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,606 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,606 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,644 - INFO - Processing tracking data: ID=0, Sequence=154, Position=(423.50, 250.50)
+2024-11-09 00:09:41,645 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,645 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,645 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,685 - INFO - Processing tracking data: ID=0, Sequence=155, Position=(424.50, 250.50)
+2024-11-09 00:09:41,685 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,685 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,685 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,729 - INFO - Processing tracking data: ID=0, Sequence=156, Position=(423.00, 251.00)
+2024-11-09 00:09:41,729 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,730 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,730 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,764 - INFO - Processing tracking data: ID=0, Sequence=157, Position=(423.50, 250.50)
+2024-11-09 00:09:41,764 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,764 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,764 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,801 - INFO - Processing tracking data: ID=0, Sequence=158, Position=(423.50, 250.50)
+2024-11-09 00:09:41,801 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,801 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,801 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,843 - INFO - Processing tracking data: ID=0, Sequence=159, Position=(424.50, 250.50)
+2024-11-09 00:09:41,843 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,843 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,844 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,889 - INFO - Processing tracking data: ID=0, Sequence=160, Position=(423.00, 251.00)
+2024-11-09 00:09:41,890 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,890 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,890 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:41,965 - INFO - Processing tracking data: ID=0, Sequence=161, Position=(423.50, 250.50)
+2024-11-09 00:09:41,965 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:41,965 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:41,965 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,006 - INFO - Processing tracking data: ID=0, Sequence=162, Position=(424.50, 250.50)
+2024-11-09 00:09:42,006 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,006 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,006 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,045 - INFO - Processing tracking data: ID=0, Sequence=163, Position=(423.00, 251.00)
+2024-11-09 00:09:42,045 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,045 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,045 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,176 - INFO - Processing tracking data: ID=0, Sequence=164, Position=(423.50, 250.50)
+2024-11-09 00:09:42,176 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,176 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,176 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,223 - INFO - Processing tracking data: ID=0, Sequence=165, Position=(423.50, 250.50)
+2024-11-09 00:09:42,223 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,223 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,223 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,281 - INFO - Processing tracking data: ID=0, Sequence=166, Position=(423.50, 250.50)
+2024-11-09 00:09:42,281 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,281 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,281 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,320 - INFO - Processing tracking data: ID=0, Sequence=167, Position=(423.50, 250.50)
+2024-11-09 00:09:42,321 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,321 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,321 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,368 - INFO - Processing tracking data: ID=0, Sequence=168, Position=(424.50, 250.50)
+2024-11-09 00:09:42,368 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,368 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,368 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,401 - INFO - Processing tracking data: ID=0, Sequence=169, Position=(423.00, 251.00)
+2024-11-09 00:09:42,402 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,402 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,402 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,445 - INFO - Processing tracking data: ID=0, Sequence=170, Position=(423.50, 250.50)
+2024-11-09 00:09:42,445 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,445 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,445 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,483 - INFO - Processing tracking data: ID=0, Sequence=171, Position=(423.50, 250.50)
+2024-11-09 00:09:42,483 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,483 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,484 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,523 - INFO - Processing tracking data: ID=0, Sequence=172, Position=(423.50, 250.50)
+2024-11-09 00:09:42,523 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,523 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,523 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,563 - INFO - Processing tracking data: ID=0, Sequence=173, Position=(424.50, 250.50)
+2024-11-09 00:09:42,564 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,564 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,564 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,602 - INFO - Processing tracking data: ID=0, Sequence=174, Position=(423.00, 252.00)
+2024-11-09 00:09:42,603 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,603 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,603 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,643 - INFO - Processing tracking data: ID=0, Sequence=175, Position=(423.50, 250.50)
+2024-11-09 00:09:42,643 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,643 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,643 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,687 - INFO - Processing tracking data: ID=0, Sequence=176, Position=(424.50, 250.50)
+2024-11-09 00:09:42,687 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,687 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,687 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,726 - INFO - Processing tracking data: ID=0, Sequence=177, Position=(423.00, 251.00)
+2024-11-09 00:09:42,726 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,726 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,726 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,765 - INFO - Processing tracking data: ID=0, Sequence=178, Position=(423.50, 250.50)
+2024-11-09 00:09:42,765 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,765 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,766 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,803 - INFO - Processing tracking data: ID=0, Sequence=179, Position=(423.50, 250.50)
+2024-11-09 00:09:42,803 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,803 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,804 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,843 - INFO - Processing tracking data: ID=0, Sequence=180, Position=(424.50, 250.50)
+2024-11-09 00:09:42,843 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,843 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,843 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,884 - INFO - Processing tracking data: ID=0, Sequence=181, Position=(424.00, 251.00)
+2024-11-09 00:09:42,884 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,884 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,885 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,922 - INFO - Processing tracking data: ID=0, Sequence=182, Position=(423.50, 250.50)
+2024-11-09 00:09:42,922 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,922 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,922 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:42,968 - INFO - Processing tracking data: ID=0, Sequence=183, Position=(423.50, 250.50)
+2024-11-09 00:09:42,969 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:42,969 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:42,969 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,046 - INFO - Processing tracking data: ID=0, Sequence=184, Position=(424.00, 251.00)
+2024-11-09 00:09:43,046 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:43,046 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:43,046 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,085 - INFO - Processing tracking data: ID=0, Sequence=185, Position=(423.50, 250.50)
+2024-11-09 00:09:43,086 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,086 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,086 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,124 - INFO - Processing tracking data: ID=0, Sequence=186, Position=(423.50, 250.50)
+2024-11-09 00:09:43,125 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,125 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,125 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,165 - INFO - Processing tracking data: ID=0, Sequence=187, Position=(424.50, 250.50)
+2024-11-09 00:09:43,165 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,165 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,165 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,207 - INFO - Processing tracking data: ID=0, Sequence=188, Position=(424.00, 251.00)
+2024-11-09 00:09:43,207 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:43,207 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:43,207 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,245 - INFO - Processing tracking data: ID=0, Sequence=189, Position=(423.50, 250.50)
+2024-11-09 00:09:43,246 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,246 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,246 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,337 - INFO - Processing tracking data: ID=0, Sequence=190, Position=(423.00, 251.00)
+2024-11-09 00:09:43,338 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,338 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,338 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,404 - INFO - Processing tracking data: ID=0, Sequence=191, Position=(423.50, 250.50)
+2024-11-09 00:09:43,404 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,404 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,404 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,441 - INFO - Processing tracking data: ID=0, Sequence=192, Position=(424.00, 251.00)
+2024-11-09 00:09:43,441 - INFO - Raw Offset: (536.50, 289.00)
+2024-11-09 00:09:43,441 - INFO - Adjusted Offset: (24.14, 13.00)
+2024-11-09 00:09:43,442 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,486 - INFO - Processing tracking data: ID=0, Sequence=193, Position=(423.50, 250.50)
+2024-11-09 00:09:43,486 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,486 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,486 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,522 - INFO - Processing tracking data: ID=0, Sequence=194, Position=(423.50, 250.50)
+2024-11-09 00:09:43,522 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,522 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,522 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,565 - INFO - Processing tracking data: ID=0, Sequence=195, Position=(424.50, 250.50)
+2024-11-09 00:09:43,566 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,566 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,566 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,601 - INFO - Processing tracking data: ID=0, Sequence=196, Position=(423.00, 251.00)
+2024-11-09 00:09:43,602 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,602 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,602 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,640 - INFO - Processing tracking data: ID=0, Sequence=197, Position=(423.50, 250.50)
+2024-11-09 00:09:43,641 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,641 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,641 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,684 - INFO - Processing tracking data: ID=0, Sequence=198, Position=(423.50, 250.50)
+2024-11-09 00:09:43,685 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,685 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,685 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,727 - INFO - Processing tracking data: ID=0, Sequence=199, Position=(423.50, 250.50)
+2024-11-09 00:09:43,727 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,727 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,727 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,763 - INFO - Processing tracking data: ID=0, Sequence=200, Position=(424.50, 250.50)
+2024-11-09 00:09:43,764 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,764 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,764 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,802 - INFO - Processing tracking data: ID=0, Sequence=201, Position=(423.00, 251.00)
+2024-11-09 00:09:43,803 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,803 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,803 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,842 - INFO - Processing tracking data: ID=0, Sequence=202, Position=(423.50, 250.50)
+2024-11-09 00:09:43,842 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,842 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,842 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,886 - INFO - Processing tracking data: ID=0, Sequence=203, Position=(423.50, 250.50)
+2024-11-09 00:09:43,886 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,886 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,886 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,920 - INFO - Processing tracking data: ID=0, Sequence=204, Position=(424.50, 250.50)
+2024-11-09 00:09:43,921 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,921 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,921 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:43,963 - INFO - Processing tracking data: ID=0, Sequence=205, Position=(423.00, 251.00)
+2024-11-09 00:09:43,964 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:43,964 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:43,964 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,001 - INFO - Processing tracking data: ID=0, Sequence=206, Position=(423.50, 250.50)
+2024-11-09 00:09:44,002 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,002 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,002 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,046 - INFO - Processing tracking data: ID=0, Sequence=207, Position=(423.50, 250.50)
+2024-11-09 00:09:44,046 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,046 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,046 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,080 - INFO - Processing tracking data: ID=0, Sequence=208, Position=(424.50, 251.50)
+2024-11-09 00:09:44,081 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,081 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,081 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,122 - INFO - Processing tracking data: ID=0, Sequence=209, Position=(424.00, 251.00)
+2024-11-09 00:09:44,123 - INFO - Raw Offset: (536.50, 289.00)
+2024-11-09 00:09:44,123 - INFO - Adjusted Offset: (24.14, 13.00)
+2024-11-09 00:09:44,123 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,166 - INFO - Processing tracking data: ID=0, Sequence=210, Position=(424.50, 250.50)
+2024-11-09 00:09:44,166 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:44,167 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:44,167 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,207 - INFO - Processing tracking data: ID=0, Sequence=211, Position=(423.00, 251.00)
+2024-11-09 00:09:44,207 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:44,207 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:44,207 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,246 - INFO - Processing tracking data: ID=0, Sequence=212, Position=(423.50, 250.50)
+2024-11-09 00:09:44,246 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:44,246 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:44,247 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,281 - INFO - Processing tracking data: ID=0, Sequence=213, Position=(423.50, 250.50)
+2024-11-09 00:09:44,281 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,281 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,281 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,320 - INFO - Processing tracking data: ID=0, Sequence=214, Position=(424.50, 250.50)
+2024-11-09 00:09:44,320 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,321 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,321 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,363 - INFO - Processing tracking data: ID=0, Sequence=215, Position=(424.00, 251.00)
+2024-11-09 00:09:44,364 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,364 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,364 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,405 - INFO - Processing tracking data: ID=0, Sequence=216, Position=(423.50, 250.50)
+2024-11-09 00:09:44,406 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,406 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,406 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,442 - INFO - Processing tracking data: ID=0, Sequence=217, Position=(424.50, 250.50)
+2024-11-09 00:09:44,442 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:44,442 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:44,442 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,581 - INFO - Processing tracking data: ID=0, Sequence=218, Position=(423.50, 250.50)
+2024-11-09 00:09:44,582 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:44,582 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:44,582 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,636 - INFO - Processing tracking data: ID=0, Sequence=219, Position=(424.50, 250.50)
+2024-11-09 00:09:44,636 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:44,636 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:44,636 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,688 - INFO - Processing tracking data: ID=0, Sequence=220, Position=(423.50, 250.50)
+2024-11-09 00:09:44,688 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,688 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,688 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,727 - INFO - Processing tracking data: ID=0, Sequence=221, Position=(424.00, 251.00)
+2024-11-09 00:09:44,727 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:44,727 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:44,727 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,767 - INFO - Processing tracking data: ID=0, Sequence=222, Position=(423.50, 250.50)
+2024-11-09 00:09:44,767 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,767 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,767 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,803 - INFO - Processing tracking data: ID=0, Sequence=223, Position=(423.50, 250.50)
+2024-11-09 00:09:44,804 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,804 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,804 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,843 - INFO - Processing tracking data: ID=0, Sequence=224, Position=(423.50, 250.50)
+2024-11-09 00:09:44,843 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,843 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,843 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,885 - INFO - Processing tracking data: ID=0, Sequence=225, Position=(424.00, 251.00)
+2024-11-09 00:09:44,886 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,886 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,886 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,923 - INFO - Processing tracking data: ID=0, Sequence=226, Position=(423.50, 250.50)
+2024-11-09 00:09:44,923 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,923 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,923 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:44,965 - INFO - Processing tracking data: ID=0, Sequence=227, Position=(423.50, 250.50)
+2024-11-09 00:09:44,966 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:44,966 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:44,966 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,006 - INFO - Processing tracking data: ID=0, Sequence=228, Position=(423.50, 250.50)
+2024-11-09 00:09:45,006 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,006 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,006 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,044 - INFO - Processing tracking data: ID=0, Sequence=229, Position=(424.00, 251.00)
+2024-11-09 00:09:45,044 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,044 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,044 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,081 - INFO - Processing tracking data: ID=0, Sequence=230, Position=(424.50, 250.50)
+2024-11-09 00:09:45,081 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,081 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,081 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,127 - INFO - Processing tracking data: ID=0, Sequence=231, Position=(424.00, 251.00)
+2024-11-09 00:09:45,127 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,127 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,127 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,163 - INFO - Processing tracking data: ID=0, Sequence=232, Position=(423.50, 250.50)
+2024-11-09 00:09:45,163 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,163 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,163 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,206 - INFO - Processing tracking data: ID=0, Sequence=233, Position=(424.00, 251.00)
+2024-11-09 00:09:45,206 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,206 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,207 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,246 - INFO - Processing tracking data: ID=0, Sequence=234, Position=(423.50, 250.50)
+2024-11-09 00:09:45,247 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,247 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,247 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,281 - INFO - Processing tracking data: ID=0, Sequence=235, Position=(423.50, 250.50)
+2024-11-09 00:09:45,281 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,281 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,281 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,326 - INFO - Processing tracking data: ID=0, Sequence=236, Position=(423.50, 250.50)
+2024-11-09 00:09:45,327 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,327 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,327 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,361 - INFO - Processing tracking data: ID=0, Sequence=237, Position=(424.50, 250.50)
+2024-11-09 00:09:45,361 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,362 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,362 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,406 - INFO - Processing tracking data: ID=0, Sequence=238, Position=(424.00, 251.00)
+2024-11-09 00:09:45,406 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,406 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,406 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,445 - INFO - Processing tracking data: ID=0, Sequence=239, Position=(423.50, 250.50)
+2024-11-09 00:09:45,445 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:45,445 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:45,445 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,483 - INFO - Processing tracking data: ID=0, Sequence=240, Position=(424.00, 251.00)
+2024-11-09 00:09:45,484 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,484 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,484 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,522 - INFO - Processing tracking data: ID=0, Sequence=241, Position=(424.00, 251.00)
+2024-11-09 00:09:45,522 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,522 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,523 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,563 - INFO - Processing tracking data: ID=0, Sequence=242, Position=(424.50, 250.50)
+2024-11-09 00:09:45,563 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,563 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,564 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,605 - INFO - Processing tracking data: ID=0, Sequence=243, Position=(424.00, 251.00)
+2024-11-09 00:09:45,605 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,605 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,605 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,641 - INFO - Processing tracking data: ID=0, Sequence=244, Position=(423.50, 250.50)
+2024-11-09 00:09:45,641 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,641 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,642 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,787 - INFO - Processing tracking data: ID=0, Sequence=245, Position=(424.00, 251.00)
+2024-11-09 00:09:45,787 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,787 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,787 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,832 - INFO - Processing tracking data: ID=0, Sequence=246, Position=(424.50, 250.50)
+2024-11-09 00:09:45,833 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,833 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,833 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,884 - INFO - Processing tracking data: ID=0, Sequence=247, Position=(424.00, 251.00)
+2024-11-09 00:09:45,885 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:45,885 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:45,885 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,922 - INFO - Processing tracking data: ID=0, Sequence=248, Position=(423.50, 250.50)
+2024-11-09 00:09:45,922 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,922 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,922 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:45,967 - INFO - Processing tracking data: ID=0, Sequence=249, Position=(424.50, 250.50)
+2024-11-09 00:09:45,968 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:45,968 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:45,968 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,002 - INFO - Processing tracking data: ID=0, Sequence=250, Position=(424.00, 251.00)
+2024-11-09 00:09:46,002 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,002 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,002 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,047 - INFO - Processing tracking data: ID=0, Sequence=251, Position=(424.00, 251.00)
+2024-11-09 00:09:46,047 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:46,047 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:46,047 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,084 - INFO - Processing tracking data: ID=0, Sequence=252, Position=(424.50, 250.50)
+2024-11-09 00:09:46,085 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,085 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,085 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,120 - INFO - Processing tracking data: ID=0, Sequence=253, Position=(424.00, 251.00)
+2024-11-09 00:09:46,120 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:46,120 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:46,120 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,162 - INFO - Processing tracking data: ID=0, Sequence=254, Position=(423.50, 250.50)
+2024-11-09 00:09:46,163 - INFO - Raw Offset: (536.00, 289.00)
+2024-11-09 00:09:46,163 - INFO - Adjusted Offset: (24.12, 13.00)
+2024-11-09 00:09:46,163 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,207 - INFO - Processing tracking data: ID=0, Sequence=255, Position=(423.50, 250.50)
+2024-11-09 00:09:46,207 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,207 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,207 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,251 - INFO - Processing tracking data: ID=0, Sequence=256, Position=(424.50, 251.50)
+2024-11-09 00:09:46,251 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,251 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,251 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,320 - INFO - Processing tracking data: ID=0, Sequence=257, Position=(423.50, 250.50)
+2024-11-09 00:09:46,320 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:46,320 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:46,320 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,365 - INFO - Processing tracking data: ID=0, Sequence=258, Position=(424.50, 250.50)
+2024-11-09 00:09:46,366 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:46,366 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:46,366 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,405 - INFO - Processing tracking data: ID=0, Sequence=259, Position=(424.00, 251.00)
+2024-11-09 00:09:46,405 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,405 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,405 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,445 - INFO - Processing tracking data: ID=0, Sequence=260, Position=(423.50, 250.50)
+2024-11-09 00:09:46,445 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,445 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,445 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,481 - INFO - Processing tracking data: ID=0, Sequence=261, Position=(424.00, 251.00)
+2024-11-09 00:09:46,482 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,482 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,482 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,522 - INFO - Processing tracking data: ID=0, Sequence=262, Position=(423.50, 250.50)
+2024-11-09 00:09:46,522 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,522 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,522 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,566 - INFO - Processing tracking data: ID=0, Sequence=263, Position=(424.50, 250.50)
+2024-11-09 00:09:46,567 - INFO - Raw Offset: (536.00, 289.50)
+2024-11-09 00:09:46,567 - INFO - Adjusted Offset: (24.12, 13.03)
+2024-11-09 00:09:46,567 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,602 - INFO - Processing tracking data: ID=0, Sequence=264, Position=(423.50, 250.50)
+2024-11-09 00:09:46,602 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:46,602 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:46,602 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,644 - INFO - Processing tracking data: ID=0, Sequence=265, Position=(423.00, 251.00)
+2024-11-09 00:09:46,644 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:46,644 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:46,644 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:46,688 - INFO - Processing tracking data: ID=0, Sequence=266, Position=(423.50, 250.50)
+2024-11-09 00:09:46,689 - INFO - Raw Offset: (536.50, 289.50)
+2024-11-09 00:09:46,689 - INFO - Adjusted Offset: (24.14, 13.03)
+2024-11-09 00:09:46,689 - ERROR - Error calculating gimbal offset: 'SIYISDK' object has no attribute 'setRotation'
+2024-11-09 00:09:48,319 - INFO - Shutting down...
+2024-11-09 00:09:48,320 - INFO - Gimbal controller shut down

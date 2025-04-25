@@ -1,0 +1,80 @@
+{
+  "waypoints": [
+    {
+      "name": "Point 1",
+      "lat": 23.19187835142356,
+      "lon": 77.3703843355179,
+      "elevation": 10.0
+    },
+    {
+      "name": "Point 2",
+      "lat": 23.192415821243838,
+      "lon": 77.37087249755861,
+      "elevation": 10.0
+    },
+    {
+      "name": "Point 3",
+      "lat": 23.192174206637766,
+      "lon": 77.37196683883668,
+      "elevation": 10.0
+    }
+  ],
+  "paths": [
+    {
+      "start": {
+        "name": "Point 1",
+        "lat": 23.19187835142356,
+        "lon": 77.3703843355179,
+        "elevation": 10.0
+      },
+      "end": {
+        "name": "Point 2",
+        "lat": 23.192415821243838,
+        "lon": 77.37087249755861,
+        "elevation": 10.0
+      },
+      "distance": 77.85371894383879,
+      "midpoint": {
+        "name": "Midpoint Point 1-Point 2",
+        "lat": 23.192147086521896,
+        "lon": 77.37062841604777,
+        "elevation": 10.0
+      }
+    },
+    {
+      "start": {
+        "name": "Point 2",
+        "lat": 23.192415821243838,
+        "lon": 77.37087249755861,
+        "elevation": 10.0
+      },
+      "end": {
+        "name": "Point 3",
+        "lat": 23.192174206637766,
+        "lon": 77.37196683883668,
+        "elevation": 10.0
+      },
+      "distance": 115.03296054928153,
+      "midpoint": {
+        "name": "Midpoint Point 2-Point 3",
+        "lat": 23.192295014886593,
+        "lon": 77.37141966869194,
+        "elevation": 10.0
+      }
+    }
+  ],
+  "midpoints": [
+    {
+      "name": "Midpoint Point 1-Point 2",
+      "lat": 23.192147086521896,
+      "lon": 77.37062841604777,
+      "elevation": 10.0
+    },
+    {
+      "name": "Midpoint Point 2-Point 3",
+      "lat": 23.192295014886593,
+      "lon": 77.37141966869194,
+      "elevation": 10.0
+    }
+  ]
+}

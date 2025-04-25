@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAVLink Message Viewer with Arm Button</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #message-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .message-box {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 15px;
+            width: calc(33% - 20px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .message-type {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .message-data {
+            color: black;
+        }
+        .message-data div {
+            margin-bottom: 5px;
+        }
+        .action-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="message-container"></div>
+
+    <button class="action-button" onclick="sendArmCommand()">Arm Autopilot</button>
+
+    <script>
+        var socket = io();
+        var messageContainer = document.getElementById('message-container');
+        var messageBoxes = {};
+
+        socket.on('message', function(data) {
+            if (data.type) {
+                if (!messageBoxes[data.type]) {
+                    messageBoxes[data.type] = document.createElement('div');
+                    messageBoxes[data.type].className = 'message-box';
+                    messageBoxes[data.type].innerHTML = `<div class="message-type" style="color: ${data.color}">${data.type}</div><div class="message-data"></div>`;
+                    messageContainer.appendChild(messageBoxes[data.type]);
+                }
+
+                var messageData = JSON.parse(data.data);
+                var dataHtml = '';
+                for (var key in messageData) {
+                    dataHtml += `<div><strong>${key}:</strong> ${messageData[key]}</div>`;
+                }
+                messageBoxes[data.type].querySelector('.message-data').innerHTML = dataHtml;
+            } else {
+                var messageElement = document.createElement('div');
+                messageElement.className = 'message-box';
+                messageElement.style.color = data.color;
+                messageElement.textContent = data.text;
+                messageContainer.appendChild(messageElement);
+            }
+        });
+
+        function sendArmCommand() {
+            socket.emit('arm');
+        }
+    </script>
+</body>
+</html>

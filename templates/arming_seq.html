@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Control Panel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; height: 200px; overflow-y: auto; border: 1px solid #ccc; }
+        #messages li { padding: 5px 10px; }
+        .data-section { margin-bottom: 20px; border: 1px solid #ddd; padding: 10px; }
+        h2 { margin-top: 0; }
+        button { padding: 10px; font-size: 16px; margin-right: 10px; }
+        #messages li.error { color: red; }
+        #messages li.info { color: blue; }
+        #messages li.success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Drone Control Panel</h1>
+
+    <button id="armButton">Arm Drone</button>
+    <button id="reconnectButton">Reconnect</button>
+
+    <div class="data-section">
+        <h2>Attitude</h2>
+        <div id="ATTITUDE"></div>
+    </div>
+
+    <div class="data-section">
+        <h2>Global Position</h2>
+        <div id="GLOBAL_POSITION_INT"></div>
+    </div>
+
+    <div class="data-section">
+        <h2>VFR HUD</h2>
+        <div id="VFR_HUD"></div>
+    </div>
+
+    <div class="data-section">
+        <h2>System Status</h2>
+        <div id="SYS_STATUS"></div>
+    </div>
+
+    <h2>Messages</h2>
+    <ul id="messages"></ul>
+
+    <script>
+        var socket = io();
+        var lastConnectionMessage = '';
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+        });
+
+        socket.on('message', function(msg) {
+            console.log('Received message:', msg);  // Debug log
+            if (msg.type && msg.data) {
+                updateData(msg.type, JSON.parse(msg.data));
+            } else {
+                // Check if it's a connection-related message and if it's different from the last one
+                if (msg.text.includes("Attempting to connect") || msg.text.includes("Connected to system")) {
+                    if (msg.text !== lastConnectionMessage) {
+                        addMessage(msg);
+                        lastConnectionMessage = msg.text;
+                    }
+                } else {
+                    addMessage(msg);
+                }
+            }
+        });
+
+        function addMessage(msg) {
+            var li = document.createElement('li');
+            li.textContent = msg.text;
+            li.className = getMessageClass(msg.color);
+            var messages = document.getElementById('messages');
+            messages.insertBefore(li, messages.firstChild);
+            while (messages.childNodes.length > 100) {
+                messages.removeChild(messages.lastChild);
+            }
+        }
+
+        function getMessageClass(color) {
+            switch (color) {
+                case 'red': return 'error';
+                case 'blue': return 'info';
+                case 'green': return 'success';
+                default: return '';
+            }
+        }
+
+        function updateData(id, data) {
+            var element = document.getElementById(id);
+            if (element) {
+                element.innerHTML = '';
+                for (var key in data) {
+                    var p = document.createElement('p');
+                    p.textContent = key + ': ' + data[key];
+                    element.appendChild(p);
+                }
+            }
+        }
+
+        document.getElementById('armButton').addEventListener('click', function() {
+            socket.emit('arm');
+        });
+
+        document.getElementById('reconnectButton').addEventListener('click', function() {
+            fetch('/reconnect')
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

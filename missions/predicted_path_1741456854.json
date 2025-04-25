@@ -1,0 +1,132 @@
+{
+  "waypoints": [
+    {
+      "name": "WP1",
+      "lat": 23.19195,
+      "lon": 77.3706,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.191245,
+      "lon": 77.37268499999999,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.19054,
+      "lon": 77.37477,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP4",
+      "lat": 23.189835,
+      "lon": 77.376855,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP5",
+      "lat": 23.18913,
+      "lon": 77.37894,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP6",
+      "lat": 23.188425,
+      "lon": 77.381025,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP7",
+      "lat": 23.18772,
+      "lon": 77.38311,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP8",
+      "lat": 23.18871,
+      "lon": 77.38503,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP9",
+      "lat": 23.1897,
+      "lon": 77.38695,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP10",
+      "lat": 23.19069,
+      "lon": 77.38887,
+      "elevation": 30.0
+    }
+  ],
+  "optimized_path": [
+    {
+      "name": "WP1",
+      "lat": 23.19195,
+      "lon": 77.3706,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.191245,
+      "lon": 77.37268499999999,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.19054,
+      "lon": 77.37477,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP4",
+      "lat": 23.189835,
+      "lon": 77.376855,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP5",
+      "lat": 23.18913,
+      "lon": 77.37894,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP6",
+      "lat": 23.188425,
+      "lon": 77.381025,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP7",
+      "lat": 23.18772,
+      "lon": 77.38311,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP8",
+      "lat": 23.18772,
+      "lon": 77.38311,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP9",
+      "lat": 23.18871,
+      "lon": 77.38503,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP10",
+      "lat": 23.1897,
+      "lon": 77.38695,
+      "elevation": 30.0
+    },
+    {
+      "name": "WP11",
+      "lat": 23.19069,
+      "lon": 77.38887,
+      "elevation": 30.0
+    }
+  ]
+}

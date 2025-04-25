@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAVLink Message Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        #message-container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+            height: 80vh;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 3px;
+        }
+        .message-type {
+            font-weight: bold;
+        }
+        .message-data {
+            color: black;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="message-container"></div>
+
+    <script>
+        var socket = io();
+        var messageContainer = document.getElementById('message-container');
+
+        socket.on('message', function(data) {
+            var messageElement = document.createElement('div');
+            messageElement.className = 'message';
+
+            if (data.type) {
+                // For structured messages
+                messageElement.innerHTML = `<span class="message-type" style="color: ${data.color}">${data.type}:</span> <span class="message-data">${JSON.stringify(JSON.parse(data.data), null, 2)}</span>`;
+            } else {
+                // For simple text messages
+                messageElement.style.color = data.color;
+                messageElement.textContent = data.text;
+            }
+
+            messageContainer.appendChild(messageElement);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        });
+    </script>
+</body>
+</html>

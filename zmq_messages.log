@@ -1,0 +1,13 @@
+2024-11-07 00:23:52,579 - Message 1 - Pos: (468.0, 171.0) Interval: 0.0ms
+2024-11-07 00:24:09,183 - 
+Final Statistics:
+Total Runtime: 23.2s
+Total Messages: 1
+Average Rate: 0.0 msg/s
+2024-11-07 00:27:30,796 - Message 1 - Pos: (478.5, 241.0) Interval: 0.0ms
+2024-11-07 00:28:02,260 - 
+Final Statistics:
+Total Runtime: 36.6s
+Total Messages: 1
+Average Rate: 0.0 msg/s
+2024-11-07 00:28:54,376 - Raw message 1: {"center_x":332.5,"center_y":239.5,"confidence":1.0,"height":55,"id":0,"timestamp":1730919534375,"velocity":{"x":0.0,"y":0.0},"width":47}

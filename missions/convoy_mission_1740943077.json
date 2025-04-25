@@ -1,0 +1,113 @@
+{
+  "waypoints": [
+    {
+      "name": "Point 1",
+      "lat": 23.19162194304182,
+      "lon": 77.37016439437868,
+      "elevation": 10.0
+    },
+    {
+      "name": "Point 2",
+      "lat": 23.1922235157765,
+      "lon": 77.37202048301698,
+      "elevation": 10.0
+    },
+    {
+      "name": "Point 3",
+      "lat": 23.19187835142356,
+      "lon": 77.37318456172945,
+      "elevation": 10.0
+    },
+    {
+      "name": "Point 4",
+      "lat": 23.191641666780956,
+      "lon": 77.37433791160585,
+      "elevation": 10.0
+    }
+  ],
+  "paths": [
+    {
+      "start": {
+        "name": "Point 1",
+        "lat": 23.19162194304182,
+        "lon": 77.37016439437868,
+        "elevation": 10.0
+      },
+      "end": {
+        "name": "Point 2",
+        "lat": 23.1922235157765,
+        "lon": 77.37202048301698,
+        "elevation": 10.0
+      },
+      "distance": 201.15730857893544,
+      "midpoint": {
+        "name": "Midpoint Point 1-Point 2",
+        "lat": 23.191922732129857,
+        "lon": 77.37109243661052,
+        "elevation": 10.0
+      }
+    },
+    {
+      "start": {
+        "name": "Point 2",
+        "lat": 23.1922235157765,
+        "lon": 77.37202048301698,
+        "elevation": 10.0
+      },
+      "end": {
+        "name": "Point 3",
+        "lat": 23.19187835142356,
+        "lon": 77.37318456172945,
+        "elevation": 10.0
+      },
+      "distance": 125.0168643902919,
+      "midpoint": {
+        "name": "Midpoint Point 2-Point 3",
+        "lat": 23.192050934670185,
+        "lon": 77.37260252312433,
+        "elevation": 10.0
+      }
+    },
+    {
+      "start": {
+        "name": "Point 3",
+        "lat": 23.19187835142356,
+        "lon": 77.37318456172945,
+        "elevation": 10.0
+      },
+      "end": {
+        "name": "Point 4",
+        "lat": 23.191641666780956,
+        "lon": 77.37433791160585,
+        "elevation": 10.0
+      },
+      "distance": 120.78541223416804,
+      "midpoint": {
+        "name": "Midpoint Point 3-Point 4",
+        "lat": 23.19176001015277,
+        "lon": 77.37376123717796,
+        "elevation": 10.0
+      }
+    }
+  ],
+  "midpoints": [
+    {
+      "name": "Midpoint Point 1-Point 2",
+      "lat": 23.191922732129857,
+      "lon": 77.37109243661052,
+      "elevation": 10.0
+    },
+    {
+      "name": "Midpoint Point 2-Point 3",
+      "lat": 23.192050934670185,
+      "lon": 77.37260252312433,
+      "elevation": 10.0
+    },
+    {
+      "name": "Midpoint Point 3-Point 4",
+      "lat": 23.19176001015277,
+      "lon": 77.37376123717796,
+      "elevation": 10.0
+    }
+  ]
+}

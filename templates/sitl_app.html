@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITL Drone Control</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        #message-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 5px;
+        }
+        .control-panel {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SITL Drone Control</h1>
+        <div id="message-box"></div>
+        <div class="control-panel">
+            <button id="arm-btn">Arm</button>
+            <div>
+                <input type="number" id="takeoff-altitude" placeholder="Altitude" value="10">
+                <button id="takeoff-btn">Takeoff</button>
+            </div>
+            <button id="land-btn">Land</button>
+            <button id="reconnect-btn">Reconnect</button>
+        </div>
+        <div id="status-panel">
+            <h2>Drone Status</h2>
+            <div id="attitude"></div>
+            <div id="position"></div>
+            <div id="vfr-hud"></div>
+            <div id="sys-status"></div>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        const messageBox = document.getElementById('message-box');
+        const armBtn = document.getElementById('arm-btn');
+        const takeoffBtn = document.getElementById('takeoff-btn');
+        const landBtn = document.getElementById('land-btn');
+        const reconnectBtn = document.getElementById('reconnect-btn');
+        const takeoffAltitude = document.getElementById('takeoff-altitude');
+
+        function addMessage(message, color = 'black') {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.style.color = color;
+            messageElement.textContent = message;
+            messageBox.appendChild(messageElement);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        }
+
+        socket.on('message', function(data) {
+            if (data.type) {
+                updateStatus(data.type, JSON.parse(data.data));
+            } else {
+                addMessage(data.text, data.color);
+            }
+        });
+
+        armBtn.addEventListener('click', function() {
+            socket.emit('arm');
+        });
+
+        takeoffBtn.addEventListener('click', function() {
+            const altitude = parseFloat(takeoffAltitude.value);
+            if (isNaN(altitude)) {
+                addMessage('Please enter a valid altitude', 'red');
+                return;
+            }
+            socket.emit('takeoff', altitude);
+        });
+
+        landBtn.addEventListener('click', function() {
+            socket.emit('land');
+        });
+
+        reconnectBtn.addEventListener('click', function() {
+            fetch('/reconnect')
+                .then(response => response.text())
+                .then(data => addMessage(data, 'blue'))
+                .catch(error => addMessage('Error: ' + error, 'red'));
+        });
+
+        function updateStatus(type, data) {
+            const statusElement = document.getElementById(type.toLowerCase().replace('_', '-'));
+            if (statusElement) {
+                statusElement.innerHTML = `<h3>${type}</h3>` +
+                    Object.entries(data).map(([key, value]) => `<p>${key}: ${value}</p>`).join('');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixhawk Monitor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f0f0f0; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; }
+        #status { font-weight: bold; margin-bottom: 10px; }
+        .message-container { display: flex; flex-direction: column; height: 80vh; }
+        .message-list { flex-grow: 1; overflow-y: auto; border: 1px solid #ccc; background-color: #fff; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Pixhawk Monitor</h1>
+    <div id="status">Connecting...</div>
+    <div class="message-container">
+        <div class="message-list" id="messageList">
+            <table id="messageTable">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody id="messageBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var socket = io();
+        var messageBody = document.getElementById('messageBody');
+        var messageList = document.getElementById('messageList');
+        var statusDiv = document.getElementById('status');
+
+        socket.on('connect', function() {
+            statusDiv.textContent = 'Connected to server';
+            statusDiv.style.color = 'green';
+        });
+
+        socket.on('disconnect', function() {
+            statusDiv.textContent = 'Disconnected from server';
+            statusDiv.style.color = 'red';
+        });
+
+        socket.on('message', function(data) {
+            try {
+                var messageData = JSON.parse(data.text);
+                for (var key in messageData) {
+                    if (messageData.hasOwnProperty(key)) {
+                        var row = messageBody.insertRow(0);
+                        var cellType = row.insertCell(0);
+                        var cellValue = row.insertCell(1);
+                        cellType.textContent = key;
+                        cellValue.textContent = messageData[key];
+                    }
+                }
+            } catch (e) {
+                console.error("Error parsing message:", e);
+            }
+            messageList.scrollTop = messageList.scrollHeight;
+        });
+
+        socket.on('status', function(data) {
+            statusDiv.textContent = data.text;
+            statusDiv.style.color = data.color;
+        });
+    </script>
+</body>
+</html>

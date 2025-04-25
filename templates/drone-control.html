@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Control Center</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        #messages { height: 200px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; }
+        #droneData { border: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Drone Control Center</h1>
+    <div id="messages"></div>
+    <button onclick="armDrone()">Arm Drone</button>
+    <button onclick="takeoff()">Takeoff</button>
+    <div id="droneData"></div>
+
+    <script>
+        const socket = io();
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+        });
+
+        socket.on('message', (msg) => {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += `<p style="color: ${msg.color}">${msg.text}</p>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        });
+
+        socket.on('drone_data', (data) => {
+            const droneDataDiv = document.getElementById('droneData');
+            droneDataDiv.innerHTML = `<h3>${data.type}</h3><pre>${JSON.stringify(JSON.parse(data.data), null, 2)}</pre>`;
+        });
+
+        function armDrone() {
+            socket.emit('arm');
+        }
+
+        function takeoff() {
+            const altitude = prompt("Enter takeoff altitude (meters):", "10");
+            if (altitude !== null) {
+                socket.emit('takeoff', parseFloat(altitude));
+            }
+        }
+    </script>
+</body>
+</html>

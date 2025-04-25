@@ -1,0 +1,42 @@
+{
+  "waypoints": [
+    {
+      "name": "WP1",
+      "lat": 23.19273,
+      "lon": 77.36559,
+      "elevation": 45.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.192545000000003,
+      "lon": 77.368235,
+      "elevation": 45.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.19236,
+      "lon": 77.37088,
+      "elevation": 45.0
+    }
+  ],
+  "optimized_path": [
+    {
+      "name": "WP1",
+      "lat": 23.19273,
+      "lon": 77.36559,
+      "elevation": 45.0
+    },
+    {
+      "name": "WP2",
+      "lat": 23.192545000000003,
+      "lon": 77.368235,
+      "elevation": 45.0
+    },
+    {
+      "name": "WP3",
+      "lat": 23.19236,
+      "lon": 77.37088,
+      "elevation": 45.0
+    }
+  ]
+}

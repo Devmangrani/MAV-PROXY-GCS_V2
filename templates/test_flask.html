@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Command Center</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <h1>Drone Command Center</h1>
+    <p>If you can see this, the page has loaded correctly.</p>
+    <div id="status"></div>
+    <script>
+        console.log('JavaScript is running');
+        document.getElementById('status').innerHTML = 'Attempting to connect...';
+
+        const socket = io({
+            transports: ['websocket'],
+            upgrade: false,
+            reconnection: true,
+            reconnectionAttempts: 3,
+            timeout: 10000
+        });
+
+        socket.on('connect', function() {
+            console.log('Connected to server');
+            document.getElementById('status').innerHTML = 'Socket.IO connected successfully';
+        });
+
+        socket.on('connect_error', function(error) {
+            console.error('Connection error:', error);
+            document.getElementById('status').innerHTML = 'Socket.IO connection error: ' + error;
+        });
+
+        socket.on('error', function(error) {
+            console.error('Socket.IO error:', error);
+            document.getElementById('status').innerHTML = 'Socket.IO error: ' + error;
+        });
+
+        socket.on('disconnect', function(reason) {
+            console.log('Disconnected:', reason);
+            document.getElementById('status').innerHTML = 'Disconnected: ' + reason;
+        });
+
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error('Global error:', message, source, lineno, colno, error);
+            document.getElementById('status').innerHTML = 'Global error: ' + message;
+        };
+    </script>
+</body>
+</html>

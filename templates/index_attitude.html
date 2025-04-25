@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Attitude</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #attitude-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .attitude-data {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
+        }
+        .attitude-data div {
+            padding: 5px;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+        .value {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div id="attitude-container">
+        <h1>Drone Attitude</h1>
+        <div class="attitude-data">
+            <div class="label">Roll:</div><div id="roll" class="value">-</div>
+            <div class="label">Pitch:</div><div id="pitch" class="value">-</div>
+            <div class="label">Yaw:</div><div id="yaw" class="value">-</div>
+            <div class="label">Roll Speed:</div><div id="rollspeed" class="value">-</div>
+            <div class="label">Pitch Speed:</div><div id="pitchspeed" class="value">-</div>
+            <div class="label">Yaw Speed:</div><div id="yawspeed" class="value">-</div>
+        </div>
+    </div>
+
+    <script>
+        var socket = io();
+        socket.on('attitude', function(data) {
+            document.getElementById('roll').textContent = data['Roll'];
+            document.getElementById('pitch').textContent = data['Pitch'];
+            document.getElementById('yaw').textContent = data['Yaw'];
+            document.getElementById('rollspeed').textContent = data['Roll Speed'];
+            document.getElementById('pitchspeed').textContent = data['Pitch Speed'];
+            document.getElementById('yawspeed').textContent = data['Yaw Speed'];
+        });
+    </script>
+</body>
+</html>

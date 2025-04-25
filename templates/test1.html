@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Command Center</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.81/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #0ff;
+            overflow: hidden;
+            height: 100%;
+        }
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+        #visualizer {
+            flex: 2;
+            position: relative;
+        }
+        #cesiumContainer {
+            width: 100%;
+            height: 100%;
+        }
+        #controls {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(0, 20, 40, 0.8);
+            overflow-y: auto;
+        }
+        .button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #004499;
+        }
+        #messages {
+            height: 200px;
+            overflow-y: scroll;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .parameter {
+            margin-bottom: 10px;
+        }
+        .parameter input {
+            background-color: #001f3f;
+            color: #0ff;
+            border: 1px solid #0066cc;
+            padding: 5px;
+        }
+        #mission-planner {
+            margin-top: 20px;
+        }
+        #hud {
+            background-color: rgba(0, 20, 40, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .hud-data {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 10px;
+        }
+        .hud-data div {
+            padding: 5px;
+        }
+        .label {
+            font-weight: bold;
+            color: #0ff;
+        }
+        .value {
+            color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="visualizer">
+            <div id="cesiumContainer"></div>
+        </div>
+        <div id="controls">
+            <h2>Drone Command Center</h2>
+            <button class="button" onclick="armDrone()">Arm Drone</button>
+            <button class="button" onclick="disarmDrone()">Disarm Drone</button>
+            <button class="button" onclick="takeoff()">Takeoff</button>
+            <button class="button" onclick="land()">Land</button>
+            <button class="button" onclick="returnToLaunch()">Return to Launch</button>
+
+            <div id="flight-modes">
+                <h3>Flight Modes</h3>
+                <button class="button" onclick="setFlightMode('STABILIZE')">Stabilize</button>
+                <button class="button" onclick="setFlightMode('ALT_HOLD')">Altitude Hold</button>
+                <button class="button" onclick="setFlightMode('LOITER')">Loiter</button>
+                <button class="button" onclick="setFlightMode('AUTO')">Auto</button>
+            </div>
+
+            <div id="mission-planner">
+                <h3>Mission Planner</h3>
+                <input type="text" id="waypoint-lat" placeholder="Latitude">
+                <input type="text" id="waypoint-lon" placeholder="Longitude">
+                <input type="text" id="waypoint-alt" placeholder="Altitude">
+                <button class="button" onclick="addWaypoint()">Add Waypoint</button>
+                <button class="button" onclick="uploadMission()">Upload Mission</button>
+                <button class="button" onclick="startMission()">Start Mission</button>
+            </div>
+
+            <div id="parameters">
+                <h3>Parameters</h3>
+                <div class="parameter">
+                    <label for="param-fence-radius">Geofence Radius (m):</label>
+                    <input type="number" id="param-fence-radius" value="100">
+                    <button class="button" onclick="setGeofence()">Set Geofence</button>
+                </div>
+            </div>
+
+            <div id="hud">
+                <h3>Heads-Up Display</h3>
+                <div class="hud-data">
+                    <div class="label">Roll:</div><div id="roll" class="value">-</div>
+                    <div class="label">Pitch:</div><div id="pitch" class="value">-</div>
+                    <div class="label">Yaw:</div><div id="yaw" class="value">-</div>
+                    <div class="label">Roll Speed:</div><div id="rollspeed" class="value">-</div>
+                    <div class="label">Pitch Speed:</div><div id="pitchspeed" class="value">-</div>
+                    <div class="label">Yaw Speed:</div><div id="yawspeed" class="value">-</div>
+                    <div class="label">Latitude:</div><div id="latitude" class="value">-</div>
+                    <div class="label">Longitude:</div><div id="longitude" class="value">-</div>
+                    <div class="label">Altitude:</div><div id="altitude" class="value">-</div>
+                    <div class="label">Ground Speed:</div><div id="groundspeed" class="value">-</div>
+                    <div class="label">Airspeed:</div><div id="airspeed" class="value">-</div>
+                    <div class="label">Climb Rate:</div><div id="climbrate" class="value">-</div>
+                    <div class="label">Battery:</div><div id="battery" class="value">-</div>
+                </div>
+            </div>
+
+            <div id="messages"></div>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        let viewer, drone, droneEntity;
+
+        function initVisualizer() {
+            Cesium.Ion.defaultAccessToken = 'your_cesium_access_token_here';
+            viewer = new Cesium.Viewer('cesiumContainer', {
+                terrainProvider: Cesium.createWorldTerrain()
+            });
+
+            droneEntity = viewer.entities.add({
+                position: Cesium.Cartesian3.fromDegrees(0, 0, 0),
+                model: {
+                    uri: 'path/to/drone_model.glb',
+                    minimumPixelSize: 128,
+                    maximumScale: 20000
+                }
+            });
+
+            viewer.trackedEntity = droneEntity;
+        }
+
+        function updateDronePosition(lat, lon, alt) {
+            droneEntity.position = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
+        }
+
+        socket.on('message', function(msg) {
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += `<p style="color: ${msg.color}">${msg.text || JSON.stringify(msg.data)}</p>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            if (msg.type && msg.data) {
+                const data = JSON.parse(msg.data);
+                switch (msg.type) {
+                    case 'ATTITUDE':
+                        document.getElementById('roll').textContent = data['Roll'];
+                        document.getElementById('pitch').textContent = data['Pitch'];
+                        document.getElementById('yaw').textContent = data['Yaw'];
+                        document.getElementById('rollspeed').textContent = data['Roll Speed'];
+                        document.getElementById('pitchspeed').textContent = data['Pitch Speed'];
+                        document.getElementById('yawspeed').textContent = data['Yaw Speed'];
+                        break;
+                    case 'GLOBAL_POSITION_INT':
+                        document.getElementById('latitude').textContent = data['Latitude'];
+                        document.getElementById('longitude').textContent = data['Longitude'];
+                        document.getElementById('altitude').textContent = data['Relative Altitude'];
+                        document.getElementById('groundspeed').textContent = data['Ground Speed'];
+                        updateDronePosition(
+                            parseFloat(data['Latitude']),
+                            parseFloat(data['Longitude']),
+                            parseFloat(data['Relative Altitude'])
+                        );
+                        break;
+                    case 'VFR_HUD':
+                        document.getElementById('airspeed').textContent = data['Airspeed'];
+                        document.getElementById('climbrate').textContent = data['Climb Rate'];
+                        break;
+                    case 'SYS_STATUS':
+                        document.getElementById('battery').textContent = data['Battery Remaining'];
+                        break;
+                }
+            }
+        });
