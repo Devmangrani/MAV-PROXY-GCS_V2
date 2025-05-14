@@ -66,6 +66,7 @@ socketio = SocketIO(
     app,
     async_mode='eventlet',
     cors_allowed_origins="*",
+
     manage_session=False,
     logger=False,
     engineio_logger=False
@@ -73,7 +74,7 @@ socketio = SocketIO(
 
 # Global variables
 vehicle = None
-RTSP_URL = "rtsp:192.168.144.25:8554/main.264"
+RTSP_URL = "rtsp://192.168.144.25:8554/video1"
 wp_loader = mavwp.MAVWPLoader()
 current_mission = []
 last_mission = None
@@ -187,7 +188,7 @@ def get_rtsp_frame():
         cap = None
         try:
             # Force open the camera
-            cap = cv2.VideoCapture(1)
+            cap = cv2.VideoCapture(RTSP_URL)
 
             # Ensure camera is opened
             if not cap.isOpened():
