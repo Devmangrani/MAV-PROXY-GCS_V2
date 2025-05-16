@@ -74,7 +74,7 @@ socketio = SocketIO(
 
 # Global variables
 vehicle = None
-RTSP_URL = "rtsp://192.168.0.114:8554/webCamStream"
+RTSP_URL = "rtsp://192.168.144.25:8554/video1"
 frame_queue = Queue(maxsize=10)
 video_thread_running = False
 ffmpeg_process = None
@@ -188,55 +188,45 @@ def get_mode_id(mode_name):
 
 
 def start_ffmpeg_stabilizer():
-    """Start FFmpeg process to stabilize thermal RTSP feed and fix MPEG4 corruption"""
+    """Start FFmpeg process to stabilize thermal RTSP stream"""
     global ffmpeg_process, RTSP_URL
 
     # Kill any existing FFmpeg processes
     stop_ffmpeg_stabilizer()
 
-    # Create a local stabilized stream URL - use a different port to avoid conflicts
+    # Create a local stabilized stream URL
     stabilized_url = "rtsp://127.0.0.1:8555/thermal_fixed"
 
-    # Modified FFmpeg command based on user's configuration but tuned for thermal feed
+    # FFmpeg command based strictly on user's provided template
     ffmpeg_cmd = [
         "ffmpeg",
         "-y",  # Overwrite output without asking
-        "-fflags", "+discardcorrupt+genpts+igndts",  # Discard corrupt packets
-        "-err_detect", "aggressive",  # Aggressive error detection
-        "-i", RTSP_URL,  # Input from thermal RTSP URL
+        "-i", RTSP_URL,  # Input from RTSP URL instead of stdin
         "-c:v", "libx264",  # Use H.264 codec
         "-pix_fmt", "yuv420p",  # Set pixel format
-        "-preset", "ultrafast",  # Use ultrafast preset for low latency
+        "-preset", "ultrafast",  # Use ultrafast preset
         "-tune", "zerolatency",  # Tune for zero latency
-        "-force_key_frames", "expr:gte(t,n_forced*1)",  # Force keyframe every 1 second
-        "-g", "15",  # GOP size
-        "-keyint_min", "15",  # Minimum keyframe interval
-        "-r", "15",  # Output frame rate
-        "-bufsize", "2M",  # Buffer size
-        "-maxrate", "1M",  # Maximum bitrate
-        "-f", "rtsp",  # Output format is RTSP
-        "-rtsp_transport", "tcp",  # Use TCP for reliability
-        stabilized_url  # Output to local RTSP URL
+        "-f", "rtsp",  # Output format RTSP instead of FLV
+        stabilized_url  # Output URL
     ]
 
     try:
-        # Start FFmpeg process with proper pipe handling
+        # Start FFmpeg process
         ffmpeg_process = subprocess.Popen(
             ffmpeg_cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            bufsize=10 ** 8,
-            preexec_fn=os.setsid  # Use process group for better cleanup
+            preexec_fn=os.setsid
         )
 
-        logger.info(f"Started FFmpeg stabilizer with command: {' '.join(ffmpeg_cmd)}")
+        logger.info(f"Started FFmpeg stabilizer: {' '.join(ffmpeg_cmd)}")
 
-        # Update the global RTSP_URL to point to the stabilized stream
-        original_url = RTSP_URL  # Save for logging
+        # Update the global RTSP_URL to the stabilized stream
+        original_url = RTSP_URL
         RTSP_URL = stabilized_url
         logger.info(f"Updated RTSP_URL from {original_url} to {stabilized_url}")
 
-        # Allow time for FFmpeg to start serving the stream
+        # Allow time for FFmpeg to start
         time.sleep(3)
 
         return True
