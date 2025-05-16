@@ -74,9 +74,10 @@ socketio = SocketIO(
 
 # Global variables
 vehicle = None
-RTSP_URL = "rtsp://192.168.1.12:8554/webCamStream"
+RTSP_URL = "rtsp://192.168.0.114:8554/webCamStream"
 frame_queue = Queue(maxsize=10)
 video_thread_running = False
+ffmpeg_process = None
 video_thread = None
 wp_loader = mavwp.MAVWPLoader()
 current_mission = []
@@ -186,26 +187,106 @@ def get_mode_id(mode_name):
     return mode_map.get(mode_name.upper(), 0)
 
 
+def start_ffmpeg_stabilizer():
+    """Start FFmpeg process to stabilize RTSP stream"""
+    global ffmpeg_process, RTSP_URL
+
+    # Kill any existing FFmpeg processes
+    stop_ffmpeg_stabilizer()
+
+    # FFmpeg command to stabilize the thermal feed
+    # Input: original RTSP_URL, Output: same URL (ffmpeg will create a local RTSP server)
+    ffmpeg_cmd = [
+        'ffmpeg',
+        '-i', RTSP_URL,
+        '-c:v', 'libx264',
+        '-preset', 'ultrafast',
+        '-tune', 'zerolatency',
+        '-x264opts', 'keyint=60:min-keyint=60:no-scenecut',
+        '-b:v', '1M',
+        '-maxrate', '1M',
+        '-bufsize', '2M',
+        '-vsync', 'cfr',
+        '-r', '15',
+        '-fflags', '+discardcorrupt+genpts',
+        '-err_detect', 'crccheck',
+        '-f', 'rtsp',
+        '-rtsp_transport', 'tcp',
+        RTSP_URL
+    ]
+
+    try:
+        # Start FFmpeg process
+        ffmpeg_process = subprocess.Popen(
+            ffmpeg_cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            bufsize=10 ** 8  # Large buffer
+        )
+
+        logger.info(f"Started FFmpeg stabilizer for {RTSP_URL}")
+
+        # Allow time for FFmpeg to start serving the stream
+        time.sleep(2)
+
+        return True
+    except Exception as e:
+        logger.error(f"Failed to start FFmpeg stabilizer: {str(e)}")
+        return False
+
+
+def stop_ffmpeg_stabilizer():
+    """Stop FFmpeg process if running"""
+    global ffmpeg_process
+
+    if ffmpeg_process:
+        try:
+            ffmpeg_process.terminate()
+            ffmpeg_process.wait(timeout=5)
+            logger.info("FFmpeg stabilizer terminated")
+        except Exception as e:
+            logger.error(f"Error stopping FFmpeg: {str(e)}")
+            try:
+                # Force kill if terminate didn't work
+                ffmpeg_process.kill()
+                logger.info("FFmpeg stabilizer forcefully killed")
+            except:
+                pass
+        finally:
+            ffmpeg_process = None
+
+
 def get_rtsp_frame():
+    global RTSP_URL, ffmpeg_process
+
+    # Start the FFmpeg stabilizer if not already running
+    if not ffmpeg_process:
+        start_ffmpeg_stabilizer()
+
     while True:  # Infinite loop to keep trying
         cap = None
         try:
-            # Force open the camera
-            cap = cv2.VideoCapture(RTSP_URL)
+            # Force open the camera with OpenCV FFmpeg backend options
+            os.environ[
+                "OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp|max_delay;500000|reorder_queue_size;0|error_concealment;1"
+            cap = cv2.VideoCapture(RTSP_URL, cv2.CAP_FFMPEG)
 
             # Ensure camera is opened
             if not cap.isOpened():
                 logger.warning("Failed to open camera, retrying...")
                 if cap is not None:
                     cap.release()
-                time.sleep(1)
+
+                # Try restarting FFmpeg if connection fails
+                start_ffmpeg_stabilizer()
+                time.sleep(3)
                 continue
 
             # Set camera properties
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-            cap.set(cv2.CAP_PROP_FPS, 30)
-            cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Minimize buffer delay
+            cap.set(cv2.CAP_PROP_FPS, 15)
+            cap.set(cv2.CAP_PROP_BUFFERSIZE, 3)  # Increased buffer size
 
             while True:  # Keep reading frames
                 ret, frame = cap.read()
@@ -224,7 +305,7 @@ def get_rtsp_frame():
 
         # Immediate retry
         logger.info("Restarting camera connection...")
-        time.sleep(0.1)  # Brief pause before retry
+        time.sleep(1)  # Longer pause before retry
 
 
 def video_capture_thread():
