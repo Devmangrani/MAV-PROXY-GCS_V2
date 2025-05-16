@@ -188,46 +188,56 @@ def get_mode_id(mode_name):
 
 
 def start_ffmpeg_stabilizer():
-    """Start FFmpeg process to stabilize RTSP stream"""
+    """Start FFmpeg process to stabilize thermal RTSP feed and fix MPEG4 corruption"""
     global ffmpeg_process, RTSP_URL
 
     # Kill any existing FFmpeg processes
     stop_ffmpeg_stabilizer()
 
-    # FFmpeg command to stabilize the thermal feed
-    # Input: original RTSP_URL, Output: same URL (ffmpeg will create a local RTSP server)
+    # Create a local stabilized stream URL - use a different port to avoid conflicts
+    stabilized_url = "rtsp://127.0.0.1:8555/thermal_fixed"
+
+    # Modified FFmpeg command based on user's configuration but tuned for thermal feed
     ffmpeg_cmd = [
-        'ffmpeg',
-        '-i', RTSP_URL,
-        '-c:v', 'libx264',
-        '-preset', 'ultrafast',
-        '-tune', 'zerolatency',
-        '-x264opts', 'keyint=60:min-keyint=60:no-scenecut',
-        '-b:v', '1M',
-        '-maxrate', '1M',
-        '-bufsize', '2M',
-        '-vsync', 'cfr',
-        '-r', '15',
-        '-fflags', '+discardcorrupt+genpts',
-        '-err_detect', 'crccheck',
-        '-f', 'rtsp',
-        '-rtsp_transport', 'tcp',
-        RTSP_URL
+        "ffmpeg",
+        "-y",  # Overwrite output without asking
+        "-fflags", "+discardcorrupt+genpts+igndts",  # Discard corrupt packets
+        "-err_detect", "aggressive",  # Aggressive error detection
+        "-i", RTSP_URL,  # Input from thermal RTSP URL
+        "-c:v", "libx264",  # Use H.264 codec
+        "-pix_fmt", "yuv420p",  # Set pixel format
+        "-preset", "ultrafast",  # Use ultrafast preset for low latency
+        "-tune", "zerolatency",  # Tune for zero latency
+        "-force_key_frames", "expr:gte(t,n_forced*1)",  # Force keyframe every 1 second
+        "-g", "15",  # GOP size
+        "-keyint_min", "15",  # Minimum keyframe interval
+        "-r", "15",  # Output frame rate
+        "-bufsize", "2M",  # Buffer size
+        "-maxrate", "1M",  # Maximum bitrate
+        "-f", "rtsp",  # Output format is RTSP
+        "-rtsp_transport", "tcp",  # Use TCP for reliability
+        stabilized_url  # Output to local RTSP URL
     ]
 
     try:
-        # Start FFmpeg process
+        # Start FFmpeg process with proper pipe handling
         ffmpeg_process = subprocess.Popen(
             ffmpeg_cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            bufsize=10 ** 8  # Large buffer
+            bufsize=10 ** 8,
+            preexec_fn=os.setsid  # Use process group for better cleanup
         )
 
-        logger.info(f"Started FFmpeg stabilizer for {RTSP_URL}")
+        logger.info(f"Started FFmpeg stabilizer with command: {' '.join(ffmpeg_cmd)}")
+
+        # Update the global RTSP_URL to point to the stabilized stream
+        original_url = RTSP_URL  # Save for logging
+        RTSP_URL = stabilized_url
+        logger.info(f"Updated RTSP_URL from {original_url} to {stabilized_url}")
 
         # Allow time for FFmpeg to start serving the stream
-        time.sleep(2)
+        time.sleep(3)
 
         return True
     except Exception as e:
@@ -241,14 +251,15 @@ def stop_ffmpeg_stabilizer():
 
     if ffmpeg_process:
         try:
-            ffmpeg_process.terminate()
+            # Kill the entire process group
+            os.killpg(os.getpgid(ffmpeg_process.pid), signal.SIGTERM)
             ffmpeg_process.wait(timeout=5)
             logger.info("FFmpeg stabilizer terminated")
         except Exception as e:
             logger.error(f"Error stopping FFmpeg: {str(e)}")
             try:
                 # Force kill if terminate didn't work
-                ffmpeg_process.kill()
+                os.killpg(os.getpgid(ffmpeg_process.pid), signal.SIGKILL)
                 logger.info("FFmpeg stabilizer forcefully killed")
             except:
                 pass
@@ -266,9 +277,11 @@ def get_rtsp_frame():
     while True:  # Infinite loop to keep trying
         cap = None
         try:
-            # Force open the camera with OpenCV FFmpeg backend options
+            # Set OpenCV FFmpeg options for better handling
             os.environ[
-                "OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp|max_delay;500000|reorder_queue_size;0|error_concealment;1"
+                "OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp|max_delay;500000|reorder_queue_size;10|error_concealment;1"
+
+            # Use CAP_FFMPEG explicitly
             cap = cv2.VideoCapture(RTSP_URL, cv2.CAP_FFMPEG)
 
             # Ensure camera is opened
@@ -277,7 +290,7 @@ def get_rtsp_frame():
                 if cap is not None:
                     cap.release()
 
-                # Try restarting FFmpeg if connection fails
+                # Try restarting FFmpeg
                 start_ffmpeg_stabilizer()
                 time.sleep(3)
                 continue
@@ -288,11 +301,31 @@ def get_rtsp_frame():
             cap.set(cv2.CAP_PROP_FPS, 15)
             cap.set(cv2.CAP_PROP_BUFFERSIZE, 3)  # Increased buffer size
 
+            frame_count = 0
+            error_count = 0
             while True:  # Keep reading frames
                 ret, frame = cap.read()
+
+                # Handle read errors
                 if not ret or frame is None:
-                    logger.warning("Failed to read frame, reopening camera...")
-                    break
+                    error_count += 1
+                    logger.warning(f"Failed to read frame {error_count}/5")
+
+                    # Only break after several consecutive errors
+                    if error_count >= 5:
+                        logger.warning("Too many read errors, reopening camera...")
+                        break
+
+                    time.sleep(0.1)
+                    continue
+
+                # Reset error count on successful frame
+                error_count = 0
+                frame_count += 1
+
+                # Skip first few frames which might be corrupted
+                if frame_count < 3:
+                    continue
 
                 yield frame
 
@@ -305,7 +338,7 @@ def get_rtsp_frame():
 
         # Immediate retry
         logger.info("Restarting camera connection...")
-        time.sleep(1)  # Longer pause before retry
+        time.sleep(1)  # Pause before retry
 
 
 def video_capture_thread():

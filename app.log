@@ -545,3 +545,11 @@
 2025-05-16 15:10:41,986 - functionality_added_v8 - WARNING - Waiting for heartbeat...
 2025-05-16 15:10:42,903 - functionality_added_v8 - WARNING - Heartbeat received from system 1
 2025-05-16 15:10:42,904 - functionality_added_v8 - WARNING - Data streams requested successfully
+2025-05-16 15:13:45,260 - functionality_added_v8 - WARNING - Connecting to udp:127.0.0.1:14550
+2025-05-16 15:13:45,261 - functionality_added_v8 - WARNING - Waiting for heartbeat...
+2025-05-16 15:13:46,205 - functionality_added_v8 - WARNING - Heartbeat received from system 1
+2025-05-16 15:13:46,206 - functionality_added_v8 - WARNING - Data streams requested successfully
+2025-05-16 15:16:44,203 - functionality_added_v8 - WARNING - Connecting to udp:127.0.0.1:14550
+2025-05-16 15:16:44,204 - functionality_added_v8 - WARNING - Waiting for heartbeat...
+2025-05-16 15:16:44,507 - functionality_added_v8 - WARNING - Heartbeat received from system 1
+2025-05-16 15:16:44,508 - functionality_added_v8 - WARNING - Data streams requested successfully
