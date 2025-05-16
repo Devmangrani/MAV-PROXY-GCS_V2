@@ -33,6 +33,8 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 import json
 import binascii
+import video_streaming
+
 
 logging.getLogger('functionality_added_v7').setLevel(logging.WARNING)
 logging.getLogger('socketio').setLevel(logging.WARNING)
@@ -74,11 +76,6 @@ socketio = SocketIO(
 
 # Global variables
 vehicle = None
-RTSP_URL = "rtsp://192.168.144.25:8554/video1"
-frame_queue = Queue(maxsize=10)
-video_thread_running = False
-ffmpeg_process = None
-video_thread = None
 wp_loader = mavwp.MAVWPLoader()
 current_mission = []
 last_mission = None
@@ -185,243 +182,6 @@ def get_mode_id(mode_name):
         'THROW': 18, 'AVOID_ADSB': 19, 'GUIDED_NOGPS': 20, 'SMART_RTL': 21,
     }
     return mode_map.get(mode_name.upper(), 0)
-
-
-def start_ffmpeg_stabilizer():
-    """Start FFmpeg process to stabilize thermal RTSP stream"""
-    global ffmpeg_process, RTSP_URL
-
-    # Kill any existing FFmpeg processes
-    stop_ffmpeg_stabilizer()
-
-    # Create a local stabilized stream URL
-    stabilized_url = "rtsp://127.0.0.1:8555/thermal_fixed"
-
-    # FFmpeg command based strictly on user's provided template
-    ffmpeg_cmd = [
-        "ffmpeg",
-        "-y",  # Overwrite output without asking
-        "-i", RTSP_URL,  # Input from RTSP URL instead of stdin
-        "-c:v", "libx264",  # Use H.264 codec
-        "-pix_fmt", "yuv420p",  # Set pixel format
-        "-preset", "ultrafast",  # Use ultrafast preset
-        "-tune", "zerolatency",  # Tune for zero latency
-        "-f", "rtsp",  # Output format RTSP instead of FLV
-        stabilized_url  # Output URL
-    ]
-
-    try:
-        # Start FFmpeg process
-        ffmpeg_process = subprocess.Popen(
-            ffmpeg_cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            preexec_fn=os.setsid
-        )
-
-        logger.info(f"Started FFmpeg stabilizer: {' '.join(ffmpeg_cmd)}")
-
-        # Update the global RTSP_URL to the stabilized stream
-        original_url = RTSP_URL
-        RTSP_URL = stabilized_url
-        logger.info(f"Updated RTSP_URL from {original_url} to {stabilized_url}")
-
-        # Allow time for FFmpeg to start
-        time.sleep(3)
-
-        return True
-    except Exception as e:
-        logger.error(f"Failed to start FFmpeg stabilizer: {str(e)}")
-        return False
-
-
-def stop_ffmpeg_stabilizer():
-    """Stop FFmpeg process if running"""
-    global ffmpeg_process
-
-    if ffmpeg_process:
-        try:
-            # Kill the entire process group
-            os.killpg(os.getpgid(ffmpeg_process.pid), signal.SIGTERM)
-            ffmpeg_process.wait(timeout=5)
-            logger.info("FFmpeg stabilizer terminated")
-        except Exception as e:
-            logger.error(f"Error stopping FFmpeg: {str(e)}")
-            try:
-                # Force kill if terminate didn't work
-                os.killpg(os.getpgid(ffmpeg_process.pid), signal.SIGKILL)
-                logger.info("FFmpeg stabilizer forcefully killed")
-            except:
-                pass
-        finally:
-            ffmpeg_process = None
-
-
-def get_rtsp_frame():
-    global RTSP_URL, ffmpeg_process
-
-    # Start the FFmpeg stabilizer if not already running
-    if not ffmpeg_process:
-        start_ffmpeg_stabilizer()
-
-    while True:  # Infinite loop to keep trying
-        cap = None
-        try:
-            # Set OpenCV FFmpeg options for better handling
-            os.environ[
-                "OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp|max_delay;500000|reorder_queue_size;10|error_concealment;1"
-
-            # Use CAP_FFMPEG explicitly
-            cap = cv2.VideoCapture(RTSP_URL, cv2.CAP_FFMPEG)
-
-            # Ensure camera is opened
-            if not cap.isOpened():
-                logger.warning("Failed to open camera, retrying...")
-                if cap is not None:
-                    cap.release()
-
-                # Try restarting FFmpeg
-                start_ffmpeg_stabilizer()
-                time.sleep(3)
-                continue
-
-            # Set camera properties
-            cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-            cap.set(cv2.CAP_PROP_FPS, 15)
-            cap.set(cv2.CAP_PROP_BUFFERSIZE, 3)  # Increased buffer size
-
-            frame_count = 0
-            error_count = 0
-            while True:  # Keep reading frames
-                ret, frame = cap.read()
-
-                # Handle read errors
-                if not ret or frame is None:
-                    error_count += 1
-                    logger.warning(f"Failed to read frame {error_count}/5")
-
-                    # Only break after several consecutive errors
-                    if error_count >= 5:
-                        logger.warning("Too many read errors, reopening camera...")
-                        break
-
-                    time.sleep(0.1)
-                    continue
-
-                # Reset error count on successful frame
-                error_count = 0
-                frame_count += 1
-
-                # Skip first few frames which might be corrupted
-                if frame_count < 3:
-                    continue
-
-                yield frame
-
-        except Exception as e:
-            logger.error(f"Camera error: {str(e)}")
-
-        finally:
-            if cap is not None:
-                cap.release()
-
-        # Immediate retry
-        logger.info("Restarting camera connection...")
-        time.sleep(1)  # Pause before retry
-
-
-def video_capture_thread():
-    """Thread function to capture frames from RTSP"""
-    global video_thread_running
-
-    while video_thread_running:
-        cap = None
-        try:
-            cap = cv2.VideoCapture(RTSP_URL)
-            if not cap.isOpened():
-                logger.warning("Failed to open camera, retrying...")
-                time.sleep(2)
-                continue
-
-            # Set camera properties
-            cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-            cap.set(cv2.CAP_PROP_FPS, 15)  # Lower frame rate
-            cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-
-            while video_thread_running:
-                ret, frame = cap.read()
-                if not ret:
-                    logger.warning("Failed to read frame, reopening camera...")
-                    break
-
-                # If queue is full, remove oldest frame
-                if frame_queue.full():
-                    try:
-                        frame_queue.get_nowait()
-                    except:
-                        pass
-
-                # Add new frame
-                frame_queue.put(frame)
-
-                # Prevent CPU overuse
-                time.sleep(0.066)  # ~15fps max
-
-        except Exception as e:
-            logger.error(f"Camera error in thread: {str(e)}")
-            time.sleep(1)
-        finally:
-            if cap:
-                cap.release()
-
-
-def start_video_thread():
-    """Start the video capture thread if not already running"""
-    global video_thread, video_thread_running
-
-    if not video_thread or not video_thread.is_alive():
-        video_thread_running = True
-        video_thread = threading.Thread(target=video_capture_thread)
-        video_thread.daemon = True
-        video_thread.start()
-        logger.info("Video capture thread started")
-
-
-def stop_video_thread():
-    """Stop the video capture thread"""
-    global video_thread_running
-    video_thread_running = False
-    logger.info("Video capture thread stopping")
-
-
-def generate_frames():
-    """Generate frames from the queue instead of directly from camera"""
-    global frame_queue
-
-    # Start video thread if not running
-    start_video_thread()
-
-    while True:
-        try:
-            # Get frame with timeout
-            frame = frame_queue.get(timeout=0.5)
-
-            ret, buffer = cv2.imencode('.jpg', frame)
-            if not ret:
-                continue
-
-            frame_bytes = buffer.tobytes()
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-
-        except Exception as e:
-            # If queue is empty or error occurs, yield empty frame
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + b'' + b'\r\n')
-            time.sleep(0.1)  # Prevent tight loop
-
 
 mode_mapping = {
     0: 'STABILIZE', 1: 'ACRO', 2: 'ALT_HOLD', 3: 'AUTO', 4: 'GUIDED', 5: 'LOITER',
@@ -1715,7 +1475,7 @@ def set_speed():
 @app.route('/video_feed')
 def video_feed():
     try:
-        return Response(generate_frames(),
+        return Response(video_streaming.generate_frames(),
                         mimetype='multipart/x-mixed-replace; boundary=frame')
     except Exception as e:
         logger.error(f"Error in video_feed route: {str(e)}")
@@ -3006,11 +2766,11 @@ def read_car_gps_data():
 
 
 def cleanup():
-    global vehicle, video_thread_running
+    global vehicle
     if vehicle:
         vehicle.close()
-    # Stop video thread
-    stop_video_thread()
+    # Clean up video streaming resources
+    video_streaming.cleanup()
     logger.info("Cleanup completed.")
 
 
